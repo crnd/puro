@@ -1,4 +1,5 @@
-﻿using Puro.Statements.Drop.Table;
+﻿using Puro.Statements.Drop.Index;
+using Puro.Statements.Drop.Table;
 
 namespace Puro.Statements.Drop;
 
@@ -13,4 +14,11 @@ public interface IDropBuilder
 	/// <param name="name">Name of the table.</param>
 	/// <returns>Interface for defining the schema.</returns>
 	public IDropTableStatement Table(string name);
+
+	/// <summary>
+	/// Drops an existing index.
+	/// </summary>
+	/// <param name="name">Name of the index.</param>
+	/// <returns>Interface for defining the table.</returns>
+	public IDropIndexStatement Index(string name);
 }
