@@ -17,7 +17,7 @@ public class DropIndexTests
 	{
 		public override void Up()
 		{
-			Drop.Index(null!).FromTable("table");
+			Drop.Index(null!).FromTable("table").InSchema("schema");
 		}
 	}
 
@@ -33,7 +33,23 @@ public class DropIndexTests
 	{
 		public override void Up()
 		{
-			Drop.Index("index").FromTable(null!);
+			Drop.Index("index").FromTable(null!).InSchema("schema");
+		}
+	}
+
+	[Fact]
+	public void NullSchemaNameThrows()
+	{
+		var migration = new NullSchemaNameMigration();
+
+		Assert.Throws<ArgumentNullException>(migration.Up);
+	}
+
+	private sealed class NullSchemaNameMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Drop.Index("index").FromTable("table").InSchema(null!);
 		}
 	}
 
@@ -49,7 +65,7 @@ public class DropIndexTests
 	{
 		public override void Up()
 		{
-			Drop.Index(string.Empty).FromTable("table");
+			Drop.Index(string.Empty).FromTable("table").InSchema("schema");
 		}
 	}
 
@@ -65,7 +81,23 @@ public class DropIndexTests
 	{
 		public override void Up()
 		{
-			Drop.Index("index").FromTable(string.Empty);
+			Drop.Index("index").FromTable(string.Empty).InSchema("schema");
+		}
+	}
+
+	[Fact]
+	public void EmptySchemaNameThrows()
+	{
+		var migration = new EmptySchemaNameMigration();
+
+		Assert.Throws<ArgumentNullException>(migration.Up);
+	}
+
+	private sealed class EmptySchemaNameMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Drop.Index("index").FromTable("table").InSchema(string.Empty);
 		}
 	}
 
@@ -81,7 +113,7 @@ public class DropIndexTests
 	{
 		public override void Up()
 		{
-			Drop.Index("     ").FromTable("table");
+			Drop.Index("     ").FromTable("table").InSchema("schema");
 		}
 	}
 
@@ -97,7 +129,23 @@ public class DropIndexTests
 	{
 		public override void Up()
 		{
-			Drop.Index("index").FromTable("     ");
+			Drop.Index("index").FromTable("     ").InSchema("schema");
+		}
+	}
+
+	[Fact]
+	public void WhiteSpaceSchemaNameThrows()
+	{
+		var migration = new WhiteSpaceSchemaNameMigration();
+
+		Assert.Throws<ArgumentNullException>(migration.Up);
+	}
+
+	private sealed class WhiteSpaceSchemaNameMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Drop.Index("index").FromTable("table").InSchema("     ");
 		}
 	}
 
@@ -117,6 +165,25 @@ public class DropIndexTests
 		public override void Up()
 		{
 			Drop.Index("index");
+		}
+	}
+
+	[Fact]
+	public void StatementWithoutSchemaNameReturnsNull()
+	{
+		var migration = new NoSchemaNameMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IDropIndexMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Null(statement.Schema);
+	}
+
+	private sealed class NoSchemaNameMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Drop.Index("index").FromTable("table");
 		}
 	}
 
@@ -143,51 +210,21 @@ public class DropIndexTests
 	}
 
 	[Fact]
-	public void NullSchemaReturnedWhenNoSchemaDefined()
+	public void StatementReturnsSchemaName()
 	{
 		var migration = new DropIndexMigration();
 		migration.Up();
 
 		var statement = Assert.Single(migration.Statements) as IDropIndexMigrationStatement;
 		Assert.NotNull(statement);
-		Assert.Null(statement.Schema);
+		Assert.Equal("TestSchemaName", statement.Schema);
 	}
 
 	private sealed class DropIndexMigration : UpMigration
 	{
 		public override void Up()
 		{
-			Drop.Index("TestIndexName").FromTable("TestTableName");
-		}
-	}
-
-	[Fact]
-	public void SchemaNotNullWhenSchemaDefined()
-	{
-		var migration = new SchemaMigration();
-		migration.Up();
-
-		var statement = Assert.Single(migration.Statements) as IDropIndexMigrationStatement;
-		Assert.NotNull(statement);
-		Assert.NotNull(statement.Schema);
-	}
-
-	[Fact]
-	public void DefinedSchemaReturned()
-	{
-		var migration = new SchemaMigration();
-		migration.Up();
-
-		var statement = Assert.Single(migration.Statements) as IDropIndexMigrationStatement;
-		Assert.NotNull(statement);
-		Assert.Equal("TestSchema", statement.Schema);
-	}
-
-	private sealed class SchemaMigration : UpMigration
-	{
-		public override void Up()
-		{
-			Drop.Index("TestIndexName").FromTable("TestTableName").InSchema("TestSchema");
+			Drop.Index("TestIndexName").FromTable("TestTableName").InSchema("TestSchemaName");
 		}
 	}
 }
