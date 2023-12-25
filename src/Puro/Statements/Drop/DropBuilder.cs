@@ -1,4 +1,5 @@
-﻿using Puro.Statements.Drop.Index;
+﻿using Puro.Statements.Drop.Constraint;
+using Puro.Statements.Drop.Index;
 using Puro.Statements.Drop.Table;
 
 namespace Puro.Statements.Drop;
@@ -24,6 +25,15 @@ internal sealed class DropBuilder : IDropBuilder
 	public IDropIndexStatement Index(string name)
 	{
 		var statement = new DropIndexStatement(name);
+
+		context.AddStatement(statement);
+
+		return statement;
+	}
+
+	public IDropConstraintStatement Constraint(string name)
+	{
+		var statement = new DropConstraintStatement(name);
 
 		context.AddStatement(statement);
 

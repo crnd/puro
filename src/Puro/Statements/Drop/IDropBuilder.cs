@@ -1,4 +1,5 @@
-﻿using Puro.Statements.Drop.Index;
+﻿using Puro.Statements.Drop.Constraint;
+using Puro.Statements.Drop.Index;
 using Puro.Statements.Drop.Table;
 
 namespace Puro.Statements.Drop;
@@ -21,4 +22,11 @@ public interface IDropBuilder
 	/// <param name="name">Name of the index.</param>
 	/// <returns>Interface for defining the table.</returns>
 	public IDropIndexStatement Index(string name);
+
+	/// <summary>
+	/// Drops an existing constraint.
+	/// </summary>
+	/// <param name="name">Name of the constraint</param>
+	/// <returns>Interface for defining the table.</returns>
+	public IDropConstraintStatement Constraint(string name);
 }
