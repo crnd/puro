@@ -1,4 +1,6 @@
-﻿namespace Puro.Statements.Create;
+﻿using Puro.Statements.Create.PrimaryKey;
+
+namespace Puro.Statements.Create;
 
 internal sealed class CreateBuilder : ICreateBuilder
 {
@@ -7,5 +9,14 @@ internal sealed class CreateBuilder : ICreateBuilder
 	public CreateBuilder(IMigrationContext context)
 	{
 		this.context = context;
+	}
+
+	public ICreatePrimaryKeyStatement PrimaryKey(string name)
+	{
+		var statement = new CreatePrimaryKeyStatement(name);
+
+		context.AddStatement(statement);
+
+		return statement;
 	}
 }
