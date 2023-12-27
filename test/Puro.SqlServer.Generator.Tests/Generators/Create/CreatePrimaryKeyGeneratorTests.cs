@@ -1,12 +1,12 @@
 ﻿using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using Puro.SqlServer.Generator.Exceptions;
-using Puro.SqlServer.Generator.Statements.Create;
+using Puro.SqlServer.Generator.Generators.Create;
 using Puro.SqlServer.Generator.Tests.Extensions;
 using Puro.Statements.Create.PrimaryKey;
 using Xunit;
 
-namespace Puro.SqlServer.Generator.Tests.Statements.Create;
+namespace Puro.SqlServer.Generator.Tests.Generators.Create;
 
 public class CreatePrimaryKeyGeneratorTests
 {

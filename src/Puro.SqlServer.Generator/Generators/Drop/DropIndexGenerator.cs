@@ -1,7 +1,7 @@
 ﻿using Puro.SqlServer.Generator.Exceptions;
 using Puro.Statements.Drop.Index;
 
-namespace Puro.SqlServer.Generator.Statements.Drop;
+namespace Puro.SqlServer.Generator.Generators.Drop;
 
 /// <summary>
 /// T-SQL generator for drop index statements.

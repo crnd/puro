@@ -1,7 +1,7 @@
 ﻿using Puro.SqlServer.Generator.Exceptions;
 using Puro.Statements.Create.PrimaryKey;
 
-namespace Puro.SqlServer.Generator.Statements.Create;
+namespace Puro.SqlServer.Generator.Generators.Create;
 
 /// <summary>
 /// T-SQL generator for create primary key statements.

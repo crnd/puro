@@ -1,5 +1,5 @@
-﻿using Puro.SqlServer.Generator.Statements.Create;
-using Puro.SqlServer.Generator.Statements.Drop;
+﻿using Puro.SqlServer.Generator.Generators.Create;
+using Puro.SqlServer.Generator.Generators.Drop;
 using Puro.Statements;
 using Puro.Statements.Create.PrimaryKey;
 using Puro.Statements.Drop.Constraint;

@@ -1,11 +1,11 @@
 ﻿using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using Puro.SqlServer.Generator.Exceptions;
-using Puro.SqlServer.Generator.Statements.Drop;
+using Puro.SqlServer.Generator.Generators.Drop;
 using Puro.Statements.Drop.Index;
 using Xunit;
 
-namespace Puro.SqlServer.Generator.Tests.Statements.Drop;
+namespace Puro.SqlServer.Generator.Tests.Generators.Drop;
 
 public class DropIndexGeneratorTests
 {
