@@ -117,7 +117,7 @@ public class MigrationTests
 		Assert.IsAssignableFrom<IDropIndexMigrationStatement>(migration.Statements[2]);
 	}
 
-	private class TwoWayMigration : Migration
+	private sealed class TwoWayMigration : Migration
 	{
 		public override void Up()
 		{
