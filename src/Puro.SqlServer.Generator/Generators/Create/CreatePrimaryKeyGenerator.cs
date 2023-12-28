@@ -9,11 +9,11 @@ namespace Puro.SqlServer.Generator.Generators.Create;
 internal static class CreatePrimaryKeyGenerator
 {
 	/// <summary>
-	/// 
+	/// Generates T-SQL from <paramref name="statement"/> to create a primary key constraint.
 	/// </summary>
-	/// <param name="statement"></param>
-	/// <returns></returns>
-	/// <exception cref="IncompleteCreatePrimaryKeyStatementException"></exception>
+	/// <param name="statement">Migration statement definition.</param>
+	/// <returns>T-SQL for creating a primary key constraint.</returns>
+	/// <exception cref="IncompleteCreatePrimaryKeyStatementException">Thrown if <paramref name="statement"/> is not correctly defined.</exception>
 	public static string Generate(ICreatePrimaryKeyMigrationStatement statement)
 	{
 		if (statement.Schema is null || statement.Table is null || statement.Columns.Count == 0)
