@@ -1,4 +1,5 @@
-﻿using Puro.Statements.Create.PrimaryKey;
+﻿using Puro.Exceptions;
+using Puro.Statements.Create.PrimaryKey;
 using Xunit;
 
 namespace Puro.Tests.Statements.Create;
@@ -194,6 +195,22 @@ public class CreatePrimaryKeyTests
 		public override void Up()
 		{
 			Create.PrimaryKey("primarykey").OnTable("table").InSchema("schema").WithColumn("     ");
+		}
+	}
+
+	[Fact]
+	public void SameColumnMultipleTimesThrows()
+	{
+		var migration = new RepeatingColumnMigration();
+
+		Assert.Throws<ConstraintColumnExistsException>(() => migration.Up());
+	}
+
+	private sealed class RepeatingColumnMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Create.PrimaryKey("primarykey").OnTable("table").InSchema("schema").WithColumn("column").WithColumn("column");
 		}
 	}
 
