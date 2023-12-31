@@ -8,7 +8,7 @@ namespace Puro;
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
 public sealed class MigrationNameAttribute : Attribute
 {
-	private const short MaximumNameLength = 150;
+	private const int MaximumNameLength = 150;
 
 	/// <summary>
 	/// Gets the name of the migration.
