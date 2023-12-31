@@ -6,18 +6,18 @@ namespace Puro.Statements.Drop;
 
 internal sealed class DropBuilder : IDropBuilder
 {
-	private readonly IMigrationContext context;
+	private readonly List<IMigrationStatement> statements;
 
-	public DropBuilder(IMigrationContext context)
+	public DropBuilder(List<IMigrationStatement> statements)
 	{
-		this.context = context;
+		this.statements = statements;
 	}
 
 	public IDropTableStatement Table(string name)
 	{
 		var statement = new DropTableStatement(name);
 
-		context.AddStatement(statement);
+		statements.Add(statement);
 
 		return statement;
 	}
@@ -26,7 +26,7 @@ internal sealed class DropBuilder : IDropBuilder
 	{
 		var statement = new DropIndexStatement(name);
 
-		context.AddStatement(statement);
+		statements.Add(statement);
 
 		return statement;
 	}
@@ -35,7 +35,7 @@ internal sealed class DropBuilder : IDropBuilder
 	{
 		var statement = new DropConstraintStatement(name);
 
-		context.AddStatement(statement);
+		statements.Add(statement);
 
 		return statement;
 	}

@@ -2,10 +2,10 @@
 
 internal sealed class AlterBuilder : IAlterBuilder
 {
-	private readonly IMigrationContext context;
+	private readonly List<IMigrationStatement> statements;
 
-	public AlterBuilder(IMigrationContext context)
+	public AlterBuilder(List<IMigrationStatement> statements)
 	{
-		this.context = context;
+		this.statements = statements;
 	}
 }

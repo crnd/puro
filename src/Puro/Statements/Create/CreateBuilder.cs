@@ -5,18 +5,18 @@ namespace Puro.Statements.Create;
 
 internal sealed class CreateBuilder : ICreateBuilder
 {
-	private readonly IMigrationContext context;
+	private readonly List<IMigrationStatement> statements;
 
-	public CreateBuilder(IMigrationContext context)
+	public CreateBuilder(List<IMigrationStatement> statements)
 	{
-		this.context = context;
+		this.statements = statements;
 	}
 
 	public ICreatePrimaryKeyStatement PrimaryKey(string name)
 	{
 		var statement = new CreatePrimaryKeyStatement(name);
 
-		context.AddStatement(statement);
+		statements.Add(statement);
 
 		return statement;
 	}
@@ -25,7 +25,7 @@ internal sealed class CreateBuilder : ICreateBuilder
 	{
 		var statement = new CreateForeignKeyStatement(name);
 
-		context.AddStatement(statement);
+		statements.Add(statement);
 
 		return statement;
 	}

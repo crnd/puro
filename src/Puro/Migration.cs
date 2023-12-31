@@ -13,33 +13,33 @@ namespace Puro;
 /// </summary>
 public abstract class Migration
 {
-	private readonly IMigrationContext context = new MigrationContext();
+	private readonly List<IMigrationStatement> statements = new();
 
 	/// <summary>
 	/// Starts building a new statement for creating a new item.
 	/// </summary>
-	protected ICreateBuilder Create => new CreateBuilder(context);
+	protected ICreateBuilder Create => new CreateBuilder(statements);
 
 	/// <summary>
 	/// Starts building a new statement for editing an existing item.
 	/// </summary>
-	protected IAlterBuilder Alter => new AlterBuilder(context);
+	protected IAlterBuilder Alter => new AlterBuilder(statements);
 
 	/// <summary>
 	/// Starts building a new statement for deleting an existing item.
 	/// </summary>
-	protected IDropBuilder Drop => new DropBuilder(context);
+	protected IDropBuilder Drop => new DropBuilder(statements);
 
 	/// <summary>
 	/// Creates a raw SQL statement.
 	/// </summary>
 	/// <param name="statement">Raw SQL statement.</param>
-	protected void Sql(string statement) => context.AddStatement(new SqlStatement(statement));
+	protected void Sql(string statement) => statements.Add(new SqlStatement(statement));
 
 	/// <summary>
 	/// Returns the statements that have been processed after running the <see cref="Up"/> or <see cref="Down"/> method.
 	/// </summary>
-	public IReadOnlyList<IMigrationStatement> Statements => context.Statements;
+	public IReadOnlyList<IMigrationStatement> Statements => statements.AsReadOnly();
 
 	/// <summary>
 	/// Gets the name of the migration that has been defined with <see cref="MigrationNameAttribute"/>.
