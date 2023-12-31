@@ -1,4 +1,5 @@
-﻿using Puro.Statements.Create.PrimaryKey;
+﻿using Puro.Statements.Create.ForeignKey;
+using Puro.Statements.Create.PrimaryKey;
 
 namespace Puro.Statements.Create;
 
@@ -13,4 +14,11 @@ public interface ICreateBuilder
 	/// <param name="name">Name of the primary key.</param>
 	/// <returns>Interface for defining the table.</returns>
 	public ICreatePrimaryKeyStatement PrimaryKey(string name);
+
+	/// <summary>
+	/// Creates a new foreign key constraint.
+	/// </summary>
+	/// <param name="name">Name of the foreign key.</param>
+	/// <returns>Interface for defining the table where the foreign key exists.</returns>
+	public ICreateForeignKeyStatement ForeignKey(string name);
 }
