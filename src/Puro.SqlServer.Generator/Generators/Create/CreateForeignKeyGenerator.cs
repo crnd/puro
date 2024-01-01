@@ -10,11 +10,11 @@ namespace Puro.SqlServer.Generator.Generators.Create;
 internal static class CreateForeignKeyGenerator
 {
 	/// <summary>
-	/// 
+	/// Generates T-SQL from <paramref name="statement"/> to create a foreign key constraint.
 	/// </summary>
-	/// <param name="statement"></param>
-	/// <returns></returns>
-	/// <exception cref="IncompleteCreateForeignKeyStatementException"></exception>
+	/// <param name="statement">Migration statement definition.</param>
+	/// <returns>T-SQL for creating a foreign key constraint.</returns>
+	/// <exception cref="IncompleteCreateForeignKeyStatementException">Thrown if <paramref name="statement"/> is not correctly defined.</exception>
 	public static string Generate(ICreateForeignKeyMigrationStatement statement)
 	{
 		if (!IsComplete(statement))
