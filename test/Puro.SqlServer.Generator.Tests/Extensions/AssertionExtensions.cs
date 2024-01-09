@@ -24,6 +24,8 @@ internal static class AssertionExtensions
 			new string[] { "\r", "\n" },
 			StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
-		return string.Join(' ', rows);
+		return string.Join(' ', rows)
+			.Replace(" ( ", " (")
+			.Replace(" );", ");");
 	}
 }
