@@ -1,6 +1,6 @@
 # Puro
 
-Puro is a fluent API database migrations framework that aims to support the most common use cases with SQL Server and PostgreSQL.
+Puro is a fluent API database migrations framework that aims to support the most common use cases.
 
 ## Design Principles
 * Minimum amount of dependencies
