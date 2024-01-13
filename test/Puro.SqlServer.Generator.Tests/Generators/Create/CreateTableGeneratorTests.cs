@@ -814,4 +814,56 @@ public class CreateTableGeneratorTests
 
 		expected.SqlEqual(sql);
 	}
+
+	[Fact]
+	public void MultipleColumnsGeneratedCorrectly()
+	{
+		var idColumn = Substitute.For<ITableColumn>();
+		idColumn.Name.Returns("Id");
+		idColumn.Type.Returns(typeof(int));
+		idColumn.Nullable.Returns(false);
+		idColumn.Identity.Returns(true);
+		idColumn.Precision.ReturnsNull();
+		idColumn.Scale.ReturnsNull();
+		idColumn.ExactLength.ReturnsNull();
+		idColumn.MaximumLength.ReturnsNull();
+
+		var nameColumn = Substitute.For<ITableColumn>();
+		nameColumn.Name.Returns("Name");
+		nameColumn.Type.Returns(typeof(string));
+		nameColumn.Nullable.Returns(false);
+		nameColumn.Identity.Returns(false);
+		nameColumn.Precision.ReturnsNull();
+		nameColumn.Scale.ReturnsNull();
+		nameColumn.ExactLength.ReturnsNull();
+		nameColumn.MaximumLength.Returns(200);
+
+		var descriptionColumn = Substitute.For<ITableColumn>();
+		descriptionColumn.Name.Returns("Description");
+		descriptionColumn.Type.Returns(typeof(string));
+		descriptionColumn.Nullable.Returns(true);
+		descriptionColumn.Identity.Returns(false);
+		descriptionColumn.Precision.ReturnsNull();
+		descriptionColumn.Scale.ReturnsNull();
+		descriptionColumn.ExactLength.ReturnsNull();
+		descriptionColumn.MaximumLength.ReturnsNull();
+
+		var columns = new List<ITableColumn> { idColumn, nameColumn, descriptionColumn };
+
+		var statement = Substitute.For<ICreateTableMigrationStatement>();
+		statement.Table.Returns("table");
+		statement.Schema.Returns("schema");
+		statement.Columns.Returns(columns.AsReadOnly());
+
+		var sql = CreateTableGenerator.Generate(statement);
+
+		var expected = @"
+			CREATE TABLE [schema].[table] (
+				[Id] INT NOT NULL IDENTITY(1, 1),
+				[Name] NVARCHAR(200) NOT NULL,
+				[Description] NVARCHAR(MAX) NULL
+			);";
+
+		expected.SqlEqual(sql);
+	}
 }
