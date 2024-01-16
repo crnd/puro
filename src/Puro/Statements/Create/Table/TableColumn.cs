@@ -20,11 +20,6 @@ internal sealed class TableColumn : ITableColumn
 
 	public TableColumn(string name)
 	{
-		if (string.IsNullOrWhiteSpace(name))
-		{
-			throw new ArgumentNullException(nameof(name));
-		}
-
 		Name = name;
 		Identity = false;
 	}
