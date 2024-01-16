@@ -137,7 +137,7 @@ internal sealed class CreateTableStatement :
 			throw new InvalidStringLengthException(length);
 		}
 
-		columns.Last().ExactLength = length;
+		columns.Last().FixedLength = length;
 
 		return this;
 	}

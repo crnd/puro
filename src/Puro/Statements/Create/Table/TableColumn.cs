@@ -10,7 +10,7 @@ internal sealed class TableColumn : ITableColumn
 
 	public int? Scale { get; internal set; }
 
-	public int? ExactLength { get; internal set; }
+	public int? FixedLength { get; internal set; }
 
 	public int? MaximumLength { get; internal set; }
 

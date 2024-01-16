@@ -21,7 +21,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(false);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var nameColumn = Substitute.For<ITableColumn>();
@@ -31,7 +31,7 @@ public class CreateTableGeneratorTests
 		nameColumn.Identity.Returns(false);
 		nameColumn.Precision.ReturnsNull();
 		nameColumn.Scale.ReturnsNull();
-		nameColumn.ExactLength.ReturnsNull();
+		nameColumn.FixedLength.ReturnsNull();
 		nameColumn.MaximumLength.Returns(250);
 
 		var columns = new List<ITableColumn> { idColumn, nameColumn };
@@ -64,7 +64,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(true);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var nameColumn = Substitute.For<ITableColumn>();
@@ -74,7 +74,7 @@ public class CreateTableGeneratorTests
 		nameColumn.Identity.Returns(true);
 		nameColumn.Precision.ReturnsNull();
 		nameColumn.Scale.ReturnsNull();
-		nameColumn.ExactLength.ReturnsNull();
+		nameColumn.FixedLength.ReturnsNull();
 		nameColumn.MaximumLength.Returns(250);
 
 		var columns = new List<ITableColumn> { idColumn, nameColumn };
@@ -97,7 +97,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(true);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var nameColumn = Substitute.For<ITableColumn>();
@@ -107,7 +107,7 @@ public class CreateTableGeneratorTests
 		nameColumn.Identity.Returns(false);
 		nameColumn.Precision.ReturnsNull();
 		nameColumn.Scale.ReturnsNull();
-		nameColumn.ExactLength.ReturnsNull();
+		nameColumn.FixedLength.ReturnsNull();
 		nameColumn.MaximumLength.Returns(250);
 
 		var columns = new List<ITableColumn> { idColumn, nameColumn };
@@ -130,7 +130,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(true);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var nameColumn = Substitute.For<ITableColumn>();
@@ -140,7 +140,7 @@ public class CreateTableGeneratorTests
 		nameColumn.Identity.Returns(false);
 		nameColumn.Precision.ReturnsNull();
 		nameColumn.Scale.ReturnsNull();
-		nameColumn.ExactLength.ReturnsNull();
+		nameColumn.FixedLength.ReturnsNull();
 		nameColumn.MaximumLength.Returns(250);
 
 		var columns = new List<ITableColumn> { idColumn, nameColumn };
@@ -163,7 +163,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(true);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var amountColumn = Substitute.For<ITableColumn>();
@@ -173,7 +173,7 @@ public class CreateTableGeneratorTests
 		amountColumn.Identity.Returns(false);
 		amountColumn.Precision.ReturnsNull();
 		amountColumn.Scale.Returns(3);
-		amountColumn.ExactLength.ReturnsNull();
+		amountColumn.FixedLength.ReturnsNull();
 		amountColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn, amountColumn };
@@ -196,7 +196,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(true);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var amountColumn = Substitute.For<ITableColumn>();
@@ -206,7 +206,7 @@ public class CreateTableGeneratorTests
 		amountColumn.Identity.Returns(true);
 		amountColumn.Precision.Returns(38);
 		amountColumn.Scale.ReturnsNull();
-		amountColumn.ExactLength.ReturnsNull();
+		amountColumn.FixedLength.ReturnsNull();
 		amountColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn, amountColumn };
@@ -229,7 +229,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(true);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var amountColumn = Substitute.For<ITableColumn>();
@@ -239,7 +239,7 @@ public class CreateTableGeneratorTests
 		amountColumn.Identity.Returns(true);
 		amountColumn.Precision.Returns(0);
 		amountColumn.Scale.Returns(3);
-		amountColumn.ExactLength.ReturnsNull();
+		amountColumn.FixedLength.ReturnsNull();
 		amountColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn, amountColumn };
@@ -262,7 +262,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(true);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var amountColumn = Substitute.For<ITableColumn>();
@@ -272,7 +272,7 @@ public class CreateTableGeneratorTests
 		amountColumn.Identity.Returns(true);
 		amountColumn.Precision.Returns(40);
 		amountColumn.Scale.Returns(3);
-		amountColumn.ExactLength.ReturnsNull();
+		amountColumn.FixedLength.ReturnsNull();
 		amountColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn, amountColumn };
@@ -295,7 +295,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(true);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var amountColumn = Substitute.For<ITableColumn>();
@@ -305,7 +305,7 @@ public class CreateTableGeneratorTests
 		amountColumn.Identity.Returns(true);
 		amountColumn.Precision.Returns(18);
 		amountColumn.Scale.Returns(-3);
-		amountColumn.ExactLength.ReturnsNull();
+		amountColumn.FixedLength.ReturnsNull();
 		amountColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn, amountColumn };
@@ -328,7 +328,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(true);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var amountColumn = Substitute.For<ITableColumn>();
@@ -338,7 +338,7 @@ public class CreateTableGeneratorTests
 		amountColumn.Identity.Returns(true);
 		amountColumn.Precision.Returns(18);
 		amountColumn.Scale.Returns(20);
-		amountColumn.ExactLength.ReturnsNull();
+		amountColumn.FixedLength.ReturnsNull();
 		amountColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn, amountColumn };
@@ -361,7 +361,7 @@ public class CreateTableGeneratorTests
 		nameColumn.Identity.Returns(false);
 		nameColumn.Precision.ReturnsNull();
 		nameColumn.Scale.ReturnsNull();
-		nameColumn.ExactLength.ReturnsNull();
+		nameColumn.FixedLength.ReturnsNull();
 		nameColumn.MaximumLength.Returns(5000);
 
 		var columns = new List<ITableColumn> { nameColumn };
@@ -374,7 +374,7 @@ public class CreateTableGeneratorTests
 	}
 
 	[Fact]
-	public void TooBigStringColumnExactLengthThrows()
+	public void TooBigStringColumnFixedLengthThrows()
 	{
 		var nameColumn = Substitute.For<ITableColumn>();
 		nameColumn.Name.Returns("Name");
@@ -383,7 +383,7 @@ public class CreateTableGeneratorTests
 		nameColumn.Identity.Returns(false);
 		nameColumn.Precision.ReturnsNull();
 		nameColumn.Scale.ReturnsNull();
-		nameColumn.ExactLength.Returns(5000);
+		nameColumn.FixedLength.Returns(5000);
 		nameColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { nameColumn };
@@ -405,7 +405,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(false);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn };
@@ -435,7 +435,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(false);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn };
@@ -465,7 +465,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(false);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn };
@@ -495,7 +495,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(false);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn };
@@ -525,7 +525,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(false);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn };
@@ -555,7 +555,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(false);
 		idColumn.Precision.Returns(17);
 		idColumn.Scale.Returns(5);
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn };
@@ -585,7 +585,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(false);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn };
@@ -606,7 +606,7 @@ public class CreateTableGeneratorTests
 	}
 
 	[Fact]
-	public void ExactLengthStringColumnGeneratedCorrectly()
+	public void FixedLengthStringColumnGeneratedCorrectly()
 	{
 		var idColumn = Substitute.For<ITableColumn>();
 		idColumn.Name.Returns("Name");
@@ -615,7 +615,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(false);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.Returns(250);
+		idColumn.FixedLength.Returns(250);
 		idColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn };
@@ -645,7 +645,7 @@ public class CreateTableGeneratorTests
 		nameColumn.Identity.Returns(false);
 		nameColumn.Precision.ReturnsNull();
 		nameColumn.Scale.ReturnsNull();
-		nameColumn.ExactLength.ReturnsNull();
+		nameColumn.FixedLength.ReturnsNull();
 		nameColumn.MaximumLength.Returns(750);
 
 		var columns = new List<ITableColumn> { nameColumn };
@@ -675,7 +675,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(false);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn };
@@ -705,7 +705,7 @@ public class CreateTableGeneratorTests
 		dateColumn.Identity.Returns(false);
 		dateColumn.Precision.ReturnsNull();
 		dateColumn.Scale.ReturnsNull();
-		dateColumn.ExactLength.ReturnsNull();
+		dateColumn.FixedLength.ReturnsNull();
 		dateColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { dateColumn };
@@ -735,7 +735,7 @@ public class CreateTableGeneratorTests
 		timeColumn.Identity.Returns(false);
 		timeColumn.Precision.ReturnsNull();
 		timeColumn.Scale.ReturnsNull();
-		timeColumn.ExactLength.ReturnsNull();
+		timeColumn.FixedLength.ReturnsNull();
 		timeColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { timeColumn };
@@ -765,7 +765,7 @@ public class CreateTableGeneratorTests
 		dateTimeColumn.Identity.Returns(false);
 		dateTimeColumn.Precision.ReturnsNull();
 		dateTimeColumn.Scale.ReturnsNull();
-		dateTimeColumn.ExactLength.ReturnsNull();
+		dateTimeColumn.FixedLength.ReturnsNull();
 		dateTimeColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { dateTimeColumn };
@@ -795,7 +795,7 @@ public class CreateTableGeneratorTests
 		dateTimeColumn.Identity.Returns(false);
 		dateTimeColumn.Precision.ReturnsNull();
 		dateTimeColumn.Scale.ReturnsNull();
-		dateTimeColumn.ExactLength.ReturnsNull();
+		dateTimeColumn.FixedLength.ReturnsNull();
 		dateTimeColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { dateTimeColumn };
@@ -825,7 +825,7 @@ public class CreateTableGeneratorTests
 		idColumn.Identity.Returns(true);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
-		idColumn.ExactLength.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
 		var nameColumn = Substitute.For<ITableColumn>();
@@ -835,7 +835,7 @@ public class CreateTableGeneratorTests
 		nameColumn.Identity.Returns(false);
 		nameColumn.Precision.ReturnsNull();
 		nameColumn.Scale.ReturnsNull();
-		nameColumn.ExactLength.ReturnsNull();
+		nameColumn.FixedLength.ReturnsNull();
 		nameColumn.MaximumLength.Returns(200);
 
 		var descriptionColumn = Substitute.For<ITableColumn>();
@@ -845,7 +845,7 @@ public class CreateTableGeneratorTests
 		descriptionColumn.Identity.Returns(false);
 		descriptionColumn.Precision.ReturnsNull();
 		descriptionColumn.Scale.ReturnsNull();
-		descriptionColumn.ExactLength.ReturnsNull();
+		descriptionColumn.FixedLength.ReturnsNull();
 		descriptionColumn.MaximumLength.ReturnsNull();
 
 		var columns = new List<ITableColumn> { idColumn, nameColumn, descriptionColumn };

@@ -16,6 +16,10 @@ internal static class CreateTableGenerator
 	/// <param name="statement">Migration statement definition.</param>
 	/// <returns>T-SQL for creating a table.</returns>
 	/// <exception cref="IncompleteCreateTableStatementException">Thrown if <paramref name="statement"/> is not correctly defined.</exception>
+	/// <exception cref="MultipleIdentityColumnsException">Thrown if <paramref name="statement"/> contains more than one identity column.</exception>
+	/// <exception cref="InvalidDecimalPrecisionException">Thrown if <paramref name="statement"/> contains a decimal column with invalid precision.</exception>
+	/// <exception cref="InvalidDecimalScaleException">Thrown if <paramref name="statement"/> contains a decimal column with invalid scale.</exception>
+	/// <exception cref="InvalidStringLengthException">Thrown if <paramref name="statement"/> contains a string column with invalid length.</exception>
 	public static string Generate(ICreateTableMigrationStatement statement)
 	{
 		if (!IsComplete(statement))
@@ -100,7 +104,7 @@ internal static class CreateTableGenerator
 			var column when column.Type == typeof(long) => "BIGINT",
 			var column when column.Type == typeof(double) => "FLOAT(53)",
 			var column when column.Type == typeof(decimal) => BuildDecimalType(column.Precision!.Value, column.Scale!.Value),
-			var column when column.Type == typeof(string) => BuildStringType(column.ExactLength, column.MaximumLength),
+			var column when column.Type == typeof(string) => BuildStringType(column.FixedLength, column.MaximumLength),
 			var column when column.Type == typeof(Guid) => "UNIQUEIDENTIFIER",
 			var column when column.Type == typeof(DateOnly) => "DATE",
 			var column when column.Type == typeof(TimeOnly) => "TIME",
@@ -130,16 +134,16 @@ internal static class CreateTableGenerator
 		return $"DECIMAL({precision}, {scale})";
 	}
 
-	private static string BuildStringType(int? exactLength, int? maximumLength)
+	private static string BuildStringType(int? fixedLength, int? maximumLength)
 	{
-		if (exactLength is not null)
+		if (fixedLength is not null)
 		{
-			if (exactLength.Value > 4000)
+			if (fixedLength.Value > 4000)
 			{
-				throw new InvalidStringLengthException(exactLength.Value);
+				throw new InvalidStringLengthException(fixedLength.Value);
 			}
 
-			return $"NCHAR({exactLength.Value})";
+			return $"NCHAR({fixedLength.Value})";
 		}
 
 		if (maximumLength is not null)

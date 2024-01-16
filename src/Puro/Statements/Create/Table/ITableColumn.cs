@@ -26,9 +26,9 @@ public interface ITableColumn
 	public int? Scale { get; }
 
 	/// <summary>
-	/// Exact length of a string column.
+	/// Fixed length of a string column.
 	/// </summary>
-	public int? ExactLength { get; }
+	public int? FixedLength { get; }
 
 	/// <summary>
 	/// Maximum length of a string column.
