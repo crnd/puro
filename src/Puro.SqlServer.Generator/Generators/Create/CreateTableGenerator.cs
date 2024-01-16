@@ -27,7 +27,7 @@ internal static class CreateTableGenerator
 			throw new IncompleteCreateTableStatementException(statement.Table);
 		}
 
-		var builder = new StringBuilder($"CREATE TABLE [{statement.Schema}].[{statement.Table}] (");
+		var builder = new StringBuilder($"CREATE TABLE [{statement.Schema}].[{statement.Table}] (").AppendLine();
 
 		var columns = statement.Columns
 			.Select(BuildColumnRowSql)
