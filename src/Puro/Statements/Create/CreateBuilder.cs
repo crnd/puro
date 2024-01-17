@@ -1,4 +1,5 @@
 ﻿using Puro.Statements.Create.ForeignKey;
+using Puro.Statements.Create.Index;
 using Puro.Statements.Create.PrimaryKey;
 using Puro.Statements.Create.Table;
 
@@ -34,6 +35,24 @@ internal sealed class CreateBuilder : ICreateBuilder
 	public ICreateTableStatement Table(string name)
 	{
 		var statement = new CreateTableStatement(name);
+
+		statements.Add(statement);
+
+		return statement;
+	}
+
+	public ICreateIndexStatement Index(string name)
+	{
+		var statement = new CreateIndexStatement(name, false);
+
+		statements.Add(statement);
+
+		return statement;
+	}
+
+	public ICreateIndexStatement UniqueIndex(string name)
+	{
+		var statement = new CreateIndexStatement(name, true);
 
 		statements.Add(statement);
 

@@ -1,4 +1,5 @@
 ﻿using Puro.Statements.Create.ForeignKey;
+using Puro.Statements.Create.Index;
 using Puro.Statements.Create.PrimaryKey;
 using Puro.Statements.Create.Table;
 
@@ -29,4 +30,18 @@ public interface ICreateBuilder
 	/// <param name="name">Name of the table.</param>
 	/// <returns>Interface for defining the schema for the table.</returns>
 	public ICreateTableStatement Table(string name);
+
+	/// <summary>
+	/// Creates a new index.
+	/// </summary>
+	/// <param name="name">Name of the index.</param>
+	/// <returns>Interface for defining the table for the index.</returns>
+	public ICreateIndexStatement Index(string name);
+
+	/// <summary>
+	/// Creates a new unique index.
+	/// </summary>
+	/// <param name="name">Name of the index.</param>
+	/// <returns>Interface for defining the table for the index.</returns>
+	public ICreateIndexStatement UniqueIndex(string name);
 }
