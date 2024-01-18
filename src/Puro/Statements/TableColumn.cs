@@ -1,4 +1,4 @@
-﻿namespace Puro.Statements.Create.Table;
+﻿namespace Puro.Statements;
 
 internal sealed class TableColumn : ITableColumn
 {

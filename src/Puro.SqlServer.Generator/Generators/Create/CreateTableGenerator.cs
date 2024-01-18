@@ -1,5 +1,6 @@
 ﻿using Puro.Exceptions;
 using Puro.SqlServer.Generator.Exceptions;
+using Puro.Statements;
 using Puro.Statements.Create.Table;
 using System.Text;
 

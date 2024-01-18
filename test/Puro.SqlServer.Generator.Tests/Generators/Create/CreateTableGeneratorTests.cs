@@ -4,6 +4,7 @@ using Puro.Exceptions;
 using Puro.SqlServer.Generator.Exceptions;
 using Puro.SqlServer.Generator.Generators.Create;
 using Puro.SqlServer.Generator.Tests.Extensions;
+using Puro.Statements;
 using Puro.Statements.Create.Table;
 using Xunit;
 

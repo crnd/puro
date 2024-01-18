@@ -1,4 +1,4 @@
-﻿namespace Puro.Statements.Create.Table;
+﻿namespace Puro.Statements;
 
 /// <summary>
 /// Column definition for a table.
