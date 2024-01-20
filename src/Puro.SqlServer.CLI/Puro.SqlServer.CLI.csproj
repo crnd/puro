@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Puro.SqlServer.Generator\Puro.SqlServer.Generator.csproj" />
+  </ItemGroup>
+
 </Project>
