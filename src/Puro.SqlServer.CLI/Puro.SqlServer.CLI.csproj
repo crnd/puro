@@ -11,4 +11,8 @@
     <ProjectReference Include="..\Puro.SqlServer.Generator\Puro.SqlServer.Generator.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Puro.SqlServer.CLI.Tests" />
+  </ItemGroup>
+
 </Project>

@@ -20,7 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puro.SqlServer.Generator", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puro.SqlServer.Generator.Tests", "test\Puro.SqlServer.Generator.Tests\Puro.SqlServer.Generator.Tests.csproj", "{D72EB588-8E8E-4F90-B6F1-C2DE2649DC8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Puro.SqlServer.CLI", "src\Puro.SqlServer.CLI\Puro.SqlServer.CLI.csproj", "{D70CF03B-FBEB-4091-AF8C-99A4751E3F7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puro.SqlServer.CLI", "src\Puro.SqlServer.CLI\Puro.SqlServer.CLI.csproj", "{D70CF03B-FBEB-4091-AF8C-99A4751E3F7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Puro.SqlServer.CLI.Tests", "test\Puro.SqlServer.CLI.Tests\Puro.SqlServer.CLI.Tests.csproj", "{805CB2C0-9987-43AB-9ED3-300AF468CBD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,10 @@ Global
 		{D70CF03B-FBEB-4091-AF8C-99A4751E3F7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D70CF03B-FBEB-4091-AF8C-99A4751E3F7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D70CF03B-FBEB-4091-AF8C-99A4751E3F7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{805CB2C0-9987-43AB-9ED3-300AF468CBD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805CB2C0-9987-43AB-9ED3-300AF468CBD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805CB2C0-9987-43AB-9ED3-300AF468CBD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805CB2C0-9987-43AB-9ED3-300AF468CBD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{3D5666AD-A64F-45E9-B1DD-D1E1032C5257} = {55334AC5-BE0B-4207-859D-57B712035747}
 		{D72EB588-8E8E-4F90-B6F1-C2DE2649DC8A} = {7CD98063-59D8-4B05-A0DE-3603A1CD4B2A}
 		{D70CF03B-FBEB-4091-AF8C-99A4751E3F7F} = {55334AC5-BE0B-4207-859D-57B712035747}
+		{805CB2C0-9987-43AB-9ED3-300AF468CBD2} = {7CD98063-59D8-4B05-A0DE-3603A1CD4B2A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {349F0784-5032-4611-B2F0-1ABEB1F7D223}
