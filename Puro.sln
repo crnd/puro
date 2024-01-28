@@ -20,9 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puro.SqlServer.Generator", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puro.SqlServer.Generator.Tests", "test\Puro.SqlServer.Generator.Tests\Puro.SqlServer.Generator.Tests.csproj", "{D72EB588-8E8E-4F90-B6F1-C2DE2649DC8A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puro.SqlServer.CLI", "src\Puro.SqlServer.CLI\Puro.SqlServer.CLI.csproj", "{D70CF03B-FBEB-4091-AF8C-99A4751E3F7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puro.SqlServer.Runner", "src\Puro.SqlServer.Runner\Puro.SqlServer.Runner.csproj", "{D70CF03B-FBEB-4091-AF8C-99A4751E3F7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Puro.SqlServer.CLI.Tests", "test\Puro.SqlServer.CLI.Tests\Puro.SqlServer.CLI.Tests.csproj", "{805CB2C0-9987-43AB-9ED3-300AF468CBD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puro.SqlServer.Runner.Tests", "test\Puro.SqlServer.Runner.Tests\Puro.SqlServer.Runner.Tests.csproj", "{805CB2C0-9987-43AB-9ED3-300AF468CBD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

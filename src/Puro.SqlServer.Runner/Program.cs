@@ -1,4 +1,4 @@
-﻿namespace Puro.SqlServer.CLI;
+﻿namespace Puro.SqlServer.Runner;
 
 internal sealed class Program
 {

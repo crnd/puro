@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Puro.SqlServer.CLI\Puro.SqlServer.CLI.csproj" />
+    <ProjectReference Include="..\..\src\Puro.SqlServer.Runner\Puro.SqlServer.Runner.csproj" />
   </ItemGroup>
 
 </Project>
