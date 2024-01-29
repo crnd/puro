@@ -15,4 +15,8 @@
     <InternalsVisibleTo Include="Puro.SqlServer.Runner.Tests" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
+  </ItemGroup>
+
 </Project>
