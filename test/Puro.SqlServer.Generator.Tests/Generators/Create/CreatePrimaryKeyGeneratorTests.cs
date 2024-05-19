@@ -57,9 +57,10 @@ public class CreatePrimaryKeyGeneratorTests
 
 		var sql = CreatePrimaryKeyGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			ALTER TABLE [Banking].[Account]
-				ADD CONSTRAINT [PK_Account_Id] PRIMARY KEY CLUSTERED ([Id]);";
+				ADD CONSTRAINT [PK_Account_Id] PRIMARY KEY CLUSTERED ([Id]);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -75,10 +76,11 @@ public class CreatePrimaryKeyGeneratorTests
 
 		var sql = CreatePrimaryKeyGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			ALTER TABLE [Banking].[Account]
 				ADD CONSTRAINT [PK_Account_AccountId_CustomerId_BankId]
-					PRIMARY KEY CLUSTERED ([AccountId], [CustomerId], [BankId]);";
+					PRIMARY KEY CLUSTERED ([AccountId], [CustomerId], [BankId]);
+			""";
 
 		expected.SqlEqual(sql);
 	}

@@ -22,11 +22,12 @@ internal static class CreateForeignKeyGenerator
 			throw new IncompleteCreateForeignKeyStatementException(statement.ForeignKey);
 		}
 
-		return @$"
-ALTER TABLE [{statement.ReferencingTableSchema}].[{statement.ReferencingTable}]
-	ADD CONSTRAINT [{statement.ForeignKey}] FOREIGN KEY ([{GetColumns(statement.ReferencingColumns)}])
-	REFERENCES [{statement.ReferencedTableSchema}].[{statement.ReferencedTable}] ([{GetColumns(statement.ReferencedColumns)}])
-	ON DELETE {ConvertOnDeleteToString(statement.OnDelete!.Value)};";
+		return $"""
+			ALTER TABLE [{statement.ReferencingTableSchema}].[{statement.ReferencingTable}]
+				ADD CONSTRAINT [{statement.ForeignKey}] FOREIGN KEY ([{GetColumns(statement.ReferencingColumns)}])
+				REFERENCES [{statement.ReferencedTableSchema}].[{statement.ReferencedTable}] ([{GetColumns(statement.ReferencedColumns)}])
+				ON DELETE {ConvertOnDeleteToString(statement.OnDelete!.Value)};
+			""";
 	}
 
 	private static bool IsComplete(ICreateForeignKeyMigrationStatement statement)

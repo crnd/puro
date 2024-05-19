@@ -100,9 +100,10 @@ public class CreateIndexGeneratorTests
 
 		var sql = CreateIndexGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE INDEX [IX_Customer_Name]
-				ON [dbo].[Customer] ([Name] ASC);";
+				ON [dbo].[Customer] ([Name] ASC);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -133,9 +134,10 @@ public class CreateIndexGeneratorTests
 
 		var sql = CreateIndexGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE INDEX [IX_Customer_Name_DateOfBirth_AddressId]
-				ON [dbo].[Customer] ([Name] ASC, [DateOfBirth] DESC, [AddressId] ASC);";
+				ON [dbo].[Customer] ([Name] ASC, [DateOfBirth] DESC, [AddressId] ASC);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -158,9 +160,10 @@ public class CreateIndexGeneratorTests
 
 		var sql = CreateIndexGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE UNIQUE INDEX [IX_Customer_AddressId]
-				ON [dbo].[Customer] ([AddressId] DESC);";
+				ON [dbo].[Customer] ([AddressId] DESC);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -187,10 +190,11 @@ public class CreateIndexGeneratorTests
 
 		var sql = CreateIndexGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE INDEX [IX_Customer_Name_AddressId]
 				ON [dbo].[Customer] ([Name] ASC, [AddressId] ASC)
-				WHERE [Enabled] = 1;";
+				WHERE [Enabled] = 1;
+			""";
 
 		expected.SqlEqual(sql);
 	}

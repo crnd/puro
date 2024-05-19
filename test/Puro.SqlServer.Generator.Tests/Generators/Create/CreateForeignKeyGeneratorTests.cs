@@ -138,11 +138,12 @@ public class CreateForeignKeyGeneratorTests
 
 		var sql = CreateForeignKeyGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			ALTER TABLE [schema].[referencingTable]
-				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
-					REFERENCES [schema].[referencedTable] ([ReferencedId])
-					ON DELETE NO ACTION;";
+			ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
+				REFERENCES [schema].[referencedTable] ([ReferencedId])
+				ON DELETE NO ACTION;
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -162,11 +163,12 @@ public class CreateForeignKeyGeneratorTests
 
 		var sql = CreateForeignKeyGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			ALTER TABLE [fromSchema].[referencingTable]
 				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
 					REFERENCES [toSchema].[referencedTable] ([ReferencedId])
-					ON DELETE NO ACTION;";
+					ON DELETE NO ACTION;
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -186,11 +188,12 @@ public class CreateForeignKeyGeneratorTests
 
 		var sql = CreateForeignKeyGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			ALTER TABLE [fromSchema].[referencingTable]
 				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId1], [ReferencingId2])
 					REFERENCES [toSchema].[referencedTable] ([ReferencedId1], [ReferencedId2])
-					ON DELETE NO ACTION;";
+					ON DELETE NO ACTION;
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -210,11 +213,12 @@ public class CreateForeignKeyGeneratorTests
 
 		var sql = CreateForeignKeyGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			ALTER TABLE [schema].[referencingTable]
 				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
 					REFERENCES [schema].[referencedTable] ([ReferencedId])
-					ON DELETE CASCADE;";
+					ON DELETE CASCADE;
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -234,11 +238,12 @@ public class CreateForeignKeyGeneratorTests
 
 		var sql = CreateForeignKeyGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			ALTER TABLE [schema].[referencingTable]
 				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
 					REFERENCES [schema].[referencedTable] ([ReferencedId])
-					ON DELETE SET NULL;";
+					ON DELETE SET NULL;
+			""";
 
 		expected.SqlEqual(sql);
 	}

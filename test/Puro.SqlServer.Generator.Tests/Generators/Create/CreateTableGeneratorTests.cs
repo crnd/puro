@@ -418,10 +418,11 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] SMALLINT NOT NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -448,10 +449,11 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] INT NOT NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -478,10 +480,11 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] BIGINT NOT NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -508,10 +511,11 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] BIT NOT NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -538,10 +542,11 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] FLOAT(53) NOT NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -568,10 +573,11 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] DECIMAL(17, 5) NOT NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -598,10 +604,11 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[Name] NVARCHAR(MAX) NOT NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -628,10 +635,11 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[Name] NCHAR(250) NOT NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -658,10 +666,11 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[Name] NVARCHAR(750) NOT NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -688,10 +697,11 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] UNIQUEIDENTIFIER NOT NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -718,10 +728,11 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[Date] DATE NOT NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -748,10 +759,11 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[Time] TIME NOT NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -778,10 +790,11 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[DateTime] DATETIME NOT NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -808,10 +821,11 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[DateTime] DATETIMEOFFSET NOT NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
@@ -858,12 +872,13 @@ public class CreateTableGeneratorTests
 
 		var sql = CreateTableGenerator.Generate(statement);
 
-		var expected = @"
+		var expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] INT NOT NULL IDENTITY(1, 1),
 				[Name] NVARCHAR(200) NOT NULL,
 				[Description] NVARCHAR(MAX) NULL
-			);";
+			);
+			""";
 
 		expected.SqlEqual(sql);
 	}
