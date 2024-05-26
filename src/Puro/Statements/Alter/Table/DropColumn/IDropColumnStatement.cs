@@ -1,4 +1,4 @@
-﻿namespace Puro.Statements.Alter.Table;
+﻿namespace Puro.Statements.Alter.Table.DropColumn;
 
 /// <summary>
 /// Methods for dropping columns from a table.
@@ -10,5 +10,5 @@ public interface IDropColumnStatement
 	/// </summary>
 	/// <param name="name">Name of the column.</param>
 	/// <returns>Interface for dropping more columns.</returns>
-	public IDropColumnStatement DropColumn(string name);
+	public IAlterTableSchemaStatement DropColumn(string name);
 }

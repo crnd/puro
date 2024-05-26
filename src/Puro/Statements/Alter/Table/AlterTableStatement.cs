@@ -1,4 +1,4 @@
-﻿using Puro.Exceptions;
+﻿using Puro.Statements.Alter.Table.DropColumn;
 
 namespace Puro.Statements.Alter.Table;
 
@@ -8,13 +8,13 @@ internal sealed class AlterTableStatement :
 	IDropColumnStatement,
 	IAlterTableMigrationStatement
 {
-	private readonly List<string> dropColumns = [];
+	private readonly List<(TableColumnChangeType, ITableColumn)> columnChanges = [];
 
 	public string? Schema { get; private set; }
 
 	public string Table { get; }
 
-	public IReadOnlyList<string> DropColumns => dropColumns.AsReadOnly();
+	public IReadOnlyList<(TableColumnChangeType, ITableColumn)> ColumnChanges => columnChanges.AsReadOnly();
 
 	public AlterTableStatement(string name)
 	{
@@ -38,19 +38,14 @@ internal sealed class AlterTableStatement :
 		return this;
 	}
 
-	public IDropColumnStatement DropColumn(string name)
+	public IAlterTableSchemaStatement DropColumn(string name)
 	{
 		if (string.IsNullOrWhiteSpace(name))
 		{
 			throw new ArgumentNullException(nameof(name));
 		}
 
-		if (dropColumns.Contains(name))
-		{
-			throw new DuplicateDropColumnException(name);
-		}
-
-		dropColumns.Add(name);
+		columnChanges.Add((TableColumnChangeType.Drop, new TableColumn(name)));
 
 		return this;
 	}

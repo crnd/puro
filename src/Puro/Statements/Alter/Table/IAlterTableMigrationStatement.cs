@@ -16,7 +16,7 @@ public interface IAlterTableMigrationStatement : IMigrationStatement
 	public string Table { get; }
 
 	/// <summary>
-	/// Gets the names of the columns to drop.
+	/// Gets the list of column changes.
 	/// </summary>
-	public IReadOnlyList<string> DropColumns { get; }
+	public IReadOnlyList<(TableColumnChangeType Type, ITableColumn Column)> ColumnChanges { get; }
 }

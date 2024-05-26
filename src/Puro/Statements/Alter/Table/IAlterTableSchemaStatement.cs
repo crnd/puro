@@ -1,8 +1,11 @@
-﻿namespace Puro.Statements.Alter.Table;
+﻿using Puro.Statements.Alter.Table.DropColumn;
+
+namespace Puro.Statements.Alter.Table;
 
 /// <summary>
 /// Methods for defining what to alter in a table.
 /// </summary>
-public interface IAlterTableSchemaStatement : IDropColumnStatement
+public interface IAlterTableSchemaStatement :
+	IDropColumnStatement
 {
 }

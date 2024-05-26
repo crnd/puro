@@ -3,6 +3,7 @@ using NSubstitute.ReturnsExtensions;
 using Puro.SqlServer.Generator.Exceptions;
 using Puro.SqlServer.Generator.Generators.Alter;
 using Puro.SqlServer.Generator.Tests.Extensions;
+using Puro.Statements;
 using Puro.Statements.Alter.Table;
 using Xunit;
 
@@ -13,11 +14,11 @@ public class AlterTableGeneratorDropColumnTests
 	[Fact]
 	public void NullSchemaThrows()
 	{
-		var columns = new List<string> { "column1", "column2" };
+		var changes = GenerateColumnChanges("column1", "column2");
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
 		statement.Table.Returns("table");
 		statement.Schema.ReturnsNull();
-		statement.DropColumns.Returns(columns.AsReadOnly());
+		statement.ColumnChanges.Returns(changes);
 
 		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement));
 	}
@@ -25,11 +26,11 @@ public class AlterTableGeneratorDropColumnTests
 	[Fact]
 	public void SingleDropColumnGeneratedCorrectly()
 	{
-		var columns = new List<string> { "column1" };
+		var changes = GenerateColumnChanges("column1");
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
 		statement.Table.Returns("table");
 		statement.Schema.Returns("schema");
-		statement.DropColumns.Returns(columns.AsReadOnly());
+		statement.ColumnChanges.Returns(changes);
 
 		var sql = AlterTableGenerator.Generate(statement);
 
@@ -44,11 +45,11 @@ public class AlterTableGeneratorDropColumnTests
 	[Fact]
 	public void MultipleDropColumnsGeneratedCorrectly()
 	{
-		var columns = new List<string> { "column1", "column2", "column3" };
+		var changes = GenerateColumnChanges("column1", "column2", "column3");
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
 		statement.Table.Returns("table");
 		statement.Schema.Returns("schema");
-		statement.DropColumns.Returns(columns.AsReadOnly());
+		statement.ColumnChanges.Returns(changes);
 
 		var sql = AlterTableGenerator.Generate(statement);
 
@@ -58,5 +59,18 @@ public class AlterTableGeneratorDropColumnTests
 			""";
 
 		expected.SqlEqual(sql);
+	}
+
+	private static IReadOnlyList<(TableColumnChangeType, ITableColumn)> GenerateColumnChanges(params string[] columnNames)
+	{
+		var changes = new List<(TableColumnChangeType, ITableColumn)>();
+		foreach (var name in columnNames)
+		{
+			var column = Substitute.For<ITableColumn>();
+			column.Name.Returns(name);
+			changes.Add((TableColumnChangeType.Drop, column));
+		}
+
+		return changes.AsReadOnly();
 	}
 }

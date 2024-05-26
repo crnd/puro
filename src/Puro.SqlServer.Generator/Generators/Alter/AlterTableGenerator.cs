@@ -1,4 +1,5 @@
 ﻿using Puro.SqlServer.Generator.Exceptions;
+using Puro.Statements;
 using Puro.Statements.Alter.Table;
 using System.Text;
 
@@ -22,31 +23,74 @@ internal static class AlterTableGenerator
 			throw new IncompleteAlterTableStatementException(statement.Table);
 		}
 
-		var builder = new StringBuilder($"ALTER TABLE [{statement.Schema}].[{statement.Table}]").AppendLine();
+		var tableSql = $"ALTER TABLE [{statement.Schema}].[{statement.Table}]" + Environment.NewLine;
+		var builder = new StringBuilder(tableSql);
 
-		if (statement.DropColumns.Count != 0)
+		TableColumnChangeType? previousChangeType = null;
+
+		foreach (var change in statement.ColumnChanges)
 		{
-			builder.Append("DROP COLUMN [");
-			builder.Append(string.Join("], [", statement.DropColumns));
-			builder.Append("];");
+			switch (change.Type)
+			{
+				case TableColumnChangeType.Add:
+					if (previousChangeType != TableColumnChangeType.Add && previousChangeType is not null)
+					{
+						builder.AppendLine(";").AppendLine();
+						builder.AppendLine(tableSql);
+					}
+
+					builder.Append(BuildAddColumn(change.Column));
+					break;
+				case TableColumnChangeType.Alter:
+					if (previousChangeType is not null)
+					{
+						builder.AppendLine(";").AppendLine();
+						builder.AppendLine(tableSql);
+					}
+
+					builder.Append(BuildAltercolumn(change.Column));
+					break;
+				case TableColumnChangeType.Drop:
+					if (previousChangeType is null)
+					{
+						builder.Append("DROP COLUMN");
+					}
+					else if (previousChangeType == TableColumnChangeType.Drop)
+					{
+						builder.Append(',');
+					}
+					else
+					{
+						builder.AppendLine(";").AppendLine();
+						builder.AppendLine(tableSql);
+						builder.Append("DROP COLUMN");
+					}
+
+					builder.Append($" [{change.Column.Name}]");
+
+					break;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(statement));
+			}
+
+			previousChangeType = change.Type;
 		}
 
-		return builder.ToString();
-
+		return builder.Append(';').ToString();
 	}
 
 	private static bool IsComplete(IAlterTableMigrationStatement statement)
 	{
-		if (statement.Schema is null)
-		{
-			return false;
-		}
+		return statement.Schema is not null && statement.ColumnChanges.Count != 0;
+	}
 
-		if (statement.DropColumns.Count == 0)
-		{
-			return false;
-		}
+	private static string BuildAddColumn(ITableColumn column)
+	{
+		throw new NotImplementedException();
+	}
 
-		return true;
+	private static string BuildAltercolumn(ITableColumn column)
+	{
+		throw new NotImplementedException();
 	}
 }
