@@ -8,6 +8,10 @@ updates:
       interval: "weekly"
     reviewers:
       - "crnd"
+    groups:
+      xunit:
+        patterns:
+          - "xunit*"
 
   # GitHub Actions
   - package-ecosystem: "github-actions"
