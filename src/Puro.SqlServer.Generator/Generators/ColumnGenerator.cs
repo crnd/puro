@@ -54,7 +54,7 @@ internal static class ColumnGenerator
 			var column when column.Type == typeof(Guid) => "UNIQUEIDENTIFIER",
 			var column when column.Type == typeof(DateOnly) => "DATE",
 			var column when column.Type == typeof(TimeOnly) => "TIME",
-			var column when column.Type == typeof(DateTime) => "DATETIME",
+			var column when column.Type == typeof(DateTime) => "DATETIME2",
 			var column when column.Type == typeof(DateTimeOffset) => "DATETIMEOFFSET",
 			_ => throw new ArgumentOutOfRangeException(nameof(tableColumn))
 		};

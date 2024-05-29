@@ -792,7 +792,7 @@ public class CreateTableGeneratorTests
 
 		var expected = """
 			CREATE TABLE [schema].[table] (
-				[DateTime] DATETIME NOT NULL
+				[DateTime] DATETIME2 NOT NULL
 			);
 			""";
 

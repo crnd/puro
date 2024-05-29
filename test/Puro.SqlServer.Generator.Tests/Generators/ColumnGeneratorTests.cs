@@ -573,7 +573,7 @@ public class ColumnGeneratorTests
 
 		var sql = ColumnGenerator.BuildColumnRowSql(column);
 
-		Assert.Equal("[column] DATETIME NOT NULL", sql);
+		Assert.Equal("[column] DATETIME2 NOT NULL", sql);
 	}
 
 	[Fact]
@@ -586,7 +586,7 @@ public class ColumnGeneratorTests
 
 		var sql = ColumnGenerator.BuildColumnRowSql(column);
 
-		Assert.Equal("[column] DATETIME NULL", sql);
+		Assert.Equal("[column] DATETIME2 NULL", sql);
 	}
 
 	[Fact]
