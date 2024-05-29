@@ -88,7 +88,7 @@ internal sealed class CreateTableStatement :
 		return this;
 	}
 
-	public ICreateTableColumnNumberTypeStatement AsDouble()
+	public ICreateTableColumnTypeStatement AsDouble()
 	{
 		columns.Last().Type = typeof(double);
 

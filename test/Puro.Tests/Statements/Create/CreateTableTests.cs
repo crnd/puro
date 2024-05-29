@@ -365,7 +365,7 @@ public class CreateTableTests
 		public override void Up()
 		{
 			Create.Table("TestTable").InSchema("TestSchema")
-				.WithColumn("Id").AsDouble().Identity();
+				.WithColumn("Id").AsDouble().NotNull();
 		}
 	}
 

@@ -33,7 +33,7 @@ public interface ICreateTableColumnStatement
 	/// Defines the column type as double.
 	/// </summary>
 	/// <returns>Interface for defining identity column.</returns>
-	public ICreateTableColumnNumberTypeStatement AsDouble();
+	public ICreateTableColumnTypeStatement AsDouble();
 
 	/// <summary>
 	/// Defines the column type as decimal.
