@@ -8,7 +8,7 @@ internal sealed class CreatePrimaryKeyStatement :
 	ICreatePrimaryKeySchemaStatement,
 	ICreatePrimaryKeyMigrationStatement
 {
-	private readonly List<string> columns = new();
+	private readonly List<string> columns = [];
 
 	public string? Schema { get; private set; }
 

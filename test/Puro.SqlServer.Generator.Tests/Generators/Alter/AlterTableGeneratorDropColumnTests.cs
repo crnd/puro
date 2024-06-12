@@ -5,6 +5,7 @@ using Puro.SqlServer.Generator.Generators.Alter;
 using Puro.SqlServer.Generator.Tests.Extensions;
 using Puro.Statements;
 using Puro.Statements.Alter.Table;
+using System.Collections.ObjectModel;
 using Xunit;
 
 namespace Puro.SqlServer.Generator.Tests.Generators.Alter;
@@ -61,7 +62,7 @@ public class AlterTableGeneratorDropColumnTests
 		expected.SqlEqual(sql);
 	}
 
-	private static IReadOnlyList<(TableColumnChangeType, ITableColumn)> GenerateColumnChanges(params string[] columnNames)
+	private static ReadOnlyCollection<(TableColumnChangeType, ITableColumn)> GenerateColumnChanges(params string[] columnNames)
 	{
 		var changes = new List<(TableColumnChangeType, ITableColumn)>();
 		foreach (var name in columnNames)

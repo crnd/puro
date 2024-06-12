@@ -13,7 +13,7 @@ internal sealed class CreateTableStatement :
 	ICreateTableStringColumnTypeStatement,
 	ICreateTableMigrationStatement
 {
-	private readonly List<TableColumn> columns = new();
+	private readonly List<TableColumn> columns = [];
 
 	public string? Schema { get; private set; }
 

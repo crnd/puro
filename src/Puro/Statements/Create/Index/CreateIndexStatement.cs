@@ -10,7 +10,7 @@ internal sealed class CreateIndexStatement :
 	ICreateIndexColumnDirectionStatement,
 	ICreateIndexMigrationStatement
 {
-	private readonly List<IndexColumn> columns = new();
+	private readonly List<IndexColumn> columns = [];
 
 	public string Index { get; }
 

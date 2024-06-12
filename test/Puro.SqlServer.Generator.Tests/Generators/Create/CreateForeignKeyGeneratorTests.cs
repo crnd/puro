@@ -18,10 +18,10 @@ public class CreateForeignKeyGeneratorTests
 		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
 		statement.ReferencingTable.ReturnsNull();
 		statement.ReferencingTableSchema.Returns("schema");
-		statement.ReferencingColumns.Returns(new List<string> { "Id" });
+		statement.ReferencingColumns.Returns(["Id"]);
 		statement.ReferencedTable.Returns("referencedTable");
 		statement.ReferencedTableSchema.Returns("schema");
-		statement.ReferencedColumns.Returns(new List<string> { "Id" });
+		statement.ReferencedColumns.Returns(["Id"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
 		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement));
@@ -34,10 +34,10 @@ public class CreateForeignKeyGeneratorTests
 		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
 		statement.ReferencingTable.Returns("referencingTable");
 		statement.ReferencingTableSchema.ReturnsNull();
-		statement.ReferencingColumns.Returns(new List<string> { "Id" });
+		statement.ReferencingColumns.Returns(["Id"]);
 		statement.ReferencedTable.Returns("referencedTable");
 		statement.ReferencedTableSchema.Returns("schema");
-		statement.ReferencedColumns.Returns(new List<string> { "Id" });
+		statement.ReferencedColumns.Returns(["Id"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
 		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement));
@@ -50,10 +50,10 @@ public class CreateForeignKeyGeneratorTests
 		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
 		statement.ReferencingTable.Returns("referencingTable");
 		statement.ReferencingTableSchema.Returns("schema");
-		statement.ReferencingColumns.Returns(new List<string> { "Id" });
+		statement.ReferencingColumns.Returns(["Id"]);
 		statement.ReferencedTable.ReturnsNull();
 		statement.ReferencedTableSchema.Returns("schema");
-		statement.ReferencedColumns.Returns(new List<string> { "Id" });
+		statement.ReferencedColumns.Returns(["Id"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
 		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement));
@@ -66,10 +66,10 @@ public class CreateForeignKeyGeneratorTests
 		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
 		statement.ReferencingTable.Returns("referencingTable");
 		statement.ReferencingTableSchema.Returns("schema");
-		statement.ReferencingColumns.Returns(new List<string> { "Id" });
+		statement.ReferencingColumns.Returns(["Id"]);
 		statement.ReferencedTable.Returns("referencedTable");
 		statement.ReferencedTableSchema.ReturnsNull();
-		statement.ReferencedColumns.Returns(new List<string> { "Id" });
+		statement.ReferencedColumns.Returns(["Id"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
 		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement));
@@ -82,10 +82,10 @@ public class CreateForeignKeyGeneratorTests
 		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
 		statement.ReferencingTable.Returns("referencingTable");
 		statement.ReferencingTableSchema.Returns("schema");
-		statement.ReferencingColumns.Returns(new List<string> { "Id" });
+		statement.ReferencingColumns.Returns(["Id"]);
 		statement.ReferencedTable.Returns("referencedTable");
 		statement.ReferencedTableSchema.Returns("schema");
-		statement.ReferencedColumns.Returns(new List<string>());
+		statement.ReferencedColumns.Returns([]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
 		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement));
@@ -98,10 +98,10 @@ public class CreateForeignKeyGeneratorTests
 		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
 		statement.ReferencingTable.Returns("referencingTable");
 		statement.ReferencingTableSchema.Returns("schema");
-		statement.ReferencingColumns.Returns(new List<string> { "Id" });
+		statement.ReferencingColumns.Returns(["Id"]);
 		statement.ReferencedTable.Returns("referencedTable");
 		statement.ReferencedTableSchema.Returns("schema");
-		statement.ReferencedColumns.Returns(new List<string> { "Id1", "Id2" });
+		statement.ReferencedColumns.Returns(["Id1", "Id2"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
 		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement));
@@ -114,10 +114,10 @@ public class CreateForeignKeyGeneratorTests
 		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
 		statement.ReferencingTable.Returns("referencingTable");
 		statement.ReferencingTableSchema.Returns("schema");
-		statement.ReferencingColumns.Returns(new List<string> { "Id" });
+		statement.ReferencingColumns.Returns(["Id"]);
 		statement.ReferencedTable.Returns("referencedTable");
 		statement.ReferencedTableSchema.Returns("schema");
-		statement.ReferencedColumns.Returns(new List<string> { "Id" });
+		statement.ReferencedColumns.Returns(["Id"]);
 		statement.OnDelete.ReturnsNull();
 
 		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement));
@@ -130,10 +130,10 @@ public class CreateForeignKeyGeneratorTests
 		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
 		statement.ReferencingTable.Returns("referencingTable");
 		statement.ReferencingTableSchema.Returns("schema");
-		statement.ReferencingColumns.Returns(new List<string> { "ReferencingId" });
+		statement.ReferencingColumns.Returns(["ReferencingId"]);
 		statement.ReferencedTable.Returns("referencedTable");
 		statement.ReferencedTableSchema.Returns("schema");
-		statement.ReferencedColumns.Returns(new List<string> { "ReferencedId" });
+		statement.ReferencedColumns.Returns(["ReferencedId"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
 		var sql = CreateForeignKeyGenerator.Generate(statement);
@@ -155,10 +155,10 @@ public class CreateForeignKeyGeneratorTests
 		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
 		statement.ReferencingTable.Returns("referencingTable");
 		statement.ReferencingTableSchema.Returns("fromSchema");
-		statement.ReferencingColumns.Returns(new List<string> { "ReferencingId" });
+		statement.ReferencingColumns.Returns(["ReferencingId"]);
 		statement.ReferencedTable.Returns("referencedTable");
 		statement.ReferencedTableSchema.Returns("toSchema");
-		statement.ReferencedColumns.Returns(new List<string> { "ReferencedId" });
+		statement.ReferencedColumns.Returns(["ReferencedId"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
 		var sql = CreateForeignKeyGenerator.Generate(statement);
@@ -180,10 +180,10 @@ public class CreateForeignKeyGeneratorTests
 		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
 		statement.ReferencingTable.Returns("referencingTable");
 		statement.ReferencingTableSchema.Returns("fromSchema");
-		statement.ReferencingColumns.Returns(new List<string> { "ReferencingId1", "ReferencingId2" });
+		statement.ReferencingColumns.Returns(["ReferencingId1", "ReferencingId2"]);
 		statement.ReferencedTable.Returns("referencedTable");
 		statement.ReferencedTableSchema.Returns("toSchema");
-		statement.ReferencedColumns.Returns(new List<string> { "ReferencedId1", "ReferencedId2" });
+		statement.ReferencedColumns.Returns(["ReferencedId1", "ReferencedId2"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
 		var sql = CreateForeignKeyGenerator.Generate(statement);
@@ -205,10 +205,10 @@ public class CreateForeignKeyGeneratorTests
 		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
 		statement.ReferencingTable.Returns("referencingTable");
 		statement.ReferencingTableSchema.Returns("schema");
-		statement.ReferencingColumns.Returns(new List<string> { "ReferencingId" });
+		statement.ReferencingColumns.Returns(["ReferencingId"]);
 		statement.ReferencedTable.Returns("referencedTable");
 		statement.ReferencedTableSchema.Returns("schema");
-		statement.ReferencedColumns.Returns(new List<string> { "ReferencedId" });
+		statement.ReferencedColumns.Returns(["ReferencedId"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Cascade);
 
 		var sql = CreateForeignKeyGenerator.Generate(statement);
@@ -230,10 +230,10 @@ public class CreateForeignKeyGeneratorTests
 		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
 		statement.ReferencingTable.Returns("referencingTable");
 		statement.ReferencingTableSchema.Returns("schema");
-		statement.ReferencingColumns.Returns(new List<string> { "ReferencingId" });
+		statement.ReferencingColumns.Returns(["ReferencingId"]);
 		statement.ReferencedTable.Returns("referencedTable");
 		statement.ReferencedTableSchema.Returns("schema");
-		statement.ReferencedColumns.Returns(new List<string> { "ReferencedId" });
+		statement.ReferencedColumns.Returns(["ReferencedId"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.SetNull);
 
 		var sql = CreateForeignKeyGenerator.Generate(statement);

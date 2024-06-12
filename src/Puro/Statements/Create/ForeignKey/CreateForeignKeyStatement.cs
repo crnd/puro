@@ -12,9 +12,9 @@ internal sealed class CreateForeignKeyStatement :
 	ICreateForeignKeyReferencedColumnStatement,
 	ICreateForeignKeyMigrationStatement
 {
-	private readonly List<string> referencingColumns = new();
+	private readonly List<string> referencingColumns = [];
 
-	private readonly List<string> referencedColumns = new();
+	private readonly List<string> referencedColumns = [];
 
 	public string ForeignKey { get; }
 

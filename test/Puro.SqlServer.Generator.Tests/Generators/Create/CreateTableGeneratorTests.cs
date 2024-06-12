@@ -50,7 +50,7 @@ public class CreateTableGeneratorTests
 		var statement = Substitute.For<ICreateTableMigrationStatement>();
 		statement.Table.Returns("table");
 		statement.Schema.Returns("schema");
-		statement.Columns.Returns(new List<ITableColumn>().AsReadOnly());
+		statement.Columns.Returns([]);
 
 		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement));
 	}

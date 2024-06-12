@@ -17,7 +17,7 @@ public class CreatePrimaryKeyGeneratorTests
 		statement.Schema.ReturnsNull();
 		statement.Table.Returns("TestTable");
 		statement.PrimaryKey.Returns("PK_Test");
-		statement.Columns.Returns(new List<string> { "Id" });
+		statement.Columns.Returns(["Id"]);
 
 		Assert.Throws<IncompleteCreatePrimaryKeyStatementException>(() => CreatePrimaryKeyGenerator.Generate(statement));
 	}
@@ -29,7 +29,7 @@ public class CreatePrimaryKeyGeneratorTests
 		statement.Schema.Returns("TestSchema");
 		statement.Table.ReturnsNull();
 		statement.PrimaryKey.Returns("PK_Test");
-		statement.Columns.Returns(new List<string> { "Id" });
+		statement.Columns.Returns(["Id"]);
 
 		Assert.Throws<IncompleteCreatePrimaryKeyStatementException>(() => CreatePrimaryKeyGenerator.Generate(statement));
 	}
@@ -41,7 +41,7 @@ public class CreatePrimaryKeyGeneratorTests
 		statement.Schema.Returns("TestSchema");
 		statement.Table.Returns("TestTable");
 		statement.PrimaryKey.Returns("PK_Test");
-		statement.Columns.Returns(new List<string>());
+		statement.Columns.Returns([]);
 
 		Assert.Throws<IncompleteCreatePrimaryKeyStatementException>(() => CreatePrimaryKeyGenerator.Generate(statement));
 	}
@@ -53,7 +53,7 @@ public class CreatePrimaryKeyGeneratorTests
 		statement.Schema.Returns("Banking");
 		statement.Table.Returns("Account");
 		statement.PrimaryKey.Returns("PK_Account_Id");
-		statement.Columns.Returns(new List<string> { "Id" });
+		statement.Columns.Returns(["Id"]);
 
 		var sql = CreatePrimaryKeyGenerator.Generate(statement);
 
@@ -72,7 +72,7 @@ public class CreatePrimaryKeyGeneratorTests
 		statement.Schema.Returns("Banking");
 		statement.Table.Returns("Account");
 		statement.PrimaryKey.Returns("PK_Account_AccountId_CustomerId_BankId");
-		statement.Columns.Returns(new List<string> { "AccountId", "CustomerId", "BankId" });
+		statement.Columns.Returns(["AccountId", "CustomerId", "BankId"]);
 
 		var sql = CreatePrimaryKeyGenerator.Generate(statement);
 

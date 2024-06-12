@@ -13,7 +13,7 @@ namespace Puro;
 /// </summary>
 public abstract class Migration
 {
-	private readonly List<IMigrationStatement> statements = new();
+	private readonly List<IMigrationStatement> statements = [];
 
 	/// <summary>
 	/// Starts building a new statement for creating a new item.
