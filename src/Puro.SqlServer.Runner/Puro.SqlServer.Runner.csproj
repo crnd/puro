@@ -8,15 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Puro.SqlServer.Generator\Puro.SqlServer.Generator.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <InternalsVisibleTo Include="Puro.SqlServer.Runner.Tests" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Puro\Puro.csproj" />
   </ItemGroup>
 
 </Project>
