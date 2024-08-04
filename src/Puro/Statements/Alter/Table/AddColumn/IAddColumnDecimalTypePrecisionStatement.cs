@@ -3,12 +3,12 @@
 /// <summary>
 /// Methods for defining decimal column scale.
 /// </summary>
-public interface IAlterTableAddColumnDecimalTypePrecisionStatement
+public interface IAddColumnDecimalTypePrecisionStatement
 {
 	/// <summary>
 	/// Defines the scale for a decimal column.
 	/// </summary>
 	/// <param name="scale">Scale value.</param>
 	/// <returns>Interface for defining identity column.</returns>
-	public IAlterTableAddColumnTypeStatement WithScale(short scale);
+	public IAddColumnTypeStatement WithScale(short scale);
 }
