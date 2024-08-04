@@ -32,7 +32,7 @@ public class AlterTableGeneratorTests
 	}
 
 	[Fact]
-	public void MixedAddAndDropColumnsGeneratedCorrectly()
+	public void MixedColumnChangesGeneratedCorrectly()
 	{
 		var column1 = Substitute.For<ITableColumn>();
 		column1.Name.Returns("column1");
@@ -41,29 +41,48 @@ public class AlterTableGeneratorTests
 
 		var column2 = Substitute.For<ITableColumn>();
 		column2.Name.Returns("column2");
+		column2.Type.Returns(typeof(DateTimeOffset));
+		column2.Nullable.Returns(true);
 
 		var column3 = Substitute.For<ITableColumn>();
 		column3.Name.Returns("column3");
 
 		var column4 = Substitute.For<ITableColumn>();
 		column4.Name.Returns("column4");
-		column4.Type.Returns(typeof(decimal));
-		column4.Nullable.Returns(true);
-		column4.Precision.Returns(5);
-		column4.Scale.Returns(2);
 
 		var column5 = Substitute.For<ITableColumn>();
 		column5.Name.Returns("column5");
-		column5.Type.Returns(typeof(int));
-		column5.Nullable.Returns(false);
+		column5.Type.Returns(typeof(decimal));
+		column5.Nullable.Returns(true);
+		column5.Precision.Returns(5);
+		column5.Scale.Returns(2);
+
+		var column6 = Substitute.For<ITableColumn>();
+		column6.Name.Returns("column6");
+		column6.Type.Returns(typeof(int));
+		column6.Nullable.Returns(false);
+
+		var column7 = Substitute.For<ITableColumn>();
+		column7.Name.Returns("column7");
+		column7.Type.Returns(typeof(TimeOnly));
+		column7.Nullable.Returns(true);
+
+		var column8 = Substitute.For<ITableColumn>();
+		column8.Name.Returns("column8");
+		column8.Type.Returns(typeof(string));
+		column8.Nullable.Returns(false);
+		column8.FixedLength.Returns(250);
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
 			(TableColumnChangeType.Add, column1),
-			(TableColumnChangeType.Drop, column2),
+			(TableColumnChangeType.Alter, column2),
 			(TableColumnChangeType.Drop, column3),
-			(TableColumnChangeType.Add, column4),
-			(TableColumnChangeType.Add, column5)
+			(TableColumnChangeType.Drop, column4),
+			(TableColumnChangeType.Add, column5),
+			(TableColumnChangeType.Add, column6),
+			(TableColumnChangeType.Alter, column7),
+			(TableColumnChangeType.Alter, column8)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -78,12 +97,21 @@ public class AlterTableGeneratorTests
 				ADD [column1] INT NULL;
 
 			ALTER TABLE [schema].[table]
-				DROP COLUMN [column2], [column3];
+				ALTER COLUMN [column2] DATETIMEOFFSET NULL;
+
+			ALTER TABLE [schema].[table]
+				DROP COLUMN [column3], [column4];
 
 			ALTER TABLE [schema].[table]
 				ADD
-					[column4] DECIMAL(5, 2) NULL,
-					[column5] INT NOT NULL;
+					[column5] DECIMAL(5, 2) NULL,
+					[column6] INT NOT NULL;
+
+			ALTER TABLE [schema].[table]
+				ALTER COLUMN [column7] TIME NULL;
+
+			ALTER TABLE [schema].[table]
+				ALTER COLUMN [column8] NCHAR(250) NOT NULL;
 			""";
 
 		expected.SqlEqual(sql);

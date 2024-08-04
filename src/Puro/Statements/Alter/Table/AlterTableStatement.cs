@@ -76,6 +76,18 @@ internal sealed class AlterTableStatement :
 		return this;
 	}
 
+	public IAddColumnStatement AlterColumn(string name)
+	{
+		if (string.IsNullOrWhiteSpace(name))
+		{
+			throw new ArgumentNullException(nameof(name));
+		}
+
+		columnChanges.Add((TableColumnChangeType.Alter, new TableColumn(name)));
+
+		return this;
+	}
+
 	public IAddColumnTypeStatement AsBool()
 	{
 		columnChanges.Last().Column.Type = typeof(bool);

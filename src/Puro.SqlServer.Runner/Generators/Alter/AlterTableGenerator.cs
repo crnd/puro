@@ -57,7 +57,7 @@ internal static class AlterTableGenerator
 						builder.AppendLine(tableSql);
 					}
 
-					builder.Append(BuildAltercolumn(column));
+					builder.Append($"ALTER COLUMN {BuildAltercolumn(column)}");
 					break;
 				case TableColumnChangeType.Drop:
 					if (previousChangeType is null)
@@ -95,8 +95,10 @@ internal static class AlterTableGenerator
 			return false;
 		}
 
-		var addColumns = statement.ColumnChanges.Where(c => c.ChangeType == TableColumnChangeType.Add).Select(c => c.Column);
-		if (addColumns.Any(c => !ColumnGenerator.ColumnIsComplete(c)))
+		var incompleteColumnChangeDefinitions = statement.ColumnChanges
+			.Where(c => c.ChangeType == TableColumnChangeType.Add || c.ChangeType == TableColumnChangeType.Alter)
+			.Any(c => !ColumnGenerator.ColumnIsComplete(c.Column));
+		if (incompleteColumnChangeDefinitions)
 		{
 			return false;
 		}
@@ -111,6 +113,6 @@ internal static class AlterTableGenerator
 
 	private static string BuildAltercolumn(ITableColumn column)
 	{
-		throw new NotImplementedException();
+		return ColumnGenerator.BuildColumnRowSql(column);
 	}
 }
