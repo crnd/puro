@@ -28,18 +28,27 @@ internal static class AlterTableGenerator
 
 		TableColumnChangeType? previousChangeType = null;
 
-		foreach (var change in statement.ColumnChanges)
+		foreach (var (changeType, column) in statement.ColumnChanges)
 		{
-			switch (change.Type)
+			switch (changeType)
 			{
 				case TableColumnChangeType.Add:
-					if (previousChangeType != TableColumnChangeType.Add && previousChangeType is not null)
+					if (previousChangeType is not null && previousChangeType != TableColumnChangeType.Add)
 					{
 						builder.AppendLine(";").AppendLine();
 						builder.AppendLine(tableSql);
 					}
 
-					builder.Append(BuildAddColumn(change.Column));
+					if (previousChangeType != TableColumnChangeType.Add)
+					{
+						builder.AppendLine("ADD");
+					}
+					else
+					{
+						builder.Append(',').AppendLine();
+					}
+
+					builder.Append(BuildAddColumn(column));
 					break;
 				case TableColumnChangeType.Alter:
 					if (previousChangeType is not null)
@@ -48,7 +57,7 @@ internal static class AlterTableGenerator
 						builder.AppendLine(tableSql);
 					}
 
-					builder.Append(BuildAltercolumn(change.Column));
+					builder.Append(BuildAltercolumn(column));
 					break;
 				case TableColumnChangeType.Drop:
 					if (previousChangeType is null)
@@ -66,14 +75,14 @@ internal static class AlterTableGenerator
 						builder.Append("DROP COLUMN");
 					}
 
-					builder.Append($" [{change.Column.Name}]");
+					builder.Append($" [{column.Name}]");
 
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(statement));
 			}
 
-			previousChangeType = change.Type;
+			previousChangeType = changeType;
 		}
 
 		return builder.Append(';').ToString();
@@ -81,12 +90,23 @@ internal static class AlterTableGenerator
 
 	private static bool IsComplete(IAlterTableMigrationStatement statement)
 	{
-		return statement.Schema is not null && statement.ColumnChanges.Count != 0;
+		if (statement.Schema is null || statement.ColumnChanges.Count == 0)
+		{
+			return false;
+		}
+
+		var addColumns = statement.ColumnChanges.Where(c => c.ChangeType == TableColumnChangeType.Add).Select(c => c.Column);
+		if (addColumns.Any(c => !ColumnGenerator.ColumnIsComplete(c)))
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	private static string BuildAddColumn(ITableColumn column)
 	{
-		throw new NotImplementedException();
+		return ColumnGenerator.BuildColumnRowSql(column);
 	}
 
 	private static string BuildAltercolumn(ITableColumn column)

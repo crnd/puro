@@ -18,5 +18,5 @@ public interface IAlterTableMigrationStatement : IMigrationStatement
 	/// <summary>
 	/// Gets the list of column changes.
 	/// </summary>
-	public IReadOnlyList<(TableColumnChangeType Type, ITableColumn Column)> ColumnChanges { get; }
+	public IReadOnlyList<(TableColumnChangeType ChangeType, ITableColumn Column)> ColumnChanges { get; }
 }

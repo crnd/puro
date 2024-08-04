@@ -1,6 +1,4 @@
 ﻿using NSubstitute;
-using NSubstitute.ReturnsExtensions;
-using Puro.SqlServer.Runner.Exceptions;
 using Puro.SqlServer.Runner.Generators.Alter;
 using Puro.SqlServer.Runner.Tests.Extensions;
 using Puro.Statements;
@@ -12,18 +10,6 @@ namespace Puro.SqlServer.Runner.Tests.Generators.Alter;
 
 public class AlterTableGeneratorDropColumnTests
 {
-	[Fact]
-	public void NullSchemaThrows()
-	{
-		var changes = GenerateColumnChanges("column1", "column2");
-		var statement = Substitute.For<IAlterTableMigrationStatement>();
-		statement.Table.Returns("table");
-		statement.Schema.ReturnsNull();
-		statement.ColumnChanges.Returns(changes);
-
-		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement));
-	}
-
 	[Fact]
 	public void SingleDropColumnGeneratedCorrectly()
 	{

@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using Puro.Statements.Alter.Table;
+using Xunit;
 
 namespace Puro.Tests.Statements.Alter;
 
@@ -103,6 +104,92 @@ public class AlterTableTests
 		{
 			Alter.Table("table").InSchema("     ")
 				.DropColumn("column");
+		}
+	}
+
+	[Fact]
+	public void StatementReturnsEmptyListWhenNoColumns()
+	{
+		var migration = new NoColumnsMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Empty(statement.ColumnChanges);
+	}
+
+	[Fact]
+	public void StatementReturnsTableName()
+	{
+		var migration = new NoColumnsMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("TestTable", statement.Table);
+	}
+
+	[Fact]
+	public void StatementReturnsSchemaName()
+	{
+		var migration = new NoColumnsMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("TestSchema", statement.Schema);
+	}
+
+	private sealed class NoColumnsMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Alter.Table("TestTable").InSchema("TestSchema");
+		}
+	}
+
+	[Fact]
+	public void StatementReturnsMultipleColumns()
+	{
+		var migration = new MultipleColumnsMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.StrictEqual(4, statement.ColumnChanges.Count);
+
+		var (changeType, column) = statement.ColumnChanges[0];
+		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.Equal("Count", column.Name);
+		Assert.StrictEqual(typeof(int), column.Type);
+		Assert.True(column.Nullable);
+
+		(changeType, column) = statement.ColumnChanges[1];
+		Assert.StrictEqual(TableColumnChangeType.Drop, changeType);
+		Assert.Equal("Name", column.Name);
+
+		(changeType, column) = statement.ColumnChanges[2];
+		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.Equal("Description", column.Name);
+		Assert.StrictEqual(typeof(string), column.Type);
+		Assert.True(column.Nullable);
+		Assert.Null(column.FixedLength);
+		Assert.StrictEqual(1000, column.MaximumLength);
+
+		(changeType, column) = statement.ColumnChanges[3];
+		Assert.StrictEqual(TableColumnChangeType.Drop, changeType);
+		Assert.Equal("LastUpdated", column.Name);
+	}
+
+	private sealed class MultipleColumnsMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Alter.Table("TestTable").InSchema("TestSchema")
+				.AddColumn("Count").AsInt().Null()
+				.DropColumn("Name")
+				.AddColumn("Description").AsString().MaximumLength(1000).Null()
+				.DropColumn("LastUpdated");
 		}
 	}
 }

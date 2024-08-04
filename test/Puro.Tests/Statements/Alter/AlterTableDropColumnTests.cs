@@ -56,16 +56,6 @@ public class AlterTableDropColumnTests
 		}
 	}
 
-	private sealed class DuplicateColumnNameMigration : UpMigration
-	{
-		public override void Up()
-		{
-			Alter.Table("table").InSchema("schema")
-				.DropColumn("column")
-				.DropColumn("column");
-		}
-	}
-
 	[Fact]
 	public void StatementReturnsTableName()
 	{
@@ -96,9 +86,9 @@ public class AlterTableDropColumnTests
 
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
-		var change = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Drop, change.Type);
-		Assert.Equal("TestColumn", change.Column.Name);
+		var (changeType, column) = Assert.Single(statement.ColumnChanges);
+		Assert.StrictEqual(TableColumnChangeType.Drop, changeType);
+		Assert.Equal("TestColumn", column.Name);
 	}
 
 	private sealed class SingleColumnDropMigration : UpMigration
@@ -119,7 +109,7 @@ public class AlterTableDropColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		Assert.StrictEqual(4, statement.ColumnChanges.Count);
-		Assert.All(statement.ColumnChanges, c => Assert.StrictEqual(TableColumnChangeType.Drop, c.Type));
+		Assert.All(statement.ColumnChanges, c => Assert.StrictEqual(TableColumnChangeType.Drop, c.ChangeType));
 		Assert.Equal("FirstColumn", statement.ColumnChanges[0].Column.Name);
 		Assert.Equal("SecondColumn", statement.ColumnChanges[1].Column.Name);
 		Assert.Equal("ThirdColumn", statement.ColumnChanges[2].Column.Name);
