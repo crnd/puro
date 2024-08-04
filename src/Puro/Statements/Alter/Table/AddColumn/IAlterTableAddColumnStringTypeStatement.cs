@@ -1,5 +1,8 @@
 ﻿namespace Puro.Statements.Alter.Table.AddColumn;
 
+/// <summary>
+/// Methods for defining string column length.
+/// </summary>
 public interface IAlterTableAddColumnStringTypeStatement : IAlterTableAddColumnTypeStatement
 {
 	/// <summary>
