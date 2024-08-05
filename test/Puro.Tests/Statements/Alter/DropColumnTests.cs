@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Puro.Tests.Statements.Alter;
 
-public class AlterTableDropColumnTests
+public class DropColumnTests
 {
 	[Fact]
 	public void NullColumnNameThrows()

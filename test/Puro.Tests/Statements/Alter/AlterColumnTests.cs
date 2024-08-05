@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Puro.Tests.Statements.Alter;
 
-public class AlterTableAddColumnTests
+public class AlterColumnTests
 {
 	[Fact]
 	public void NullColumnNameThrows()
@@ -19,7 +19,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("table").InSchema("schema")
-				.AddColumn(null!).AsInt().Null();
+				.AlterColumn(null!).AsInt().Null();
 		}
 	}
 
@@ -36,7 +36,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("table").InSchema("schema")
-				.AddColumn(string.Empty).AsInt().Null();
+				.AlterColumn(string.Empty).AsInt().Null();
 		}
 	}
 
@@ -53,25 +53,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("table").InSchema("schema")
-				.AddColumn("     ").AsInt().Null();
-		}
-	}
-
-	[Fact]
-	public void DuplicateColumnNameThrows()
-	{
-		var migration = new DuplicateColumnNameMigration();
-
-		Assert.Throws<TableColumnExistsException>(() => migration.Up());
-	}
-
-	private sealed class DuplicateColumnNameMigration : UpMigration
-	{
-		public override void Up()
-		{
-			Alter.Table("table").InSchema("schema")
-				.AddColumn("column").AsInt().Null()
-				.AddColumn("column").AsShort().NotNull();
+				.AlterColumn("     ").AsInt().Null();
 		}
 	}
 
@@ -88,7 +70,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("table").InSchema("schema")
-				.AddColumn("Name").AsString().FixedLength(0);
+				.AlterColumn("Name").AsString().FixedLength(0);
 		}
 	}
 
@@ -105,7 +87,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("table").InSchema("schema")
-				.AddColumn("Name").AsString().MaximumLength(0);
+				.AlterColumn("Name").AsString().MaximumLength(0);
 		}
 	}
 
@@ -118,7 +100,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.Equal("Exists", column.Name);
 	}
 
@@ -131,7 +113,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(typeof(bool), column.Type);
 	}
 
@@ -140,7 +122,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("Exists").AsBool().Null();
+				.AlterColumn("Exists").AsBool().Null();
 		}
 	}
 
@@ -153,7 +135,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(typeof(short), column.Type);
 	}
 
@@ -162,7 +144,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("Count").AsShort().Null();
+				.AlterColumn("Count").AsShort().Null();
 		}
 	}
 
@@ -175,7 +157,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(typeof(int), column.Type);
 	}
 
@@ -184,7 +166,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("Count").AsInt().Null();
+				.AlterColumn("Count").AsInt().Null();
 		}
 	}
 
@@ -197,7 +179,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(typeof(long), column.Type);
 	}
 
@@ -206,7 +188,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("Count").AsLong().Null();
+				.AlterColumn("Count").AsLong().Null();
 		}
 	}
 
@@ -219,7 +201,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(typeof(double), column.Type);
 	}
 
@@ -228,7 +210,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("Count").AsDouble().Null();
+				.AlterColumn("Count").AsDouble().Null();
 		}
 	}
 
@@ -241,7 +223,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(typeof(decimal), column.Type);
 	}
 
@@ -254,7 +236,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(5, column.Precision);
 	}
 
@@ -267,7 +249,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(2, column.Scale);
 	}
 
@@ -276,7 +258,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("Id").AsDecimal().WithPrecision(5).WithScale(2).NotNull();
+				.AlterColumn("Id").AsDecimal().WithPrecision(5).WithScale(2).NotNull();
 		}
 	}
 
@@ -289,7 +271,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(typeof(Guid), column.Type);
 	}
 
@@ -298,7 +280,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("Id").AsGuid().NotNull();
+				.AlterColumn("Id").AsGuid().NotNull();
 		}
 	}
 
@@ -311,7 +293,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(typeof(string), column.Type);
 	}
 
@@ -324,7 +306,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.Null(column.FixedLength);
 	}
 
@@ -337,7 +319,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.Null(column.MaximumLength);
 	}
 
@@ -346,7 +328,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("Name").AsString().NotNull();
+				.AlterColumn("Name").AsString().NotNull();
 		}
 	}
 
@@ -359,7 +341,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(350, column.FixedLength);
 	}
 
@@ -368,7 +350,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("Name").AsString().FixedLength(350).NotNull();
+				.AlterColumn("Name").AsString().FixedLength(350).NotNull();
 		}
 	}
 
@@ -381,7 +363,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(760, column.MaximumLength);
 	}
 
@@ -390,7 +372,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("Name").AsString().MaximumLength(760).NotNull();
+				.AlterColumn("Name").AsString().MaximumLength(760).NotNull();
 		}
 	}
 
@@ -403,7 +385,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(typeof(DateOnly), column.Type);
 	}
 
@@ -412,7 +394,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("TimeStamp").AsDate().NotNull();
+				.AlterColumn("TimeStamp").AsDate().NotNull();
 		}
 	}
 
@@ -425,7 +407,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(typeof(TimeOnly), column.Type);
 	}
 
@@ -434,7 +416,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("TimeStamp").AsTime().NotNull();
+				.AlterColumn("TimeStamp").AsTime().NotNull();
 		}
 	}
 
@@ -447,7 +429,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(typeof(DateTime), column.Type);
 	}
 
@@ -456,7 +438,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("TimeStamp").AsDateTime().NotNull();
+				.AlterColumn("TimeStamp").AsDateTime().NotNull();
 		}
 	}
 
@@ -469,7 +451,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.StrictEqual(typeof(DateTimeOffset), column.Type);
 	}
 
@@ -478,7 +460,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("TimeStamp").AsDateTimeOffset().NotNull();
+				.AlterColumn("TimeStamp").AsDateTimeOffset().NotNull();
 		}
 	}
 
@@ -491,7 +473,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.True(column.Nullable);
 	}
 
@@ -500,7 +482,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("Name").AsString().Null();
+				.AlterColumn("Name").AsString().Null();
 		}
 	}
 
@@ -513,7 +495,7 @@ public class AlterTableAddColumnTests
 		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
 		Assert.NotNull(statement);
 		var (changeType, column) = Assert.Single(statement.ColumnChanges);
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.False(column.Nullable);
 	}
 
@@ -522,7 +504,7 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("Name").AsString().NotNull();
+				.AlterColumn("Name").AsString().NotNull();
 		}
 	}
 
@@ -537,13 +519,13 @@ public class AlterTableAddColumnTests
 		Assert.StrictEqual(3, statement.ColumnChanges.Count);
 
 		var (changeType, column) = statement.ColumnChanges[0];
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.Equal("Count", column.Name);
 		Assert.StrictEqual(typeof(int), column.Type);
 		Assert.True(column.Nullable);
 
 		(changeType, column) = statement.ColumnChanges[1];
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.Equal("Description", column.Name);
 		Assert.StrictEqual(typeof(string), column.Type);
 		Assert.True(column.Nullable);
@@ -551,7 +533,7 @@ public class AlterTableAddColumnTests
 		Assert.StrictEqual(1000, column.MaximumLength);
 
 		(changeType, column) = statement.ColumnChanges[2];
-		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.StrictEqual(TableColumnChangeType.Alter, changeType);
 		Assert.Equal("LastUpdated", column.Name);
 		Assert.StrictEqual(typeof(DateTimeOffset), column.Type);
 		Assert.True(column.Nullable);
@@ -562,9 +544,9 @@ public class AlterTableAddColumnTests
 		public override void Up()
 		{
 			Alter.Table("TestTable").InSchema("TestSchema")
-				.AddColumn("Count").AsInt().Null()
-				.AddColumn("Description").AsString().MaximumLength(1000).Null()
-				.AddColumn("LastUpdated").AsDateTimeOffset().Null();
+				.AlterColumn("Count").AsInt().Null()
+				.AlterColumn("Description").AsString().MaximumLength(1000).Null()
+				.AlterColumn("LastUpdated").AsDateTimeOffset().Null();
 		}
 	}
 }
