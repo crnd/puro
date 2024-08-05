@@ -1,16 +1,16 @@
 ﻿using Puro.Exceptions;
-using Puro.Statements.Alter.Table.AddColumn;
+using Puro.Statements.Alter.Table.ColumnChanges;
 
 namespace Puro.Statements.Alter.Table;
 
 internal sealed class AlterTableStatement :
 	IAlterTableStatement,
 	IAlterTableSchemaStatement,
-	IAddColumnTypeStatement,
-	IAddColumnStatement,
-	IAddColumnDecimalTypeStatement,
-	IAddColumnDecimalTypePrecisionStatement,
-	IAddColumnStringTypeStatement,
+	IDefineColumnTypeStatement,
+	IDefineColumnStatement,
+	IDefineColumnDecimalTypeStatement,
+	IDefineColumnDecimalTypePrecisionStatement,
+	IDefineColumnStringTypeStatement,
 	IAlterTableMigrationStatement
 {
 	private readonly List<(TableColumnChangeType ChangeType, TableColumn Column)> columnChanges = [];
@@ -56,7 +56,7 @@ internal sealed class AlterTableStatement :
 		return this;
 	}
 
-	public IAddColumnStatement AddColumn(string name)
+	public IDefineColumnStatement AddColumn(string name)
 	{
 		if (string.IsNullOrWhiteSpace(name))
 		{
@@ -76,7 +76,7 @@ internal sealed class AlterTableStatement :
 		return this;
 	}
 
-	public IAddColumnStatement AlterColumn(string name)
+	public IDefineColumnStatement AlterColumn(string name)
 	{
 		if (string.IsNullOrWhiteSpace(name))
 		{
@@ -88,77 +88,77 @@ internal sealed class AlterTableStatement :
 		return this;
 	}
 
-	public IAddColumnTypeStatement AsBool()
+	public IDefineColumnTypeStatement AsBool()
 	{
 		columnChanges.Last().Column.Type = typeof(bool);
 
 		return this;
 	}
 
-	public IAddColumnTypeStatement AsShort()
+	public IDefineColumnTypeStatement AsShort()
 	{
 		columnChanges.Last().Column.Type = typeof(short);
 
 		return this;
 	}
 
-	public IAddColumnTypeStatement AsInt()
+	public IDefineColumnTypeStatement AsInt()
 	{
 		columnChanges.Last().Column.Type = typeof(int);
 
 		return this;
 	}
 
-	public IAddColumnTypeStatement AsLong()
+	public IDefineColumnTypeStatement AsLong()
 	{
 		columnChanges.Last().Column.Type = typeof(long);
 
 		return this;
 	}
 
-	public IAddColumnTypeStatement AsDouble()
+	public IDefineColumnTypeStatement AsDouble()
 	{
 		columnChanges.Last().Column.Type = typeof(double);
 
 		return this;
 	}
 
-	public IAddColumnDecimalTypeStatement AsDecimal()
+	public IDefineColumnDecimalTypeStatement AsDecimal()
 	{
 		columnChanges.Last().Column.Type = typeof(decimal);
 
 		return this;
 	}
 
-	public IAddColumnDecimalTypePrecisionStatement WithPrecision(short precision)
+	public IDefineColumnDecimalTypePrecisionStatement WithPrecision(short precision)
 	{
 		columnChanges.Last().Column.Precision = precision;
 
 		return this;
 	}
 
-	public IAddColumnTypeStatement WithScale(short scale)
+	public IDefineColumnTypeStatement WithScale(short scale)
 	{
 		columnChanges.Last().Column.Scale = scale;
 
 		return this;
 	}
 
-	public IAddColumnTypeStatement AsGuid()
+	public IDefineColumnTypeStatement AsGuid()
 	{
 		columnChanges.Last().Column.Type = typeof(Guid);
 
 		return this;
 	}
 
-	public IAddColumnStringTypeStatement AsString()
+	public IDefineColumnStringTypeStatement AsString()
 	{
 		columnChanges.Last().Column.Type = typeof(string);
 
 		return this;
 	}
 
-	public IAddColumnTypeStatement FixedLength(int length)
+	public IDefineColumnTypeStatement FixedLength(int length)
 	{
 		if (length < 1)
 		{
@@ -170,7 +170,7 @@ internal sealed class AlterTableStatement :
 		return this;
 	}
 
-	public IAddColumnTypeStatement MaximumLength(int length)
+	public IDefineColumnTypeStatement MaximumLength(int length)
 	{
 		if (length < 1)
 		{
@@ -182,28 +182,28 @@ internal sealed class AlterTableStatement :
 		return this;
 	}
 
-	public IAddColumnTypeStatement AsDate()
+	public IDefineColumnTypeStatement AsDate()
 	{
 		columnChanges.Last().Column.Type = typeof(DateOnly);
 
 		return this;
 	}
 
-	public IAddColumnTypeStatement AsTime()
+	public IDefineColumnTypeStatement AsTime()
 	{
 		columnChanges.Last().Column.Type = typeof(TimeOnly);
 
 		return this;
 	}
 
-	public IAddColumnTypeStatement AsDateTime()
+	public IDefineColumnTypeStatement AsDateTime()
 	{
 		columnChanges.Last().Column.Type = typeof(DateTime);
 
 		return this;
 	}
 
-	public IAddColumnTypeStatement AsDateTimeOffset()
+	public IDefineColumnTypeStatement AsDateTimeOffset()
 	{
 		columnChanges.Last().Column.Type = typeof(DateTimeOffset);
 

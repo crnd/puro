@@ -1,9 +1,9 @@
-﻿namespace Puro.Statements.Alter.Table.AddColumn;
+﻿namespace Puro.Statements.Alter.Table.ColumnChanges;
 
 /// <summary>
 /// Methods for defining column nullability.
 /// </summary>
-public interface IAddColumnTypeStatement
+public interface IDefineColumnTypeStatement
 {
 	/// <summary>
 	/// Defines that the column can contain null values.
