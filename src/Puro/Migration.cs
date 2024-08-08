@@ -3,6 +3,7 @@ using Puro.Statements;
 using Puro.Statements.Alter;
 using Puro.Statements.Create;
 using Puro.Statements.Drop;
+using Puro.Statements.Rename;
 using Puro.Statements.Sql;
 using System.Reflection;
 
@@ -29,6 +30,11 @@ public abstract class Migration
 	/// Starts building a new statement for deleting an existing item.
 	/// </summary>
 	protected IDropBuilder Drop => new DropBuilder(statements);
+
+	/// <summary>
+	/// Starts building a new statement for renaming an existing item.
+	/// </summary>
+	protected IRenameBuilder Rename => new RenameBuilder(statements);
 
 	/// <summary>
 	/// Creates a raw SQL statement.
