@@ -117,6 +117,28 @@ public class MigrationTests
 		Assert.IsAssignableFrom<IDropIndexMigrationStatement>(migration.Statements[2]);
 	}
 
+	[Fact]
+	public void MultipleUpCallsAddStatementsMultipleTimes()
+	{
+		var migration = new TwoWayMigration();
+		migration.Up();
+		migration.Up();
+		migration.Up();
+
+		Assert.StrictEqual(6, migration.Statements.Count);
+	}
+
+	[Fact]
+	public void MultipleDownCallsAddStatementsMultipleTimes()
+	{
+		var migration = new TwoWayMigration();
+		migration.Down();
+		migration.Down();
+		migration.Down();
+
+		Assert.StrictEqual(9, migration.Statements.Count);
+	}
+
 	private sealed class TwoWayMigration : Migration
 	{
 		public override void Up()
