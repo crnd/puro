@@ -139,6 +139,26 @@ public class MigrationTests
 		Assert.StrictEqual(9, migration.Statements.Count);
 	}
 
+	[Fact]
+	public void UpAndDownAddsAllStatements()
+	{
+		var migration = new TwoWayMigration();
+		migration.Up();
+		migration.Down();
+
+		Assert.StrictEqual(5, migration.Statements.Count);
+	}
+
+	[Fact]
+	public void DownAndUpAddsAllStatements()
+	{
+		var migration = new TwoWayMigration();
+		migration.Down();
+		migration.Up();
+
+		Assert.StrictEqual(5, migration.Statements.Count);
+	}
+
 	private sealed class TwoWayMigration : Migration
 	{
 		public override void Up()
