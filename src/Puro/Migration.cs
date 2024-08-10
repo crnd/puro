@@ -5,6 +5,7 @@ using Puro.Statements.Create;
 using Puro.Statements.Drop;
 using Puro.Statements.Rename;
 using Puro.Statements.Sql;
+using Puro.Statements.Use;
 using System.Reflection;
 
 namespace Puro;
@@ -37,6 +38,11 @@ public abstract class Migration
 	protected IRenameBuilder Rename => new RenameBuilder(statements);
 
 	/// <summary>
+	/// Starts defining a new use statement.
+	/// </summary>
+	protected IUseBuilder Use => new UseBuilder(this);
+
+	/// <summary>
 	/// Creates a raw SQL statement.
 	/// </summary>
 	/// <param name="statement">Raw SQL statement.</param>
@@ -46,6 +52,11 @@ public abstract class Migration
 	/// Returns the statements that have been processed after running the <see cref="Up"/> or <see cref="Down"/> method.
 	/// </summary>
 	public IReadOnlyList<IMigrationStatement> Statements => statements.AsReadOnly();
+
+	/// <summary>
+	/// Default schema for the migration.
+	/// </summary>
+	public string? Schema { get; internal set; }
 
 	/// <summary>
 	/// Gets the name of the migration that has been defined with <see cref="MigrationNameAttribute"/>.
