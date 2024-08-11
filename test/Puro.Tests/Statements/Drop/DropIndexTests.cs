@@ -227,4 +227,34 @@ public class DropIndexTests
 			Drop.Index("TestIndexName").FromTable("TestTableName").InSchema("TestSchemaName");
 		}
 	}
+
+	[Fact]
+	public void NoSchemaStatementReturnsIndexName()
+	{
+		var migration = new DropIndexNoSchemaMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IDropIndexMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("IX_Test", statement.Index);
+	}
+
+	[Fact]
+	public void NoSchemaStatementReturnsTableName()
+	{
+		var migration = new DropIndexNoSchemaMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IDropIndexMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("Table", statement.Table);
+	}
+
+	private sealed class DropIndexNoSchemaMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Drop.Index("IX_Test").FromTable("Table");
+		}
+	}
 }

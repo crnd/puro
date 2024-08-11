@@ -27,7 +27,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -47,7 +47,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -68,7 +68,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -89,7 +89,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -114,7 +114,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -140,7 +140,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -168,7 +168,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -196,7 +196,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteAlterTableStatementException>(() => AlterTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -219,7 +219,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		Assert.Throws<InvalidDecimalPrecisionException>(() => AlterTableGenerator.Generate(statement));
+		Assert.Throws<InvalidDecimalPrecisionException>(() => AlterTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -242,7 +242,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		Assert.Throws<InvalidDecimalPrecisionException>(() => AlterTableGenerator.Generate(statement));
+		Assert.Throws<InvalidDecimalPrecisionException>(() => AlterTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -265,7 +265,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		Assert.Throws<InvalidDecimalScaleException>(() => AlterTableGenerator.Generate(statement));
+		Assert.Throws<InvalidDecimalScaleException>(() => AlterTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -288,7 +288,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		Assert.Throws<InvalidDecimalScaleException>(() => AlterTableGenerator.Generate(statement));
+		Assert.Throws<InvalidDecimalScaleException>(() => AlterTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -310,7 +310,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		Assert.Throws<InvalidStringLengthException>(() => AlterTableGenerator.Generate(statement));
+		Assert.Throws<InvalidStringLengthException>(() => AlterTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -332,7 +332,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		Assert.Throws<InvalidStringLengthException>(() => AlterTableGenerator.Generate(statement));
+		Assert.Throws<InvalidStringLengthException>(() => AlterTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -353,7 +353,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
@@ -381,7 +381,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
@@ -409,7 +409,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
@@ -437,7 +437,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
@@ -465,7 +465,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
@@ -495,7 +495,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
@@ -523,7 +523,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
@@ -552,7 +552,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
@@ -581,7 +581,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
@@ -609,7 +609,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
@@ -637,7 +637,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
@@ -665,7 +665,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
@@ -693,7 +693,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
@@ -721,7 +721,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
@@ -763,7 +763,7 @@ public class AlterTableGeneratorAddColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes.AsReadOnly());
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		const string expected = """
 			ALTER TABLE [schema].[table]

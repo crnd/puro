@@ -19,7 +19,7 @@ public class AlterTableGeneratorDropColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes);
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		var expected = """
 			ALTER TABLE [schema].[table]
@@ -38,7 +38,7 @@ public class AlterTableGeneratorDropColumnTests
 		statement.Schema.Returns("schema");
 		statement.ColumnChanges.Returns(changes);
 
-		var sql = AlterTableGenerator.Generate(statement);
+		var sql = AlterTableGenerator.Generate(statement, "schema");
 
 		var expected = """
 			ALTER TABLE [schema].[table]

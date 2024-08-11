@@ -13,11 +13,33 @@ public class DropIndexGeneratorTests
 	public void NullSchemaThrows()
 	{
 		var statement = Substitute.For<IDropIndexMigrationStatement>();
-		statement.Schema.ReturnsNull();
+		statement.Schema.Returns("TestSchema");
 		statement.Table.Returns("TestTable");
 		statement.Index.Returns("TestIndex");
 
-		Assert.Throws<IncompleteDropIndexStatementException>(() => DropIndexGenerator.Generate(statement));
+		Assert.Throws<ArgumentNullException>(() => DropIndexGenerator.Generate(statement, null!));
+	}
+
+	[Fact]
+	public void EmptySchemaThrows()
+	{
+		var statement = Substitute.For<IDropIndexMigrationStatement>();
+		statement.Schema.Returns("TestSchema");
+		statement.Table.Returns("TestTable");
+		statement.Index.Returns("TestIndex");
+
+		Assert.Throws<ArgumentNullException>(() => DropIndexGenerator.Generate(statement, string.Empty));
+	}
+
+	[Fact]
+	public void WhiteSpaceSchemaThrows()
+	{
+		var statement = Substitute.For<IDropIndexMigrationStatement>();
+		statement.Schema.Returns("TestSchema");
+		statement.Table.Returns("TestTable");
+		statement.Index.Returns("TestIndex");
+
+		Assert.Throws<ArgumentNullException>(() => DropIndexGenerator.Generate(statement, "     "));
 	}
 
 	[Fact]
@@ -28,7 +50,7 @@ public class DropIndexGeneratorTests
 		statement.Table.ReturnsNull();
 		statement.Index.Returns("TestIndex");
 
-		Assert.Throws<IncompleteDropIndexStatementException>(() => DropIndexGenerator.Generate(statement));
+		Assert.Throws<IncompleteDropIndexStatementException>(() => DropIndexGenerator.Generate(statement, "TestSchema"));
 	}
 
 	[Fact]
@@ -39,7 +61,33 @@ public class DropIndexGeneratorTests
 		statement.Table.Returns("Account");
 		statement.Index.Returns("UIX_Account_AccountNumber");
 
-		var sql = DropIndexGenerator.Generate(statement);
+		var sql = DropIndexGenerator.Generate(statement, "Banking");
+
+		Assert.Equal("DROP INDEX [UIX_Account_AccountNumber] ON [Banking].[Account];", sql);
+	}
+
+	[Fact]
+	public void StatementSchemaSupersedesMigrationSchema()
+	{
+		var statement = Substitute.For<IDropIndexMigrationStatement>();
+		statement.Schema.Returns("Correct");
+		statement.Table.Returns("Account");
+		statement.Index.Returns("UIX_Account_AccountNumber");
+
+		var sql = DropIndexGenerator.Generate(statement, "Wrong");
+
+		Assert.Equal("DROP INDEX [UIX_Account_AccountNumber] ON [Correct].[Account];", sql);
+	}
+
+	[Fact]
+	public void MigrationSchemaUsedWhenStatementSchemaNull()
+	{
+		var statement = Substitute.For<IDropIndexMigrationStatement>();
+		statement.Schema.ReturnsNull();
+		statement.Table.Returns("Account");
+		statement.Index.Returns("UIX_Account_AccountNumber");
+
+		var sql = DropIndexGenerator.Generate(statement, "Banking");
 
 		Assert.Equal("DROP INDEX [UIX_Account_AccountNumber] ON [Banking].[Account];", sql);
 	}

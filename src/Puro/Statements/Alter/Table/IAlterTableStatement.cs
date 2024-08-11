@@ -3,7 +3,7 @@
 /// <summary>
 /// Methods for defining the schema for the table.
 /// </summary>
-public interface IAlterTableStatement
+public interface IAlterTableStatement : IAlterTableSchemaStatement
 {
 	/// <summary>
 	/// Defines the schema for the table.

@@ -7,14 +7,31 @@ namespace Puro.Tests.Statements.Create;
 public class CreateTableTests
 {
 	[Fact]
-	public void NullTableNameThrows()
+	public void NullTableNameWithoutSchemaThrows()
 	{
-		var migration = new NullTableNameMigration();
+		var migration = new NullTableNameWithoutSchemaMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullTableNameMigration : UpMigration
+	private sealed class NullTableNameWithoutSchemaMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Create.Table(null!)
+				.WithColumn("Id").AsInt().Identity();
+		}
+	}
+
+	[Fact]
+	public void NullTableNameWithSchemaThrows()
+	{
+		var migration = new NullTableNameWithSchemaMigration();
+
+		Assert.Throws<ArgumentNullException>(migration.Up);
+	}
+
+	private sealed class NullTableNameWithSchemaMigration : UpMigration
 	{
 		public override void Up()
 		{
@@ -28,7 +45,7 @@ public class CreateTableTests
 	{
 		var migration = new NullSchemaNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class NullSchemaNameMigration : UpMigration
@@ -45,7 +62,7 @@ public class CreateTableTests
 	{
 		var migration = new NullColumnNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class NullColumnNameMigration : UpMigration
@@ -58,14 +75,31 @@ public class CreateTableTests
 	}
 
 	[Fact]
-	public void EmptyTableNameThrows()
+	public void EmptyTableNameWithoutSchemaThrows()
 	{
-		var migration = new EmptyTableNameMigration();
+		var migration = new EmptyTableNameWithoutSchemaMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyTableNameMigration : UpMigration
+	private sealed class EmptyTableNameWithoutSchemaMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Create.Table(string.Empty)
+				.WithColumn("Id").AsInt().Identity();
+		}
+	}
+
+	[Fact]
+	public void EmptyTableNameWithSchemaThrows()
+	{
+		var migration = new EmptyTableNameWithSchemaMigration();
+
+		Assert.Throws<ArgumentNullException>(migration.Up);
+	}
+
+	private sealed class EmptyTableNameWithSchemaMigration : UpMigration
 	{
 		public override void Up()
 		{
@@ -79,7 +113,7 @@ public class CreateTableTests
 	{
 		var migration = new EmptySchemaNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class EmptySchemaNameMigration : UpMigration
@@ -96,7 +130,7 @@ public class CreateTableTests
 	{
 		var migration = new EmptyColumnNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class EmptyColumnNameMigration : UpMigration
@@ -109,14 +143,31 @@ public class CreateTableTests
 	}
 
 	[Fact]
-	public void WhiteSpaceTableNameThrows()
+	public void WhiteSpaceTableNameWithoutSchemaThrows()
 	{
-		var migration = new WhiteSpaceTableNameMigration();
+		var migration = new WhiteSpaceTableNameWithoutSchemaMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceTableNameMigration : UpMigration
+	private sealed class WhiteSpaceTableNameWithoutSchemaMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Create.Table("     ")
+				.WithColumn("Id").AsInt().Identity();
+		}
+	}
+
+	[Fact]
+	public void WhiteSpaceTableNameWithSchemaThrows()
+	{
+		var migration = new WhiteSpaceTableNameWithSchemaMigration();
+
+		Assert.Throws<ArgumentNullException>(migration.Up);
+	}
+
+	private sealed class WhiteSpaceTableNameWithSchemaMigration : UpMigration
 	{
 		public override void Up()
 		{
@@ -130,7 +181,7 @@ public class CreateTableTests
 	{
 		var migration = new WhiteSpaceSchemaNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class WhiteSpaceSchemaNameMigration : UpMigration
@@ -147,7 +198,7 @@ public class CreateTableTests
 	{
 		var migration = new WhiteSpaceColumnNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class WhiteSpaceColumnNameMigration : UpMigration
@@ -164,7 +215,7 @@ public class CreateTableTests
 	{
 		var migration = new DuplicateColumnNameMigration();
 
-		Assert.Throws<TableColumnExistsException>(() => migration.Up());
+		Assert.Throws<TableColumnExistsException>(migration.Up);
 	}
 
 	private sealed class DuplicateColumnNameMigration : UpMigration
@@ -182,7 +233,7 @@ public class CreateTableTests
 	{
 		var migration = new NonPositiveFixedStringLengthMigration();
 
-		Assert.Throws<InvalidStringLengthException>(() => migration.Up());
+		Assert.Throws<InvalidStringLengthException>(migration.Up);
 	}
 
 	private sealed class NonPositiveFixedStringLengthMigration : UpMigration
@@ -199,7 +250,7 @@ public class CreateTableTests
 	{
 		var migration = new NonPositiveMaximumStringLengthMigration();
 
-		Assert.Throws<InvalidStringLengthException>(() => migration.Up());
+		Assert.Throws<InvalidStringLengthException>(migration.Up);
 	}
 
 	private sealed class NonPositiveMaximumStringLengthMigration : UpMigration
@@ -208,6 +259,25 @@ public class CreateTableTests
 		{
 			Create.Table("table").InSchema("schema")
 				.WithColumn("Name").AsString().MaximumLength(0);
+		}
+	}
+
+	[Fact]
+	public void StatementReturnsNullSchemaWhenSchemaNotDefined()
+	{
+		var migration = new NoSchemaMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateTableMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Null(statement.Schema);
+	}
+
+	private sealed class NoSchemaMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Create.Table("TestTable");
 		}
 	}
 
@@ -301,7 +371,7 @@ public class CreateTableTests
 	{
 		public override void Up()
 		{
-			Create.Table("TestTable").InSchema("TestSchema")
+			Create.Table("TestTable")
 				.WithColumn("Id").AsShort().Identity();
 		}
 	}
@@ -322,7 +392,7 @@ public class CreateTableTests
 	{
 		public override void Up()
 		{
-			Create.Table("TestTable").InSchema("TestSchema")
+			Create.Table("TestTable")
 				.WithColumn("Id").AsInt().Identity();
 		}
 	}
@@ -343,7 +413,7 @@ public class CreateTableTests
 	{
 		public override void Up()
 		{
-			Create.Table("TestTable").InSchema("TestSchema")
+			Create.Table("TestTable")
 				.WithColumn("Id").AsLong().Identity();
 		}
 	}
@@ -364,7 +434,7 @@ public class CreateTableTests
 	{
 		public override void Up()
 		{
-			Create.Table("TestTable").InSchema("TestSchema")
+			Create.Table("TestTable")
 				.WithColumn("Id").AsDouble().NotNull();
 		}
 	}
@@ -409,7 +479,7 @@ public class CreateTableTests
 	{
 		public override void Up()
 		{
-			Create.Table("TestTable").InSchema("TestSchema")
+			Create.Table("TestTable")
 				.WithColumn("Id").AsDecimal().WithPrecision(5).WithScale(2).NotNull();
 		}
 	}

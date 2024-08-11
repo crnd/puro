@@ -192,4 +192,46 @@ public class AlterTableTests
 				.DropColumn("LastUpdated");
 		}
 	}
+
+	[Fact]
+	public void NoSchemaStatementReturnsTable()
+	{
+		var migration = new NoSchemaMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("Account", statement.Table);
+	}
+
+	[Fact]
+	public void NoSchemaStatementReturnsColumnChanges()
+	{
+		var migration = new NoSchemaMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IAlterTableMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.StrictEqual(2, statement.ColumnChanges.Count);
+
+		var (changeType, column) = statement.ColumnChanges[0];
+		Assert.StrictEqual(TableColumnChangeType.Add, changeType);
+		Assert.Equal("Version", column.Name);
+		Assert.StrictEqual(typeof(int), column.Type);
+		Assert.True(column.Nullable);
+
+		(changeType, column) = statement.ColumnChanges[1];
+		Assert.StrictEqual(TableColumnChangeType.Drop, changeType);
+		Assert.Equal("AccountVersion", column.Name);
+	}
+
+	private sealed class NoSchemaMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Alter.Table("Account")
+				.AddColumn("Version").AsInt().Null()
+				.DropColumn("AccountVersion");
+		}
+	}
 }

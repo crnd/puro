@@ -13,13 +13,19 @@ internal static class CreateIndexGenerator
 	/// Generates T-SQL from <paramref name="statement"/> to create an index.
 	/// </summary>
 	/// <param name="statement">Migration statement definition.</param>
+	/// <param name="schema">Schema name from the migration.</param>
 	/// <returns>T-SQL for creating an index.</returns>
 	/// <exception cref="IncompleteCreateIndexStatementException">Thrown if <paramref name="statement"/> is not correctly defined.</exception>
-	public static string Generate(ICreateIndexMigrationStatement statement)
+	public static string Generate(ICreateIndexMigrationStatement statement, string schema)
 	{
 		if (!IsComplete(statement))
 		{
 			throw new IncompleteCreateIndexStatementException(statement.Index);
+		}
+
+		if (string.IsNullOrWhiteSpace(schema))
+		{
+			throw new ArgumentNullException(nameof(schema));
 		}
 
 		var builder = new StringBuilder();
@@ -32,7 +38,7 @@ internal static class CreateIndexGenerator
 			builder.AppendLine($"CREATE INDEX [{statement.Index}]");
 		}
 
-		builder.Append($"ON [{statement.Schema}].[{statement.Table}] ([{BuildColumns(statement.Columns)})");
+		builder.Append($"ON [{statement.Schema ?? schema}].[{statement.Table}] ([{BuildColumns(statement.Columns)})");
 
 		if (statement.Filter is not null)
 		{
@@ -44,7 +50,7 @@ internal static class CreateIndexGenerator
 
 	private static bool IsComplete(ICreateIndexMigrationStatement statement)
 	{
-		if (statement.Schema is null || statement.Table is null || statement.Columns.Count == 0)
+		if (statement.Table is null || statement.Columns.Count == 0)
 		{
 			return false;
 		}

@@ -75,8 +75,7 @@ public class MigrationTests
 		public override void Up()
 		{
 			Drop.Constraint("PK_Account_CustomerId")
-				.FromTable("Account")
-				.InSchema("Banking");
+				.FromTable("Account").InSchema("Banking");
 
 			Create.PrimaryKey("PK_Account_Id")
 				.OnTable("Account")
@@ -89,8 +88,7 @@ public class MigrationTests
 
 			Sql("SELECT [AccountNumber] FROM [Banking].[Account];");
 
-			Drop.Table("Account")
-				.InSchema("Banking");
+			Drop.Table("Account").InSchema("Banking");
 		}
 	}
 
@@ -165,8 +163,7 @@ public class MigrationTests
 		{
 			Sql("SELECT * FROM [dbo].[Test];");
 
-			Drop.Table("Test")
-				.InSchema("dbo");
+			Drop.Table("Test").InSchema("dbo");
 		}
 
 		public override void Down()

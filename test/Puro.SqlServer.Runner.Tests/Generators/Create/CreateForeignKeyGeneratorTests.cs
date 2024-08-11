@@ -12,6 +12,54 @@ namespace Puro.SqlServer.Runner.Tests.Generators.Create;
 public class CreateForeignKeyGeneratorTests
 {
 	[Fact]
+	public void NullSchemaThrows()
+	{
+		var statement = Substitute.For<ICreateForeignKeyMigrationStatement>();
+		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
+		statement.ReferencingTable.Returns("referencingTable");
+		statement.ReferencingTableSchema.Returns("schema");
+		statement.ReferencingColumns.Returns(["Id"]);
+		statement.ReferencedTable.Returns("referencedTable");
+		statement.ReferencedTableSchema.Returns("schema");
+		statement.ReferencedColumns.Returns(["Id"]);
+		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
+
+		Assert.Throws<ArgumentNullException>(() => CreateForeignKeyGenerator.Generate(statement, null!));
+	}
+
+	[Fact]
+	public void EmptySchemaThrows()
+	{
+		var statement = Substitute.For<ICreateForeignKeyMigrationStatement>();
+		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
+		statement.ReferencingTable.Returns("referencingTable");
+		statement.ReferencingTableSchema.Returns("schema");
+		statement.ReferencingColumns.Returns(["Id"]);
+		statement.ReferencedTable.Returns("referencedTable");
+		statement.ReferencedTableSchema.Returns("schema");
+		statement.ReferencedColumns.Returns(["Id"]);
+		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
+
+		Assert.Throws<ArgumentNullException>(() => CreateForeignKeyGenerator.Generate(statement, string.Empty));
+	}
+
+	[Fact]
+	public void WhiteSpaceSchemaThrows()
+	{
+		var statement = Substitute.For<ICreateForeignKeyMigrationStatement>();
+		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
+		statement.ReferencingTable.Returns("referencingTable");
+		statement.ReferencingTableSchema.Returns("schema");
+		statement.ReferencingColumns.Returns(["Id"]);
+		statement.ReferencedTable.Returns("referencedTable");
+		statement.ReferencedTableSchema.Returns("schema");
+		statement.ReferencedColumns.Returns(["Id"]);
+		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
+
+		Assert.Throws<ArgumentNullException>(() => CreateForeignKeyGenerator.Generate(statement, "     "));
+	}
+
+	[Fact]
 	public void NullReferencingTableThrows()
 	{
 		var statement = Substitute.For<ICreateForeignKeyMigrationStatement>();
@@ -24,23 +72,7 @@ public class CreateForeignKeyGeneratorTests
 		statement.ReferencedColumns.Returns(["Id"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
-		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement));
-	}
-
-	[Fact]
-	public void NullReferencingTableSchemaThrows()
-	{
-		var statement = Substitute.For<ICreateForeignKeyMigrationStatement>();
-		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
-		statement.ReferencingTable.Returns("referencingTable");
-		statement.ReferencingTableSchema.ReturnsNull();
-		statement.ReferencingColumns.Returns(["Id"]);
-		statement.ReferencedTable.Returns("referencedTable");
-		statement.ReferencedTableSchema.Returns("schema");
-		statement.ReferencedColumns.Returns(["Id"]);
-		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
-
-		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement));
+		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -56,23 +88,7 @@ public class CreateForeignKeyGeneratorTests
 		statement.ReferencedColumns.Returns(["Id"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
-		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement));
-	}
-
-	[Fact]
-	public void NullReferencedTableSchemaThrows()
-	{
-		var statement = Substitute.For<ICreateForeignKeyMigrationStatement>();
-		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
-		statement.ReferencingTable.Returns("referencingTable");
-		statement.ReferencingTableSchema.Returns("schema");
-		statement.ReferencingColumns.Returns(["Id"]);
-		statement.ReferencedTable.Returns("referencedTable");
-		statement.ReferencedTableSchema.ReturnsNull();
-		statement.ReferencedColumns.Returns(["Id"]);
-		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
-
-		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement));
+		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -88,7 +104,7 @@ public class CreateForeignKeyGeneratorTests
 		statement.ReferencedColumns.Returns([]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
-		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement));
+		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -104,7 +120,7 @@ public class CreateForeignKeyGeneratorTests
 		statement.ReferencedColumns.Returns(["Id1", "Id2"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
-		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement));
+		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -120,7 +136,7 @@ public class CreateForeignKeyGeneratorTests
 		statement.ReferencedColumns.Returns(["Id"]);
 		statement.OnDelete.ReturnsNull();
 
-		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement));
+		Assert.Throws<IncompleteCreateForeignKeyStatementException>(() => CreateForeignKeyGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -136,7 +152,7 @@ public class CreateForeignKeyGeneratorTests
 		statement.ReferencedColumns.Returns(["ReferencedId"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
-		var sql = CreateForeignKeyGenerator.Generate(statement);
+		var sql = CreateForeignKeyGenerator.Generate(statement, "schema");
 
 		var expected = """
 			ALTER TABLE [schema].[referencingTable]
@@ -161,7 +177,7 @@ public class CreateForeignKeyGeneratorTests
 		statement.ReferencedColumns.Returns(["ReferencedId"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
-		var sql = CreateForeignKeyGenerator.Generate(statement);
+		var sql = CreateForeignKeyGenerator.Generate(statement, "schema");
 
 		var expected = """
 			ALTER TABLE [fromSchema].[referencingTable]
@@ -174,7 +190,7 @@ public class CreateForeignKeyGeneratorTests
 	}
 
 	[Fact]
-	public void MultipleColumnCorrectlyGenerated()
+	public void MultipleColumnsCorrectlyGenerated()
 	{
 		var statement = Substitute.For<ICreateForeignKeyMigrationStatement>();
 		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
@@ -186,7 +202,7 @@ public class CreateForeignKeyGeneratorTests
 		statement.ReferencedColumns.Returns(["ReferencedId1", "ReferencedId2"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
 
-		var sql = CreateForeignKeyGenerator.Generate(statement);
+		var sql = CreateForeignKeyGenerator.Generate(statement, "schema");
 
 		var expected = """
 			ALTER TABLE [fromSchema].[referencingTable]
@@ -211,7 +227,7 @@ public class CreateForeignKeyGeneratorTests
 		statement.ReferencedColumns.Returns(["ReferencedId"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.Cascade);
 
-		var sql = CreateForeignKeyGenerator.Generate(statement);
+		var sql = CreateForeignKeyGenerator.Generate(statement, "schema");
 
 		var expected = """
 			ALTER TABLE [schema].[referencingTable]
@@ -236,13 +252,113 @@ public class CreateForeignKeyGeneratorTests
 		statement.ReferencedColumns.Returns(["ReferencedId"]);
 		statement.OnDelete.Returns(OnDeleteBehavior.SetNull);
 
-		var sql = CreateForeignKeyGenerator.Generate(statement);
+		var sql = CreateForeignKeyGenerator.Generate(statement, "schema");
 
 		var expected = """
 			ALTER TABLE [schema].[referencingTable]
 				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
 					REFERENCES [schema].[referencedTable] ([ReferencedId])
 					ON DELETE SET NULL;
+			""";
+
+		expected.SqlEqual(sql);
+	}
+
+	[Fact]
+	public void StatementSchemaSupersedesMigrationSchema()
+	{
+		var statement = Substitute.For<ICreateForeignKeyMigrationStatement>();
+		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
+		statement.ReferencingTable.Returns("referencingTable");
+		statement.ReferencingTableSchema.Returns("correct");
+		statement.ReferencingColumns.Returns(["ReferencingId1", "ReferencingId2"]);
+		statement.ReferencedTable.Returns("referencedTable");
+		statement.ReferencedTableSchema.Returns("correct");
+		statement.ReferencedColumns.Returns(["ReferencedId1", "ReferencedId2"]);
+		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
+
+		var sql = CreateForeignKeyGenerator.Generate(statement, "wrong");
+
+		var expected = """
+			ALTER TABLE [correct].[referencingTable]
+				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId1], [ReferencingId2])
+					REFERENCES [correct].[referencedTable] ([ReferencedId1], [ReferencedId2])
+					ON DELETE NO ACTION;
+			""";
+
+		expected.SqlEqual(sql);
+	}
+
+	[Fact]
+	public void MigrationSchemaUsedWhenStatementSchemaNull()
+	{
+		var statement = Substitute.For<ICreateForeignKeyMigrationStatement>();
+		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
+		statement.ReferencingTable.Returns("referencingTable");
+		statement.ReferencingTableSchema.ReturnsNull();
+		statement.ReferencingColumns.Returns(["ReferencingId1", "ReferencingId2"]);
+		statement.ReferencedTable.Returns("referencedTable");
+		statement.ReferencedTableSchema.ReturnsNull();
+		statement.ReferencedColumns.Returns(["ReferencedId1", "ReferencedId2"]);
+		statement.OnDelete.Returns(OnDeleteBehavior.Restrict);
+
+		var sql = CreateForeignKeyGenerator.Generate(statement, "testschema");
+
+		var expected = """
+			ALTER TABLE [testschema].[referencingTable]
+				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId1], [ReferencingId2])
+					REFERENCES [testschema].[referencedTable] ([ReferencedId1], [ReferencedId2])
+					ON DELETE NO ACTION;
+			""";
+
+		expected.SqlEqual(sql);
+	}
+
+	[Fact]
+	public void MigrationSchemaUsedWhenStatementReferencingTableSchemaNull()
+	{
+		var statement = Substitute.For<ICreateForeignKeyMigrationStatement>();
+		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
+		statement.ReferencingTable.Returns("referencingTable");
+		statement.ReferencingTableSchema.ReturnsNull();
+		statement.ReferencingColumns.Returns(["ReferencingId"]);
+		statement.ReferencedTable.Returns("referencedTable");
+		statement.ReferencedTableSchema.Returns("statement");
+		statement.ReferencedColumns.Returns(["ReferencedId"]);
+		statement.OnDelete.Returns(OnDeleteBehavior.Cascade);
+
+		var sql = CreateForeignKeyGenerator.Generate(statement, "migration");
+
+		var expected = """
+			ALTER TABLE [migration].[referencingTable]
+				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
+					REFERENCES [statement].[referencedTable] ([ReferencedId])
+					ON DELETE CASCADE;
+			""";
+
+		expected.SqlEqual(sql);
+	}
+
+	[Fact]
+	public void MigrationSchemaUsedWhenStatementReferencedTableSchemaNull()
+	{
+		var statement = Substitute.For<ICreateForeignKeyMigrationStatement>();
+		statement.ForeignKey.Returns("FK_referencingTable_referencedTable");
+		statement.ReferencingTable.Returns("referencingTable");
+		statement.ReferencingTableSchema.Returns("statement");
+		statement.ReferencingColumns.Returns(["ReferencingId"]);
+		statement.ReferencedTable.Returns("referencedTable");
+		statement.ReferencedTableSchema.ReturnsNull();
+		statement.ReferencedColumns.Returns(["ReferencedId"]);
+		statement.OnDelete.Returns(OnDeleteBehavior.Cascade);
+
+		var sql = CreateForeignKeyGenerator.Generate(statement, "migration");
+
+		var expected = """
+			ALTER TABLE [statement].[referencingTable]
+				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
+					REFERENCES [migration].[referencedTable] ([ReferencedId])
+					ON DELETE CASCADE;
 			""";
 
 		expected.SqlEqual(sql);

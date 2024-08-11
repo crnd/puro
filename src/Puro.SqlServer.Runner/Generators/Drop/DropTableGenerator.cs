@@ -1,5 +1,4 @@
-﻿using Puro.SqlServer.Runner.Exceptions;
-using Puro.Statements.Drop.Table;
+﻿using Puro.Statements.Drop.Table;
 
 namespace Puro.SqlServer.Runner.Generators.Drop;
 
@@ -12,15 +11,15 @@ internal static class DropTableGenerator
 	/// Generates T-SQL from <paramref name="statement"/> to drop a table.
 	/// </summary>
 	/// <param name="statement">Migration statement definition.</param>
+	/// <param name="schema">Schema name from the migration.</param>
 	/// <returns>T-SQL for dropping the defined table.</returns>
-	/// <exception cref="IncompleteDropTableStatementException">Thrown if <paramref name="statement"/> is not correctly defined.</exception>
-	public static string Generate(IDropTableMigrationStatement statement)
+	public static string Generate(IDropTableMigrationStatement statement, string schema)
 	{
-		if (statement.Schema is null)
+		if (string.IsNullOrWhiteSpace(schema))
 		{
-			throw new IncompleteDropTableStatementException(statement.Table);
+			throw new ArgumentNullException(nameof(schema));
 		}
 
-		return $"DROP TABLE [{statement.Schema}].[{statement.Table}];";
+		return $"DROP TABLE [{statement.Schema ?? schema}].[{statement.Table}];";
 	}
 }

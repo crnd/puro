@@ -3,7 +3,7 @@
 /// <summary>
 /// Methods to define a schema for a table where an index belongs to.
 /// </summary>
-public interface ICreateIndexTableStatement
+public interface ICreateIndexTableStatement : ICreateIndexTableSchemaStatement
 {
 	/// <summary>
 	/// Defines the schema for the table where the index belongs to.

@@ -12,15 +12,21 @@ internal static class DropIndexGenerator
 	/// Generates T-SQL from <paramref name="statement"/> to drop an index.
 	/// </summary>
 	/// <param name="statement">Migration statement definition.</param>
+	/// <param name="schema">Schema name from the migration.</param>
 	/// <returns>T-SQL for dropping the defined index.</returns>
 	/// <exception cref="IncompleteDropIndexStatementException">Thrown if <paramref name="statement"/> is not correctly defined.</exception>
-	public static string Generate(IDropIndexMigrationStatement statement)
+	public static string Generate(IDropIndexMigrationStatement statement, string schema)
 	{
-		if (statement.Schema is null || statement.Table is null)
+		if (statement.Table is null)
 		{
 			throw new IncompleteDropIndexStatementException(statement.Index);
 		}
 
-		return $"DROP INDEX [{statement.Index}] ON [{statement.Schema}].[{statement.Table}];";
+		if (string.IsNullOrWhiteSpace(schema))
+		{
+			throw new ArgumentNullException(nameof(schema));
+		}
+
+		return $"DROP INDEX [{statement.Index}] ON [{statement.Schema ?? schema}].[{statement.Table}];";
 	}
 }

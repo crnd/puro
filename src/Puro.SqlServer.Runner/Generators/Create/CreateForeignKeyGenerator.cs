@@ -13,31 +13,32 @@ internal static class CreateForeignKeyGenerator
 	/// Generates T-SQL from <paramref name="statement"/> to create a foreign key constraint.
 	/// </summary>
 	/// <param name="statement">Migration statement definition.</param>
+	/// <param name="schema">Schema name from the migration.</param>
 	/// <returns>T-SQL for creating a foreign key constraint.</returns>
 	/// <exception cref="IncompleteCreateForeignKeyStatementException">Thrown if <paramref name="statement"/> is not correctly defined.</exception>
-	public static string Generate(ICreateForeignKeyMigrationStatement statement)
+	public static string Generate(ICreateForeignKeyMigrationStatement statement, string schema)
 	{
 		if (!IsComplete(statement))
 		{
 			throw new IncompleteCreateForeignKeyStatementException(statement.ForeignKey);
 		}
 
+		if (string.IsNullOrWhiteSpace(schema))
+		{
+			throw new ArgumentNullException(nameof(schema));
+		}
+
 		return $"""
-			ALTER TABLE [{statement.ReferencingTableSchema}].[{statement.ReferencingTable}]
+			ALTER TABLE [{statement.ReferencingTableSchema ?? schema}].[{statement.ReferencingTable}]
 				ADD CONSTRAINT [{statement.ForeignKey}] FOREIGN KEY ([{GetColumns(statement.ReferencingColumns)}])
-				REFERENCES [{statement.ReferencedTableSchema}].[{statement.ReferencedTable}] ([{GetColumns(statement.ReferencedColumns)}])
+				REFERENCES [{statement.ReferencedTableSchema ?? schema}].[{statement.ReferencedTable}] ([{GetColumns(statement.ReferencedColumns)}])
 				ON DELETE {ConvertOnDeleteToString(statement.OnDelete!.Value)};
 			""";
 	}
 
 	private static bool IsComplete(ICreateForeignKeyMigrationStatement statement)
 	{
-		if (statement.ReferencingTableSchema is null || statement.ReferencingTable is null)
-		{
-			return false;
-		}
-
-		if (statement.ReferencedTableSchema is null || statement.ReferencedTable is null)
+		if (statement.ReferencingTable is null || statement.ReferencedTable is null)
 		{
 			return false;
 		}

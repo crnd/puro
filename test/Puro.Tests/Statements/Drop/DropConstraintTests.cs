@@ -38,6 +38,22 @@ public class DropConstraintTests
 	}
 
 	[Fact]
+	public void NullTableNameWithoutSchemaThrows()
+	{
+		var migration = new NullTableNameWithoutSchemaMigration();
+
+		Assert.Throws<ArgumentNullException>(migration.Up);
+	}
+
+	private sealed class NullTableNameWithoutSchemaMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Drop.Constraint("constraint").FromTable(null!);
+		}
+	}
+
+	[Fact]
 	public void NullSchemaNameThrows()
 	{
 		var migration = new NullSchemaNameMigration();
@@ -82,6 +98,22 @@ public class DropConstraintTests
 		public override void Up()
 		{
 			Drop.Constraint("constraint").FromTable(string.Empty).InSchema("schema");
+		}
+	}
+
+	[Fact]
+	public void EmptyTableNameWithoutSchemaThrows()
+	{
+		var migration = new EmptyTableNameWithoutSchemaMigration();
+
+		Assert.Throws<ArgumentNullException>(migration.Up);
+	}
+
+	private sealed class EmptyTableNameWithoutSchemaMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Drop.Constraint("constraint").FromTable(string.Empty);
 		}
 	}
 
@@ -134,6 +166,22 @@ public class DropConstraintTests
 	}
 
 	[Fact]
+	public void WhiteSpaceTableNameWithoutSchemaThrows()
+	{
+		var migration = new WhiteSpaceTableNameWithoutSchemaMigration();
+
+		Assert.Throws<ArgumentNullException>(migration.Up);
+	}
+
+	private sealed class WhiteSpaceTableNameWithoutSchemaMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Drop.Constraint("constraint").FromTable("     ");
+		}
+	}
+
+	[Fact]
 	public void WhiteSpaceSchemaNameThrows()
 	{
 		var migration = new WhiteSpaceSchemaNameMigration();
@@ -150,7 +198,7 @@ public class DropConstraintTests
 	}
 
 	[Fact]
-	public void StatementWithoutTableNameReturnsNull()
+	public void StatementWithoutTableNameReturnsNullTableName()
 	{
 		var migration = new NoTableNameMigration();
 		migration.Up();
@@ -169,7 +217,7 @@ public class DropConstraintTests
 	}
 
 	[Fact]
-	public void StatementWithoutSchemaNameReturnsNull()
+	public void StatementWithoutSchemaNameReturnsNullSchemaName()
 	{
 		var migration = new NoSchemaNameMigration();
 		migration.Up();
@@ -225,6 +273,25 @@ public class DropConstraintTests
 		public override void Up()
 		{
 			Drop.Constraint("TestConstraintName").FromTable("TestTableName").InSchema("TestSchemaName");
+		}
+	}
+
+	[Fact]
+	public void StatementWithoutSchemaReturnsTableName()
+	{
+		var migration = new DropConstraintWithoutSchemaMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IDropConstraintMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("TestTableName", statement.Table);
+	}
+
+	private sealed class DropConstraintWithoutSchemaMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Drop.Constraint("TestConstraintName").FromTable("TestTableName");
 		}
 	}
 }

@@ -14,16 +14,22 @@ internal static class AlterTableGenerator
 	/// Generates T-SQL from <paramref name="statement"/> to alter an existing table.
 	/// </summary>
 	/// <param name="statement">Migration statement definition.</param>
+	/// <param name="schema">Schema name from the migration.</param>
 	/// <returns>T-SQL for altering a table.</returns>
 	/// <exception cref="IncompleteAlterTableStatementException">Thrown if <paramref name="statement"/> is not correctly defined.</exception>
-	public static string Generate(IAlterTableMigrationStatement statement)
+	public static string Generate(IAlterTableMigrationStatement statement, string schema)
 	{
 		if (!IsComplete(statement))
 		{
 			throw new IncompleteAlterTableStatementException(statement.Table);
 		}
 
-		var tableSql = $"ALTER TABLE [{statement.Schema}].[{statement.Table}]" + Environment.NewLine;
+		if (string.IsNullOrWhiteSpace(schema))
+		{
+			throw new ArgumentNullException(nameof(schema));
+		}
+
+		var tableSql = $"ALTER TABLE [{statement.Schema ?? schema}].[{statement.Table}]" + Environment.NewLine;
 		var builder = new StringBuilder(tableSql);
 
 		TableColumnChangeType? previousChangeType = null;
@@ -90,7 +96,7 @@ internal static class AlterTableGenerator
 
 	private static bool IsComplete(IAlterTableMigrationStatement statement)
 	{
-		if (statement.Schema is null || statement.ColumnChanges.Count == 0)
+		if (statement.ColumnChanges.Count == 0)
 		{
 			return false;
 		}

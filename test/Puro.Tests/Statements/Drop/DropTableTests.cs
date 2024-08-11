@@ -22,6 +22,22 @@ public class DropTableTests
 	}
 
 	[Fact]
+	public void NullSchemaNameThrows()
+	{
+		var migration = new NullSchemaNameMigration();
+
+		Assert.Throws<ArgumentNullException>(migration.Up);
+	}
+
+	private sealed class NullSchemaNameMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Drop.Table("table").InSchema(null!);
+		}
+	}
+
+	[Fact]
 	public void EmptyTableNameThrows()
 	{
 		var migration = new EmptyTableNameMigration();
@@ -38,18 +54,50 @@ public class DropTableTests
 	}
 
 	[Fact]
-	public void WhiteSpaceTableNameThrows()
+	public void EmptySchemaNameThrows()
 	{
-		var migration = new WhiteSpaceNameMigration();
+		var migration = new EmptySchemaNameMigration();
 
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceNameMigration : UpMigration
+	private sealed class EmptySchemaNameMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Drop.Table("table").InSchema(string.Empty);
+		}
+	}
+
+	[Fact]
+	public void WhiteSpaceTableNameThrows()
+	{
+		var migration = new WhiteSpaceTableNameMigration();
+
+		Assert.Throws<ArgumentNullException>(migration.Up);
+	}
+
+	private sealed class WhiteSpaceTableNameMigration : UpMigration
 	{
 		public override void Up()
 		{
 			Drop.Table("        ");
+		}
+	}
+
+	[Fact]
+	public void WhiteSpaceSchemaNameThrows()
+	{
+		var migration = new WhiteSpaceSchemaNameMigration();
+
+		Assert.Throws<ArgumentNullException>(migration.Up);
+	}
+
+	private sealed class WhiteSpaceSchemaNameMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Drop.Table("table").InSchema("        ");
 		}
 	}
 
@@ -61,7 +109,7 @@ public class DropTableTests
 
 		var statement = Assert.Single(migration.Statements) as IDropTableMigrationStatement;
 		Assert.NotNull(statement);
-		Assert.Equal(nameof(TableNameMigration), statement.Table);
+		Assert.Equal("TestTable", statement.Table);
 	}
 
 	[Fact]
@@ -79,19 +127,8 @@ public class DropTableTests
 	{
 		public override void Up()
 		{
-			Drop.Table(nameof(TableNameMigration));
+			Drop.Table("TestTable");
 		}
-	}
-
-	[Fact]
-	public void SchemaNotNullWhenSchemaDefined()
-	{
-		var migration = new SchemaMigration();
-		migration.Up();
-
-		var statement = Assert.Single(migration.Statements) as IDropTableMigrationStatement;
-		Assert.NotNull(statement);
-		Assert.NotNull(statement.Schema);
 	}
 
 	[Fact]
@@ -109,7 +146,7 @@ public class DropTableTests
 	{
 		public override void Up()
 		{
-			Drop.Table(nameof(SchemaMigration)).InSchema("TestSchema");
+			Drop.Table("TestTable").InSchema("TestSchema");
 		}
 	}
 }

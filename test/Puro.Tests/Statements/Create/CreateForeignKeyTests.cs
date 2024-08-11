@@ -12,7 +12,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new NullForeignKeyMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class NullForeignKeyMigration : UpMigration
@@ -31,7 +31,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new NullPrincipalTableMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class NullPrincipalTableMigration : UpMigration
@@ -50,7 +50,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new NullPrincipalTableSchemaMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class NullPrincipalTableSchemaMigration : UpMigration
@@ -69,7 +69,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new NullPrincipalTableColumnMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class NullPrincipalTableColumnMigration : UpMigration
@@ -88,7 +88,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new NullTargetTableMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class NullTargetTableMigration : UpMigration
@@ -107,7 +107,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new NullTargetTableSchemaMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class NullTargetTableSchemaMigration : UpMigration
@@ -126,7 +126,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new NullTargetTableColumnMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class NullTargetTableColumnMigration : UpMigration
@@ -145,7 +145,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new EmptyForeignKeyMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class EmptyForeignKeyMigration : UpMigration
@@ -164,7 +164,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new EmptyPrincipalTableMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class EmptyPrincipalTableMigration : UpMigration
@@ -183,7 +183,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new EmptyPrincipalTableSchemaMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class EmptyPrincipalTableSchemaMigration : UpMigration
@@ -202,7 +202,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new EmptyPrincipalTableColumnMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class EmptyPrincipalTableColumnMigration : UpMigration
@@ -221,7 +221,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new EmptyTargetTableMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class EmptyTargetTableMigration : UpMigration
@@ -240,7 +240,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new EmptyTargetTableSchemaMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class EmptyTargetTableSchemaMigration : UpMigration
@@ -259,7 +259,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new EmptyTargetTableColumnMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class EmptyTargetTableColumnMigration : UpMigration
@@ -278,7 +278,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new WhiteSpaceForeignKeyMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class WhiteSpaceForeignKeyMigration : UpMigration
@@ -297,7 +297,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new WhiteSpacePrincipalTableMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class WhiteSpacePrincipalTableMigration : UpMigration
@@ -316,7 +316,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new WhiteSpacePrincipalTableSchemaMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class WhiteSpacePrincipalTableSchemaMigration : UpMigration
@@ -335,7 +335,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new WhiteSpacePrincipalTableColumnMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class WhiteSpacePrincipalTableColumnMigration : UpMigration
@@ -354,7 +354,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new WhiteSpaceTargetTableMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class WhiteSpaceTargetTableMigration : UpMigration
@@ -373,7 +373,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new WhiteSpaceTargetTableSchemaMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class WhiteSpaceTargetTableSchemaMigration : UpMigration
@@ -392,7 +392,7 @@ public class CreateForeignKeyTests
 	{
 		var migration = new WhiteSpaceTargetTableColumnMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class WhiteSpaceTargetTableColumnMigration : UpMigration
@@ -613,6 +613,95 @@ public class CreateForeignKeyTests
 			Create.ForeignKey("foreignkey")
 				.FromTable("fromTable").FromSchema("fromSchema").FromColumn("fromColumn")
 				.ToTable("toTable").ToSchema("toSchema").ToColumn("toColumn")
+				.OnDeleteSetNull();
+		}
+	}
+
+	[Fact]
+	public void StatementReturnsTableNameWhenReferencingSchemaNotDefined()
+	{
+		var migration = new ReferencingSchemaNotDefinedMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateForeignKeyMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("fromTable", statement.ReferencingTable);
+	}
+
+	[Fact]
+	public void StatementReturnsNullWhenReferencingSchemaNotDefined()
+	{
+		var migration = new ReferencingSchemaNotDefinedMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateForeignKeyMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Null(statement.ReferencingTableSchema);
+	}
+
+	private sealed class ReferencingSchemaNotDefinedMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Create.ForeignKey("foreignkey")
+				.FromTable("fromTable").FromColumn("fromColumn")
+				.ToTable("toTable").ToSchema("toSchema").ToColumn("toColumn")
+				.OnDeleteSetNull();
+		}
+	}
+
+	[Fact]
+	public void StatementReturnsTableNameWhenReferencedSchemaNotDefined()
+	{
+		var migration = new ReferencedSchemaNotDefinedMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateForeignKeyMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("toTable", statement.ReferencedTable);
+	}
+
+	[Fact]
+	public void StatementReturnsNullWhenReferencedSchemaNotDefined()
+	{
+		var migration = new ReferencedSchemaNotDefinedMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateForeignKeyMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Null(statement.ReferencedTableSchema);
+	}
+
+	private sealed class ReferencedSchemaNotDefinedMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Create.ForeignKey("foreignkey")
+				.FromTable("fromTable").FromSchema("fromSchema").FromColumn("fromColumn")
+				.ToTable("toTable").ToColumn("toColumn")
+				.OnDeleteSetNull();
+		}
+	}
+
+	[Fact]
+	public void StatementReturnsNullsWhenNoSchemasDefined()
+	{
+		var migration = new NoSchemasMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateForeignKeyMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Null(statement.ReferencingTableSchema);
+		Assert.Null(statement.ReferencedTableSchema);
+	}
+
+	private sealed class NoSchemasMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Create.ForeignKey("foreignkey")
+				.FromTable("fromTable").FromColumn("fromColumn")
+				.ToTable("toTable").ToColumn("toColumn")
 				.OnDeleteSetNull();
 		}
 	}

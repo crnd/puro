@@ -11,7 +11,7 @@ public class CreateIndexTests
 	{
 		var migration = new NullIndexNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class NullIndexNameMigration : UpMigration
@@ -29,7 +29,7 @@ public class CreateIndexTests
 	{
 		var migration = new NullTableNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class NullTableNameMigration : UpMigration
@@ -47,7 +47,7 @@ public class CreateIndexTests
 	{
 		var migration = new NullSchemaNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class NullSchemaNameMigration : UpMigration
@@ -65,7 +65,7 @@ public class CreateIndexTests
 	{
 		var migration = new NullColumnNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class NullColumnNameMigration : UpMigration
@@ -83,7 +83,7 @@ public class CreateIndexTests
 	{
 		var migration = new NullFilterMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class NullFilterMigration : UpMigration
@@ -102,7 +102,7 @@ public class CreateIndexTests
 	{
 		var migration = new EmptyIndexNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class EmptyIndexNameMigration : UpMigration
@@ -120,7 +120,7 @@ public class CreateIndexTests
 	{
 		var migration = new EmptyTableNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class EmptyTableNameMigration : UpMigration
@@ -138,7 +138,7 @@ public class CreateIndexTests
 	{
 		var migration = new EmptySchemaNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class EmptySchemaNameMigration : UpMigration
@@ -156,7 +156,7 @@ public class CreateIndexTests
 	{
 		var migration = new EmptyColumnNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class EmptyColumnNameMigration : UpMigration
@@ -174,7 +174,7 @@ public class CreateIndexTests
 	{
 		var migration = new EmptyFilterMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class EmptyFilterMigration : UpMigration
@@ -193,7 +193,7 @@ public class CreateIndexTests
 	{
 		var migration = new WhiteSpaceIndexNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class WhiteSpaceIndexNameMigration : UpMigration
@@ -211,7 +211,7 @@ public class CreateIndexTests
 	{
 		var migration = new WhiteSpaceTableNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class WhiteSpaceTableNameMigration : UpMigration
@@ -229,7 +229,7 @@ public class CreateIndexTests
 	{
 		var migration = new WhiteSpaceSchemaNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class WhiteSpaceSchemaNameMigration : UpMigration
@@ -247,7 +247,7 @@ public class CreateIndexTests
 	{
 		var migration = new WhiteSpaceColumnNameMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class WhiteSpaceColumnNameMigration : UpMigration
@@ -265,7 +265,7 @@ public class CreateIndexTests
 	{
 		var migration = new WhiteSpaceFilterMigration();
 
-		Assert.Throws<ArgumentNullException>(() => migration.Up());
+		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
 	private sealed class WhiteSpaceFilterMigration : UpMigration
@@ -284,7 +284,7 @@ public class CreateIndexTests
 	{
 		var migration = new DuplicateColumnNameMigration();
 
-		Assert.Throws<IndexColumnExistsException>(() => migration.Up());
+		Assert.Throws<IndexColumnExistsException>(migration.Up);
 	}
 
 	private sealed class DuplicateColumnNameMigration : UpMigration
@@ -385,6 +385,38 @@ public class CreateIndexTests
 				.OnTable("Customer").InSchema("dbo")
 				.OnColumn("AddressId").Ascending()
 				.WithFilter("[Enabled] = 1");
+		}
+	}
+
+	[Fact]
+	public void NoSchemaStatementReturnsNullSchema()
+	{
+		var migration = new NoSchemaMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateIndexMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Null(statement.Schema);
+	}
+
+	[Fact]
+	public void NoSchemaStatementReturnsTableName()
+	{
+		var migration = new NoSchemaMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateIndexMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("Customer", statement.Table);
+	}
+
+	private sealed class NoSchemaMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Create.Index("IX_Customer_AddressId")
+				.OnTable("Customer")
+				.OnColumn("AddressId").Ascending();
 		}
 	}
 

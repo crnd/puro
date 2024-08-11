@@ -14,20 +14,26 @@ internal static class CreateTableGenerator
 	/// Generates T-SQL from <paramref name="statement"/> to create a table.
 	/// </summary>
 	/// <param name="statement">Migration statement definition.</param>
+	/// <param name="schema">Schema name from the migration.</param>
 	/// <returns>T-SQL for creating a table.</returns>
 	/// <exception cref="IncompleteCreateTableStatementException">Thrown if <paramref name="statement"/> is not correctly defined.</exception>
 	/// <exception cref="MultipleIdentityColumnsException">Thrown if <paramref name="statement"/> contains more than one identity column.</exception>
 	/// <exception cref="InvalidDecimalPrecisionException">Thrown if <paramref name="statement"/> contains a decimal column with invalid precision.</exception>
 	/// <exception cref="InvalidDecimalScaleException">Thrown if <paramref name="statement"/> contains a decimal column with invalid scale.</exception>
 	/// <exception cref="InvalidStringLengthException">Thrown if <paramref name="statement"/> contains a string column with invalid length.</exception>
-	public static string Generate(ICreateTableMigrationStatement statement)
+	public static string Generate(ICreateTableMigrationStatement statement, string schema)
 	{
 		if (!IsComplete(statement))
 		{
 			throw new IncompleteCreateTableStatementException(statement.Table);
 		}
 
-		var builder = new StringBuilder($"CREATE TABLE [{statement.Schema}].[{statement.Table}] (").AppendLine();
+		if (string.IsNullOrWhiteSpace(schema))
+		{
+			throw new ArgumentNullException(nameof(schema));
+		}
+
+		var builder = new StringBuilder($"CREATE TABLE [{statement.Schema ?? schema}].[{statement.Table}] (").AppendLine();
 
 		var columns = statement.Columns
 			.Select(ColumnGenerator.BuildColumnRowSql)
@@ -40,7 +46,7 @@ internal static class CreateTableGenerator
 
 	private static bool IsComplete(ICreateTableMigrationStatement statement)
 	{
-		if (statement.Schema is null || statement.Columns.Count == 0)
+		if (statement.Columns.Count == 0)
 		{
 			return false;
 		}

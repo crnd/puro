@@ -3,7 +3,7 @@
 /// <summary>
 /// Methods for defining the schema for the referenced table.
 /// </summary>
-public interface ICreateForeignKeyReferencedTableStatement
+public interface ICreateForeignKeyReferencedTableStatement : ICreateForeignKeyReferencedTableSchemaStatement
 {
 	/// <summary>
 	/// Defines the schema for the referenced table for the foreign key constraint.

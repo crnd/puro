@@ -19,29 +19,63 @@ public class CreateTableGeneratorTests
 		idColumn.Name.Returns("Id");
 		idColumn.Type.Returns(typeof(int));
 		idColumn.Nullable.Returns(false);
-		idColumn.Identity.Returns(false);
+		idColumn.Identity.Returns(true);
 		idColumn.Precision.ReturnsNull();
 		idColumn.Scale.ReturnsNull();
 		idColumn.FixedLength.ReturnsNull();
 		idColumn.MaximumLength.ReturnsNull();
 
-		var nameColumn = Substitute.For<ITableColumn>();
-		nameColumn.Name.Returns("Name");
-		nameColumn.Type.Returns(typeof(string));
-		nameColumn.Nullable.Returns(false);
-		nameColumn.Identity.Returns(false);
-		nameColumn.Precision.ReturnsNull();
-		nameColumn.Scale.ReturnsNull();
-		nameColumn.FixedLength.ReturnsNull();
-		nameColumn.MaximumLength.Returns(250);
-
-		var columns = new List<ITableColumn> { idColumn, nameColumn };
+		var columns = new List<ITableColumn> { idColumn };
 		var statement = Substitute.For<ICreateTableMigrationStatement>();
 		statement.Table.Returns("table");
 		statement.Schema.ReturnsNull();
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement));
+		Assert.Throws<ArgumentNullException>(() => CreateTableGenerator.Generate(statement, null!));
+	}
+
+	[Fact]
+	public void EmptySchemaThrows()
+	{
+		var idColumn = Substitute.For<ITableColumn>();
+		idColumn.Name.Returns("Id");
+		idColumn.Type.Returns(typeof(int));
+		idColumn.Nullable.Returns(false);
+		idColumn.Identity.Returns(true);
+		idColumn.Precision.ReturnsNull();
+		idColumn.Scale.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
+		idColumn.MaximumLength.ReturnsNull();
+
+		var columns = new List<ITableColumn> { idColumn };
+		var statement = Substitute.For<ICreateTableMigrationStatement>();
+		statement.Table.Returns("table");
+		statement.Schema.ReturnsNull();
+		statement.Columns.Returns(columns.AsReadOnly());
+
+		Assert.Throws<ArgumentNullException>(() => CreateTableGenerator.Generate(statement, string.Empty));
+	}
+
+	[Fact]
+	public void WhiteSpaceSchemaThrows()
+	{
+		var idColumn = Substitute.For<ITableColumn>();
+		idColumn.Name.Returns("Id");
+		idColumn.Type.Returns(typeof(int));
+		idColumn.Nullable.Returns(false);
+		idColumn.Identity.Returns(true);
+		idColumn.Precision.ReturnsNull();
+		idColumn.Scale.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
+		idColumn.MaximumLength.ReturnsNull();
+
+		var columns = new List<ITableColumn> { idColumn };
+		var statement = Substitute.For<ICreateTableMigrationStatement>();
+		statement.Table.Returns("table");
+		statement.Schema.ReturnsNull();
+		statement.Columns.Returns(columns.AsReadOnly());
+
+		Assert.Throws<ArgumentNullException>(() => CreateTableGenerator.Generate(statement, "     "));
 	}
 
 	[Fact]
@@ -52,7 +86,7 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns([]);
 
-		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -85,7 +119,7 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		Assert.Throws<MultipleIdentityColumnsException>(() => CreateTableGenerator.Generate(statement));
+		Assert.Throws<MultipleIdentityColumnsException>(() => CreateTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -118,7 +152,7 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -151,7 +185,7 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -184,7 +218,7 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -217,7 +251,7 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -250,7 +284,7 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -283,7 +317,7 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -316,7 +350,7 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -349,7 +383,7 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteCreateTableStatementException>(() => CreateTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -371,7 +405,7 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		Assert.Throws<InvalidStringLengthException>(() => CreateTableGenerator.Generate(statement));
+		Assert.Throws<InvalidStringLengthException>(() => CreateTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -393,7 +427,7 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		Assert.Throws<InvalidStringLengthException>(() => CreateTableGenerator.Generate(statement));
+		Assert.Throws<InvalidStringLengthException>(() => CreateTableGenerator.Generate(statement, "schema"));
 	}
 
 	[Fact]
@@ -416,9 +450,9 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] SMALLINT NOT NULL
 			);
@@ -447,9 +481,9 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] INT NOT NULL
 			);
@@ -478,9 +512,9 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] BIGINT NOT NULL
 			);
@@ -509,9 +543,9 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] BIT NOT NULL
 			);
@@ -540,9 +574,9 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] FLOAT(53) NOT NULL
 			);
@@ -571,9 +605,9 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] DECIMAL(17, 5) NOT NULL
 			);
@@ -602,9 +636,9 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[Name] NVARCHAR(MAX) NOT NULL
 			);
@@ -633,9 +667,9 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[Name] NCHAR(250) NOT NULL
 			);
@@ -664,9 +698,9 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[Name] NVARCHAR(750) NOT NULL
 			);
@@ -695,9 +729,9 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] UNIQUEIDENTIFIER NOT NULL
 			);
@@ -726,9 +760,9 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[Date] DATE NOT NULL
 			);
@@ -757,9 +791,9 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[Time] TIME NOT NULL
 			);
@@ -788,9 +822,9 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[DateTime] DATETIME2 NOT NULL
 			);
@@ -819,9 +853,9 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[DateTime] DATETIMEOFFSET NOT NULL
 			);
@@ -870,13 +904,75 @@ public class CreateTableGeneratorTests
 		statement.Schema.Returns("schema");
 		statement.Columns.Returns(columns.AsReadOnly());
 
-		var sql = CreateTableGenerator.Generate(statement);
+		var sql = CreateTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			CREATE TABLE [schema].[table] (
 				[Id] INT NOT NULL IDENTITY(1, 1),
 				[Name] NVARCHAR(200) NOT NULL,
 				[Description] NVARCHAR(MAX) NULL
+			);
+			""";
+
+		expected.SqlEqual(sql);
+	}
+
+	[Fact]
+	public void StatementSchemaSupersedesMigrationSchema()
+	{
+		var idColumn = Substitute.For<ITableColumn>();
+		idColumn.Name.Returns("Id");
+		idColumn.Type.Returns(typeof(bool));
+		idColumn.Nullable.Returns(false);
+		idColumn.Identity.Returns(false);
+		idColumn.Precision.ReturnsNull();
+		idColumn.Scale.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
+		idColumn.MaximumLength.ReturnsNull();
+
+		var columns = new List<ITableColumn> { idColumn };
+
+		var statement = Substitute.For<ICreateTableMigrationStatement>();
+		statement.Table.Returns("table");
+		statement.Schema.Returns("correct");
+		statement.Columns.Returns(columns.AsReadOnly());
+
+		var sql = CreateTableGenerator.Generate(statement, "wrong");
+
+		const string expected = """
+			CREATE TABLE [correct].[table] (
+				[Id] BIT NOT NULL
+			);
+			""";
+
+		expected.SqlEqual(sql);
+	}
+
+	[Fact]
+	public void MigrationSchemaUsedWhenStatementSchemaNull()
+	{
+		var idColumn = Substitute.For<ITableColumn>();
+		idColumn.Name.Returns("Id");
+		idColumn.Type.Returns(typeof(bool));
+		idColumn.Nullable.Returns(false);
+		idColumn.Identity.Returns(false);
+		idColumn.Precision.ReturnsNull();
+		idColumn.Scale.ReturnsNull();
+		idColumn.FixedLength.ReturnsNull();
+		idColumn.MaximumLength.ReturnsNull();
+
+		var columns = new List<ITableColumn> { idColumn };
+
+		var statement = Substitute.For<ICreateTableMigrationStatement>();
+		statement.Table.Returns("table");
+		statement.Schema.ReturnsNull();
+		statement.Columns.Returns(columns.AsReadOnly());
+
+		var sql = CreateTableGenerator.Generate(statement, "schema");
+
+		const string expected = """
+			CREATE TABLE [schema].[table] (
+				[Id] BIT NOT NULL
 			);
 			""";
 

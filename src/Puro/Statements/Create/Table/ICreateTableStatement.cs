@@ -3,7 +3,7 @@
 /// <summary>
 /// Methods for defining the schema for the table.
 /// </summary>
-public interface ICreateTableStatement
+public interface ICreateTableStatement : ICreateTableSchemaStatement
 {
 	/// <summary>
 	/// Defines the schema for the table.

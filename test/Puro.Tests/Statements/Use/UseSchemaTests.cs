@@ -120,7 +120,7 @@ public class UseSchemaTests
 		{
 			Use.Schema("Accounting");
 
-			Create.Table("Customer").InSchema("Accounting")
+			Create.Table("Customer")
 				.WithColumn("Id").AsInt().Identity()
 				.WithColumn("Name").AsString().MaximumLength(50).NotNull();
 

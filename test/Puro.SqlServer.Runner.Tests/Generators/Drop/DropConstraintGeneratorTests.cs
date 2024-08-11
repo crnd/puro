@@ -13,11 +13,33 @@ public class DropConstraintGeneratorTests
 	public void NullSchemaThrows()
 	{
 		var statement = Substitute.For<IDropConstraintMigrationStatement>();
-		statement.Schema.ReturnsNull();
-		statement.Table.Returns("TestTable");
+		statement.Schema.Returns("TestSchema");
+		statement.Table.Returns("Table");
 		statement.Constraint.Returns("TestConstraint");
 
-		Assert.Throws<IncompleteDropConstraintStatementException>(() => DropConstraintGenerator.Generate(statement));
+		Assert.Throws<ArgumentNullException>(() => DropConstraintGenerator.Generate(statement, null!));
+	}
+
+	[Fact]
+	public void EmptySchemaThrows()
+	{
+		var statement = Substitute.For<IDropConstraintMigrationStatement>();
+		statement.Schema.Returns("TestSchema");
+		statement.Table.Returns("Table");
+		statement.Constraint.Returns("TestConstraint");
+
+		Assert.Throws<ArgumentNullException>(() => DropConstraintGenerator.Generate(statement, string.Empty));
+	}
+
+	[Fact]
+	public void WhiteSpaceSchemaThrows()
+	{
+		var statement = Substitute.For<IDropConstraintMigrationStatement>();
+		statement.Schema.Returns("TestSchema");
+		statement.Table.Returns("Table");
+		statement.Constraint.Returns("TestConstraint");
+
+		Assert.Throws<ArgumentNullException>(() => DropConstraintGenerator.Generate(statement, "     "));
 	}
 
 	[Fact]
@@ -28,7 +50,7 @@ public class DropConstraintGeneratorTests
 		statement.Table.ReturnsNull();
 		statement.Constraint.Returns("TestConstraint");
 
-		Assert.Throws<IncompleteDropConstraintStatementException>(() => DropConstraintGenerator.Generate(statement));
+		Assert.Throws<IncompleteDropConstraintStatementException>(() => DropConstraintGenerator.Generate(statement, "TestSchema"));
 	}
 
 	[Fact]
@@ -39,7 +61,33 @@ public class DropConstraintGeneratorTests
 		statement.Table.Returns("Account");
 		statement.Constraint.Returns("PK_Account_Id");
 
-		var sql = DropConstraintGenerator.Generate(statement);
+		var sql = DropConstraintGenerator.Generate(statement, "Banking");
+
+		Assert.Equal("ALTER TABLE [Banking].[Account] DROP CONSTRAINT [PK_Account_Id];", sql);
+	}
+
+	[Fact]
+	public void StatementSchemaSupersedesMigrationSchema()
+	{
+		var statement = Substitute.For<IDropConstraintMigrationStatement>();
+		statement.Schema.Returns("Correct");
+		statement.Table.Returns("Account");
+		statement.Constraint.Returns("PK_Account_Id");
+
+		var sql = DropConstraintGenerator.Generate(statement, "Wrong");
+
+		Assert.Equal("ALTER TABLE [Correct].[Account] DROP CONSTRAINT [PK_Account_Id];", sql);
+	}
+
+	[Fact]
+	public void MigrationSchemaUsedWhenStatementSchemaNull()
+	{
+		var statement = Substitute.For<IDropConstraintMigrationStatement>();
+		statement.Schema.ReturnsNull();
+		statement.Table.Returns("Account");
+		statement.Constraint.Returns("PK_Account_Id");
+
+		var sql = DropConstraintGenerator.Generate(statement, "Banking");
 
 		Assert.Equal("ALTER TABLE [Banking].[Account] DROP CONSTRAINT [PK_Account_Id];", sql);
 	}

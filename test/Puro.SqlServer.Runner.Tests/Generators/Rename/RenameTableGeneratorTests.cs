@@ -13,11 +13,33 @@ public class RenameTableGeneratorTests
 	public void NullSchemaThrows()
 	{
 		var statement = Substitute.For<IRenameTableMigrationStatement>();
-		statement.Schema.ReturnsNull();
+		statement.Schema.Returns("schema");
 		statement.CurrentName.Returns("table");
-		statement.NewName.Returns("new");
+		statement.NewName.Returns("newname");
 
-		Assert.Throws<IncompleteRenameTableStatementException>(() => RenameTableGenerator.Generate(statement));
+		Assert.Throws<ArgumentNullException>(() => RenameTableGenerator.Generate(statement, null!));
+	}
+
+	[Fact]
+	public void EmptySchemaThrows()
+	{
+		var statement = Substitute.For<IRenameTableMigrationStatement>();
+		statement.Schema.Returns("schema");
+		statement.CurrentName.Returns("table");
+		statement.NewName.Returns("newname");
+
+		Assert.Throws<ArgumentNullException>(() => RenameTableGenerator.Generate(statement, string.Empty));
+	}
+
+	[Fact]
+	public void WhiteSpaceSchemaThrows()
+	{
+		var statement = Substitute.For<IRenameTableMigrationStatement>();
+		statement.Schema.Returns("schema");
+		statement.CurrentName.Returns("table");
+		statement.NewName.Returns("newname");
+
+		Assert.Throws<ArgumentNullException>(() => RenameTableGenerator.Generate(statement, "     "));
 	}
 
 	[Fact]
@@ -28,9 +50,8 @@ public class RenameTableGeneratorTests
 		statement.CurrentName.Returns("table");
 		statement.NewName.ReturnsNull();
 
-		Assert.Throws<IncompleteRenameTableStatementException>(() => RenameTableGenerator.Generate(statement));
+		Assert.Throws<IncompleteRenameTableStatementException>(() => RenameTableGenerator.Generate(statement, "schema"));
 	}
-
 
 	[Fact]
 	public void SqlGeneratedCorrectly()
@@ -40,7 +61,33 @@ public class RenameTableGeneratorTests
 		statement.CurrentName.Returns("Car");
 		statement.NewName.Returns("Vehicle");
 
-		var sql = RenameTableGenerator.Generate(statement);
+		var sql = RenameTableGenerator.Generate(statement, "Transport");
+
+		Assert.Equal("EXEC sp_rename '[Transport].[Car]', 'Vehicle';", sql);
+	}
+
+	[Fact]
+	public void StatementSchemaSupersedesMigrationSchema()
+	{
+		var statement = Substitute.For<IRenameTableMigrationStatement>();
+		statement.Schema.Returns("Correct");
+		statement.CurrentName.Returns("Car");
+		statement.NewName.Returns("Vehicle");
+
+		var sql = RenameTableGenerator.Generate(statement, "Wrong");
+
+		Assert.Equal("EXEC sp_rename '[Correct].[Car]', 'Vehicle';", sql);
+	}
+
+	[Fact]
+	public void MigrationSchemaUsedWhenStatementSchemaNull()
+	{
+		var statement = Substitute.For<IRenameTableMigrationStatement>();
+		statement.Schema.ReturnsNull();
+		statement.CurrentName.Returns("Car");
+		statement.NewName.Returns("Vehicle");
+
+		var sql = RenameTableGenerator.Generate(statement, "Transport");
 
 		Assert.Equal("EXEC sp_rename '[Transport].[Car]', 'Vehicle';", sql);
 	}
