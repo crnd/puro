@@ -1,4 +1,5 @@
-﻿using Puro.Statements.Rename.Table;
+﻿using Puro.Statements.Rename.Column;
+using Puro.Statements.Rename.Table;
 
 namespace Puro.Statements.Rename;
 
@@ -14,6 +15,15 @@ internal sealed class RenameBuilder : IRenameBuilder
 	public IRenameTableStatement Table(string name)
 	{
 		var statement = new RenameTableStatement(name);
+
+		statements.Add(statement);
+
+		return statement;
+	}
+
+	public IRenameColumnStatement Column(string name)
+	{
+		var statement = new RenameColumnStatement(name);
 
 		statements.Add(statement);
 
