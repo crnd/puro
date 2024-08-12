@@ -97,6 +97,15 @@ public class UseSchemaTests
 		Assert.Equal("Transportation", migration.Schema);
 	}
 
+	[Fact]
+	public void UseSchemaDoesNotAddStatements()
+	{
+		var migration = new UseSchemaMigration();
+		migration.Up();
+
+		Assert.Empty(migration.Statements);
+	}
+
 	private sealed class UseSchemaMigration : UpMigration
 	{
 		public override void Up()
