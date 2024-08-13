@@ -9,5 +9,6 @@ public interface IRenameTableStatement
 	/// Defines the schema for the rename table statement.
 	/// </summary>
 	/// <param name="name">Name of the schema.</param>
+	/// <returns>Interface for defining the new name for the table.</returns>
 	public IRenameTableInSchemaStatement InSchema(string name);
 }
