@@ -1,4 +1,5 @@
 ﻿using Puro.Statements.Rename.Column;
+using Puro.Statements.Rename.Index;
 using Puro.Statements.Rename.Table;
 
 namespace Puro.Statements.Rename;
@@ -21,4 +22,11 @@ public interface IRenameBuilder
 	/// <param name="name">Name of the column.</param>
 	/// <returns>Interface for defining the table.</returns>
 	public IRenameColumnStatement Column(string name);
+
+	/// <summary>
+	/// Renames an index.
+	/// </summary>
+	/// <param name="name">Name of the index.</param>
+	/// <returns>Interface for defining the table.</returns>
+	public IRenameIndexStatement Index(string name);
 }
