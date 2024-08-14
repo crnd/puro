@@ -29,6 +29,6 @@ internal static class RenameTableGenerator
 
 		// New name for the table cannot be enclosed in square brackets as
 		// then the square brackets would be included in the new table name.
-		return $"EXEC sp_rename '[{statement.Schema ?? schema}].[{statement.CurrentName}]', '{statement.NewName}';";
+		return $"EXEC sp_rename N'[{statement.Schema ?? schema}].[{statement.CurrentName}]', N'{statement.NewName}';";
 	}
 }

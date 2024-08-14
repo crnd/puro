@@ -63,7 +63,7 @@ public class RenameTableGeneratorTests
 
 		var sql = RenameTableGenerator.Generate(statement, "Transport");
 
-		Assert.Equal("EXEC sp_rename '[Transport].[Car]', 'Vehicle';", sql);
+		Assert.Equal("EXEC sp_rename N'[Transport].[Car]', N'Vehicle';", sql);
 	}
 
 	[Fact]
@@ -76,7 +76,7 @@ public class RenameTableGeneratorTests
 
 		var sql = RenameTableGenerator.Generate(statement, "Wrong");
 
-		Assert.Equal("EXEC sp_rename '[Correct].[Car]', 'Vehicle';", sql);
+		Assert.Equal("EXEC sp_rename N'[Correct].[Car]', N'Vehicle';", sql);
 	}
 
 	[Fact]
@@ -89,6 +89,6 @@ public class RenameTableGeneratorTests
 
 		var sql = RenameTableGenerator.Generate(statement, "Transport");
 
-		Assert.Equal("EXEC sp_rename '[Transport].[Car]', 'Vehicle';", sql);
+		Assert.Equal("EXEC sp_rename N'[Transport].[Car]', N'Vehicle';", sql);
 	}
 }
