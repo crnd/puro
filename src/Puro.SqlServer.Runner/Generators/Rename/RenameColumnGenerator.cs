@@ -30,6 +30,6 @@ internal static class RenameColumnGenerator
 
 		// New name for the column cannot be enclosed in square brackets as
 		// then the square brackets would be included in the new column name.
-		return $"EXEC sp_rename '[{statement.Schema ?? schema}].[{statement.Table}].[{statement.CurrentName}]', '{statement.NewName}', 'COLUMN';";
+		return $"EXEC sp_rename N'[{statement.Schema ?? schema}].[{statement.Table}].[{statement.CurrentName}]', N'{statement.NewName}', N'COLUMN';";
 	}
 }

@@ -80,7 +80,7 @@ public class RenameColumnGeneratorTests
 
 		var sql = RenameColumnGenerator.Generate(statement, "Schema");
 
-		Assert.Equal("EXEC sp_rename '[Schema].[Table].[Current]', 'New', 'COLUMN';", sql);
+		Assert.Equal("EXEC sp_rename N'[Schema].[Table].[Current]', N'New', N'COLUMN';", sql);
 	}
 
 	[Fact]
@@ -94,7 +94,7 @@ public class RenameColumnGeneratorTests
 
 		var sql = RenameColumnGenerator.Generate(statement, "Wrong");
 
-		Assert.Equal("EXEC sp_rename '[Correct].[Vehicle].[Name]', 'Model', 'COLUMN';", sql);
+		Assert.Equal("EXEC sp_rename N'[Correct].[Vehicle].[Name]', N'Model', N'COLUMN';", sql);
 	}
 
 	[Fact]
@@ -108,6 +108,6 @@ public class RenameColumnGeneratorTests
 
 		var sql = RenameColumnGenerator.Generate(statement, "Transportation");
 
-		Assert.Equal("EXEC sp_rename '[Transportation].[Vehicle].[Name]', 'Model', 'COLUMN';", sql);
+		Assert.Equal("EXEC sp_rename N'[Transportation].[Vehicle].[Name]', N'Model', N'COLUMN';", sql);
 	}
 }
