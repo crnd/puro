@@ -1,5 +1,4 @@
 ﻿using Puro.SqlServer.Runner.Exceptions;
-using Puro.Statements;
 using Puro.Statements.Alter.Table;
 using System.Text;
 
@@ -42,7 +41,7 @@ internal static class AlterTableGenerator
 					if (previousChangeType is not null && previousChangeType != TableColumnChangeType.Add)
 					{
 						builder.AppendLine(";").AppendLine();
-						builder.AppendLine(tableSql);
+						builder.Append(tableSql);
 					}
 
 					if (previousChangeType != TableColumnChangeType.Add)
@@ -54,16 +53,16 @@ internal static class AlterTableGenerator
 						builder.Append(',').AppendLine();
 					}
 
-					builder.Append(BuildAddColumn(column));
+					builder.Append(ColumnGenerator.BuildColumnRowSql(column));
 					break;
 				case TableColumnChangeType.Alter:
 					if (previousChangeType is not null)
 					{
 						builder.AppendLine(";").AppendLine();
-						builder.AppendLine(tableSql);
+						builder.Append(tableSql);
 					}
 
-					builder.Append($"ALTER COLUMN {BuildAltercolumn(column)}");
+					builder.Append($"ALTER COLUMN {ColumnGenerator.BuildColumnRowSql(column)}");
 					break;
 				case TableColumnChangeType.Drop:
 					if (previousChangeType is null)
@@ -77,7 +76,7 @@ internal static class AlterTableGenerator
 					else
 					{
 						builder.AppendLine(";").AppendLine();
-						builder.AppendLine(tableSql);
+						builder.Append(tableSql);
 						builder.Append("DROP COLUMN");
 					}
 
@@ -110,15 +109,5 @@ internal static class AlterTableGenerator
 		}
 
 		return true;
-	}
-
-	private static string BuildAddColumn(ITableColumn column)
-	{
-		return ColumnGenerator.BuildColumnRowSql(column);
-	}
-
-	private static string BuildAltercolumn(ITableColumn column)
-	{
-		return ColumnGenerator.BuildColumnRowSql(column);
 	}
 }
