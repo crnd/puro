@@ -154,7 +154,7 @@ public class CreateForeignKeyGeneratorTests
 
 		var sql = CreateForeignKeyGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			ALTER TABLE [schema].[referencingTable]
 			ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
 				REFERENCES [schema].[referencedTable] ([ReferencedId])
@@ -179,7 +179,7 @@ public class CreateForeignKeyGeneratorTests
 
 		var sql = CreateForeignKeyGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			ALTER TABLE [fromSchema].[referencingTable]
 				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
 					REFERENCES [toSchema].[referencedTable] ([ReferencedId])
@@ -204,7 +204,7 @@ public class CreateForeignKeyGeneratorTests
 
 		var sql = CreateForeignKeyGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			ALTER TABLE [fromSchema].[referencingTable]
 				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId1], [ReferencingId2])
 					REFERENCES [toSchema].[referencedTable] ([ReferencedId1], [ReferencedId2])
@@ -229,7 +229,7 @@ public class CreateForeignKeyGeneratorTests
 
 		var sql = CreateForeignKeyGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			ALTER TABLE [schema].[referencingTable]
 				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
 					REFERENCES [schema].[referencedTable] ([ReferencedId])
@@ -254,7 +254,7 @@ public class CreateForeignKeyGeneratorTests
 
 		var sql = CreateForeignKeyGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			ALTER TABLE [schema].[referencingTable]
 				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
 					REFERENCES [schema].[referencedTable] ([ReferencedId])
@@ -279,7 +279,7 @@ public class CreateForeignKeyGeneratorTests
 
 		var sql = CreateForeignKeyGenerator.Generate(statement, "wrong");
 
-		var expected = """
+		const string expected = """
 			ALTER TABLE [correct].[referencingTable]
 				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId1], [ReferencingId2])
 					REFERENCES [correct].[referencedTable] ([ReferencedId1], [ReferencedId2])
@@ -304,7 +304,7 @@ public class CreateForeignKeyGeneratorTests
 
 		var sql = CreateForeignKeyGenerator.Generate(statement, "testschema");
 
-		var expected = """
+		const string expected = """
 			ALTER TABLE [testschema].[referencingTable]
 				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId1], [ReferencingId2])
 					REFERENCES [testschema].[referencedTable] ([ReferencedId1], [ReferencedId2])
@@ -329,7 +329,7 @@ public class CreateForeignKeyGeneratorTests
 
 		var sql = CreateForeignKeyGenerator.Generate(statement, "migration");
 
-		var expected = """
+		const string expected = """
 			ALTER TABLE [migration].[referencingTable]
 				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
 					REFERENCES [statement].[referencedTable] ([ReferencedId])
@@ -354,7 +354,7 @@ public class CreateForeignKeyGeneratorTests
 
 		var sql = CreateForeignKeyGenerator.Generate(statement, "migration");
 
-		var expected = """
+		const string expected = """
 			ALTER TABLE [statement].[referencingTable]
 				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
 					REFERENCES [migration].[referencedTable] ([ReferencedId])

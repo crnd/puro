@@ -21,7 +21,7 @@ public class AlterTableGeneratorDropColumnTests
 
 		var sql = AlterTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			ALTER TABLE [schema].[table]
 				DROP COLUMN [column1];
 			""";
@@ -40,7 +40,7 @@ public class AlterTableGeneratorDropColumnTests
 
 		var sql = AlterTableGenerator.Generate(statement, "schema");
 
-		var expected = """
+		const string expected = """
 			ALTER TABLE [schema].[table]
 				DROP COLUMN [column1], [column2], [column3];
 			""";
