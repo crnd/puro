@@ -18,10 +18,12 @@ internal static class AssertionExtensions
 		Assert.Equal(Normalize(expected), Normalize(actual));
 	}
 
+	private static readonly string[] separator = ["\r", "\n"];
+
 	private static string Normalize(string input)
 	{
 		var rows = input.Split(
-			new string[] { "\r", "\n" },
+			separator,
 			StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
 		return string.Join(' ', rows)
