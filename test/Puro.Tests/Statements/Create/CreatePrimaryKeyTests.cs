@@ -314,7 +314,7 @@ public class CreatePrimaryKeyTests
 	}
 
 	[Fact]
-	public void NoSchemaStatementReturnsNullSchema()
+	public void SchemalessStatementReturnsNullSchema()
 	{
 		var migration = new MigrationWithoutSchema();
 		migration.Up();
@@ -324,12 +324,46 @@ public class CreatePrimaryKeyTests
 		Assert.Null(statement.Schema);
 	}
 
+	[Fact]
+	public void SchemalessStatementReturnsPrimaryKeyName()
+	{
+		var migration = new MigrationWithoutSchema();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreatePrimaryKeyMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("PK_Account", statement.PrimaryKey);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsTableName()
+	{
+		var migration = new MigrationWithoutSchema();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreatePrimaryKeyMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("Account", statement.Table);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsColumnName()
+	{
+		var migration = new MigrationWithoutSchema();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreatePrimaryKeyMigrationStatement;
+		Assert.NotNull(statement);
+		var column = Assert.Single(statement.Columns);
+		Assert.Equal("Id", column);
+	}
+
 	private sealed class MigrationWithoutSchema : UpMigration
 	{
 		public override void Up()
 		{
-			Create.PrimaryKey("TestPrimaryKey")
-				.OnTable("TestTable")
+			Create.PrimaryKey("PK_Account")
+				.OnTable("Account")
 				.WithColumn("Id");
 		}
 	}
