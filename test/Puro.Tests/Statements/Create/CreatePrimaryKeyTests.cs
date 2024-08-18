@@ -312,4 +312,25 @@ public class CreatePrimaryKeyTests
 				.WithColumn("Column1");
 		}
 	}
+
+	[Fact]
+	public void NoSchemaStatementReturnsNullSchema()
+	{
+		var migration = new MigrationWithoutSchema();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreatePrimaryKeyMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Null(statement.Schema);
+	}
+
+	private sealed class MigrationWithoutSchema : UpMigration
+	{
+		public override void Up()
+		{
+			Create.PrimaryKey("TestPrimaryKey")
+				.OnTable("TestTable")
+				.WithColumn("Id");
+		}
+	}
 }

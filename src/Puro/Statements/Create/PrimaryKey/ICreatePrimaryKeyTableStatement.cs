@@ -3,7 +3,7 @@
 /// <summary>
 /// Methods for defining the schema.
 /// </summary>
-public interface ICreatePrimaryKeyTableStatement
+public interface ICreatePrimaryKeyTableStatement : ICreatePrimaryKeySchemaStatement
 {
 	/// <summary>
 	/// Defines the schema for the primary key constraint.
