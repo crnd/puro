@@ -410,13 +410,37 @@ public class CreateIndexTests
 		Assert.Equal("Customer", statement.Table);
 	}
 
+	[Fact]
+	public void NoSchemaStatementReturnsColumnDirection()
+	{
+		var migration = new NoSchemaMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateIndexMigrationStatement;
+		Assert.NotNull(statement);
+		var column = Assert.Single(statement.Columns);
+		Assert.False(column.Descending);
+	}
+
+	[Fact]
+	public void NoSchemaStatementReturnsFilter()
+	{
+		var migration = new NoSchemaMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateIndexMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("[Enabled] = 1", statement.Filter);
+	}
+
 	private sealed class NoSchemaMigration : UpMigration
 	{
 		public override void Up()
 		{
 			Create.Index("IX_Customer_AddressId")
 				.OnTable("Customer")
-				.OnColumn("AddressId").Ascending();
+				.OnColumn("AddressId").Ascending()
+				.WithFilter("[Enabled] = 1");
 		}
 	}
 
