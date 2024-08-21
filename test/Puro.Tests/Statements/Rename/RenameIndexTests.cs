@@ -250,6 +250,39 @@ public class RenameIndexTests
 	}
 
 	[Fact]
+	public void StatementWithoutSchemaReturnsCurrentIndexName()
+	{
+		var migration = new MigrationWithoutSchema();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IRenameIndexMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("IX_AccountNumber", statement.CurrentName);
+	}
+
+	[Fact]
+	public void StatementWithoutSchemaReturnsTableName()
+	{
+		var migration = new MigrationWithoutSchema();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IRenameIndexMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("Account", statement.Table);
+	}
+
+	[Fact]
+	public void StatementWithoutSchemaReturnsNewIndexName()
+	{
+		var migration = new MigrationWithoutSchema();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IRenameIndexMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("UIX_AccountNumber", statement.NewName);
+	}
+
+	[Fact]
 	public void StatementWithoutSchemaReturnsNullSchema()
 	{
 		var migration = new MigrationWithoutSchema();

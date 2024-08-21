@@ -102,7 +102,7 @@ public class DropTableTests
 	}
 
 	[Fact]
-	public void StatementReturnsTableName()
+	public void SchemalessStatementReturnsTableName()
 	{
 		var migration = new TableNameMigration();
 		migration.Up();
@@ -140,6 +140,17 @@ public class DropTableTests
 		var statement = Assert.Single(migration.Statements) as IDropTableMigrationStatement;
 		Assert.NotNull(statement);
 		Assert.Equal("TestSchema", statement.Schema);
+	}
+
+	[Fact]
+	public void StatementReturnsTableName()
+	{
+		var migration = new SchemaMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IDropTableMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("TestTable", statement.Table);
 	}
 
 	private sealed class SchemaMigration : UpMigration

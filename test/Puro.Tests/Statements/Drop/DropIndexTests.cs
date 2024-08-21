@@ -169,25 +169,6 @@ public class DropIndexTests
 	}
 
 	[Fact]
-	public void StatementWithoutSchemaNameReturnsNull()
-	{
-		var migration = new NoSchemaNameMigration();
-		migration.Up();
-
-		var statement = Assert.Single(migration.Statements) as IDropIndexMigrationStatement;
-		Assert.NotNull(statement);
-		Assert.Null(statement.Schema);
-	}
-
-	private sealed class NoSchemaNameMigration : UpMigration
-	{
-		public override void Up()
-		{
-			Drop.Index("index").FromTable("table");
-		}
-	}
-
-	[Fact]
 	public void StatementReturnsIndexName()
 	{
 		var migration = new DropIndexMigration();
@@ -248,6 +229,17 @@ public class DropIndexTests
 		var statement = Assert.Single(migration.Statements) as IDropIndexMigrationStatement;
 		Assert.NotNull(statement);
 		Assert.Equal("Table", statement.Table);
+	}
+
+	[Fact]
+	public void StatementWithoutSchemaNameReturnsNull()
+	{
+		var migration = new DropIndexNoSchemaMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IDropIndexMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Null(statement.Schema);
 	}
 
 	private sealed class DropIndexNoSchemaMigration : UpMigration

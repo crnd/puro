@@ -250,6 +250,39 @@ public class RenameColumnTests
 	}
 
 	[Fact]
+	public void StatementWithoutSchemaReturnsCurrentColumnName()
+	{
+		var migration = new MigrationWithoutSchema();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IRenameColumnMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("Name", statement.CurrentName);
+	}
+
+	[Fact]
+	public void StatementWithoutSchemaReturnsNewColumnName()
+	{
+		var migration = new MigrationWithoutSchema();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IRenameColumnMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("Model", statement.NewName);
+	}
+
+	[Fact]
+	public void StatementWithoutSchemaReturnsTableName()
+	{
+		var migration = new MigrationWithoutSchema();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IRenameColumnMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("Vehicle", statement.Table);
+	}
+
+	[Fact]
 	public void StatementWithoutSchemaReturnsNullSchema()
 	{
 		var migration = new MigrationWithoutSchema();

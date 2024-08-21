@@ -217,7 +217,7 @@ public class DropConstraintTests
 	}
 
 	[Fact]
-	public void StatementWithoutSchemaNameReturnsNullSchemaName()
+	public void SchemalessStatementReturnsNullSchemaName()
 	{
 		var migration = new NoSchemaNameMigration();
 		migration.Up();
@@ -225,6 +225,28 @@ public class DropConstraintTests
 		var statement = Assert.Single(migration.Statements) as IDropConstraintMigrationStatement;
 		Assert.NotNull(statement);
 		Assert.Null(statement.Schema);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsConstraintName()
+	{
+		var migration = new NoSchemaNameMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IDropConstraintMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("constraint", statement.Constraint);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsTableName()
+	{
+		var migration = new NoSchemaNameMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IDropConstraintMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("table", statement.Table);
 	}
 
 	private sealed class NoSchemaNameMigration : UpMigration
