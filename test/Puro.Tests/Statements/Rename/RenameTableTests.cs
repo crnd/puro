@@ -189,4 +189,45 @@ public class RenameTableTests
 			Rename.Table("Car").InSchema("Transportation").To("Vehicle");
 		}
 	}
+
+	[Fact]
+	public void SchemalessStatementReturnsCurrentTableName()
+	{
+		var migration = new SchemalessRenameTableMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IRenameTableMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("Car", statement.CurrentName);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsNewTableName()
+	{
+		var migration = new SchemalessRenameTableMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IRenameTableMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("Vehicle", statement.NewName);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsNullSchemaName()
+	{
+		var migration = new SchemalessRenameTableMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as IRenameTableMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Null(statement.Schema);
+	}
+
+	private sealed class SchemalessRenameTableMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Rename.Table("Car").To("Vehicle");
+		}
+	}
 }

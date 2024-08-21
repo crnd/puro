@@ -3,7 +3,7 @@
 /// <summary>
 /// Methods for defining the schema.
 /// </summary>
-public interface IRenameTableStatement
+public interface IRenameTableStatement : IRenameTableInSchemaStatement
 {
 	/// <summary>
 	/// Defines the schema for the rename table statement.
