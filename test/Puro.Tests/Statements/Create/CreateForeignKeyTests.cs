@@ -684,7 +684,29 @@ public class CreateForeignKeyTests
 	}
 
 	[Fact]
-	public void StatementReturnsNullsWhenNoSchemasDefined()
+	public void SchemalessStatementReturnsForeignKeyName()
+	{
+		var migration = new NoSchemasMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateForeignKeyMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("foreignkey", statement.ForeignKey);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsReferencingTableName()
+	{
+		var migration = new NoSchemasMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateForeignKeyMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("fromTable", statement.ReferencingTable);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsNullReferencingTableSchema()
 	{
 		var migration = new NoSchemasMigration();
 		migration.Up();
@@ -692,7 +714,63 @@ public class CreateForeignKeyTests
 		var statement = Assert.Single(migration.Statements) as ICreateForeignKeyMigrationStatement;
 		Assert.NotNull(statement);
 		Assert.Null(statement.ReferencingTableSchema);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsReferencingColumnName()
+	{
+		var migration = new NoSchemasMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateForeignKeyMigrationStatement;
+		Assert.NotNull(statement);
+		var columnName = Assert.Single(statement.ReferencingColumns);
+		Assert.Equal("fromColumn", columnName);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsReferencedTableName()
+	{
+		var migration = new NoSchemasMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateForeignKeyMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("toTable", statement.ReferencedTable);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsNullReferencedTableSchema()
+	{
+		var migration = new NoSchemasMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateForeignKeyMigrationStatement;
+		Assert.NotNull(statement);
 		Assert.Null(statement.ReferencedTableSchema);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsReferencedColumnName()
+	{
+		var migration = new NoSchemasMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateForeignKeyMigrationStatement;
+		Assert.NotNull(statement);
+		var columnName = Assert.Single(statement.ReferencedColumns);
+		Assert.Equal("toColumn", columnName);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsOnDeleteBehavior()
+	{
+		var migration = new NoSchemasMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateForeignKeyMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.StrictEqual(OnDeleteBehavior.SetNull, statement.OnDelete);
 	}
 
 	private sealed class NoSchemasMigration : UpMigration
