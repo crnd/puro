@@ -263,25 +263,6 @@ public class CreateTableTests
 	}
 
 	[Fact]
-	public void StatementReturnsNullSchemaWhenSchemaNotDefined()
-	{
-		var migration = new NoSchemaMigration();
-		migration.Up();
-
-		var statement = Assert.Single(migration.Statements) as ICreateTableMigrationStatement;
-		Assert.NotNull(statement);
-		Assert.Null(statement.Schema);
-	}
-
-	private sealed class NoSchemaMigration : UpMigration
-	{
-		public override void Up()
-		{
-			Create.Table("TestTable");
-		}
-	}
-
-	[Fact]
 	public void StatementReturnsEmptyListWhenNoColumns()
 	{
 		var migration = new NoColumnsMigration();
@@ -766,6 +747,50 @@ public class CreateTableTests
 				.WithColumn("Name").AsString().MaximumLength(200).NotNull()
 				.WithColumn("Description").AsString().Null()
 				.WithColumn("LastUpdated").AsDateTimeOffset().Null();
+		}
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsTableName()
+	{
+		var migration = new SchemalessMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateTableMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Equal("Account", statement.Table);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsNullSchema()
+	{
+		var migration = new SchemalessMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateTableMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.Null(statement.Schema);
+	}
+
+	[Fact]
+	public void SchemalessStatementReturnsColumns()
+	{
+		var migration = new SchemalessMigration();
+		migration.Up();
+
+		var statement = Assert.Single(migration.Statements) as ICreateTableMigrationStatement;
+		Assert.NotNull(statement);
+		Assert.StrictEqual(3, statement.Columns.Count);
+	}
+
+	private sealed class SchemalessMigration : UpMigration
+	{
+		public override void Up()
+		{
+			Create.Table("Account")
+				.WithColumn("Id").AsInt().Identity()
+				.WithColumn("Name").AsString().MaximumLength(100).NotNull()
+				.WithColumn("Number").AsString().MaximumLength(50).NotNull();
 		}
 	}
 }
