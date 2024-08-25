@@ -4,18 +4,8 @@ using System.Text;
 
 namespace Puro.SqlServer.Runner.Generators.Create;
 
-/// <summary>
-/// T-SQL generator for create index statements.
-/// </summary>
 internal static class CreateIndexGenerator
 {
-	/// <summary>
-	/// Generates T-SQL from <paramref name="statement"/> to create an index.
-	/// </summary>
-	/// <param name="statement">Migration statement definition.</param>
-	/// <param name="schema">Schema name from the migration.</param>
-	/// <returns>T-SQL for creating an index.</returns>
-	/// <exception cref="IncompleteCreateIndexStatementException">Thrown if <paramref name="statement"/> is not correctly defined.</exception>
 	public static string Generate(ICreateIndexMigrationStatement statement, string schema)
 	{
 		if (!IsComplete(statement))

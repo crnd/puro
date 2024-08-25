@@ -1,26 +1,11 @@
-﻿using Puro.Exceptions;
-using Puro.SqlServer.Runner.Exceptions;
+﻿using Puro.SqlServer.Runner.Exceptions;
 using Puro.Statements.Create.Table;
 using System.Text;
 
 namespace Puro.SqlServer.Runner.Generators.Create;
 
-/// <summary>
-/// T-SQL generator for create table statements.
-/// </summary>
 internal static class CreateTableGenerator
 {
-	/// <summary>
-	/// Generates T-SQL from <paramref name="statement"/> to create a table.
-	/// </summary>
-	/// <param name="statement">Migration statement definition.</param>
-	/// <param name="schema">Schema name from the migration.</param>
-	/// <returns>T-SQL for creating a table.</returns>
-	/// <exception cref="IncompleteCreateTableStatementException">Thrown if <paramref name="statement"/> is not correctly defined.</exception>
-	/// <exception cref="MultipleIdentityColumnsException">Thrown if <paramref name="statement"/> contains more than one identity column.</exception>
-	/// <exception cref="InvalidDecimalPrecisionException">Thrown if <paramref name="statement"/> contains a decimal column with invalid precision.</exception>
-	/// <exception cref="InvalidDecimalScaleException">Thrown if <paramref name="statement"/> contains a decimal column with invalid scale.</exception>
-	/// <exception cref="InvalidStringLengthException">Thrown if <paramref name="statement"/> contains a string column with invalid length.</exception>
 	public static string Generate(ICreateTableMigrationStatement statement, string schema)
 	{
 		if (!IsComplete(statement))

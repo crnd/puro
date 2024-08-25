@@ -3,19 +3,8 @@ using Puro.Statements.Rename.Column;
 
 namespace Puro.SqlServer.Runner.Generators.Rename;
 
-/// <summary>
-/// T-SQL generator for rename column statements.
-/// </summary>
 internal static class RenameColumnGenerator
 {
-	/// <summary>
-	/// Generates T-SQL from <paramref name="statement"/> to rename a column.
-	/// </summary>
-	/// <param name="statement">Migration statement definition.</param>
-	/// <param name="schema">Schema name from the migration.</param>
-	/// <returns>T-SQL for renaming the defined column.</returns>
-	/// <exception cref="IncompleteRenameColumnStatementException">Thrown if <paramref name="statement"/> is not correctly defined.</exception>
-	/// <exception cref="ArgumentNullException">Thrown if <paramref name="schema"/> is not defined.</exception>
 	public static string Generate(IRenameColumnMigrationStatement statement, string schema)
 	{
 		if (statement.Table is null || statement.NewName is null)

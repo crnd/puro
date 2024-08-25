@@ -4,18 +4,8 @@ using Puro.Statements.Create.ForeignKey;
 
 namespace Puro.SqlServer.Runner.Generators.Create;
 
-/// <summary>
-/// T-SQL generator for create foreign key statements.
-/// </summary>
 internal static class CreateForeignKeyGenerator
 {
-	/// <summary>
-	/// Generates T-SQL from <paramref name="statement"/> to create a foreign key constraint.
-	/// </summary>
-	/// <param name="statement">Migration statement definition.</param>
-	/// <param name="schema">Schema name from the migration.</param>
-	/// <returns>T-SQL for creating a foreign key constraint.</returns>
-	/// <exception cref="IncompleteCreateForeignKeyStatementException">Thrown if <paramref name="statement"/> is not correctly defined.</exception>
 	public static string Generate(ICreateForeignKeyMigrationStatement statement, string schema)
 	{
 		if (!IsComplete(statement))

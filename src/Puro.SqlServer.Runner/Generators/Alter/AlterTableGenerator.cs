@@ -4,18 +4,8 @@ using System.Text;
 
 namespace Puro.SqlServer.Runner.Generators.Alter;
 
-/// <summary>
-/// T-SQL generator for alter table statements.
-/// </summary>
 internal static class AlterTableGenerator
 {
-	/// <summary>
-	/// Generates T-SQL from <paramref name="statement"/> to alter an existing table.
-	/// </summary>
-	/// <param name="statement">Migration statement definition.</param>
-	/// <param name="schema">Schema name from the migration.</param>
-	/// <returns>T-SQL for altering a table.</returns>
-	/// <exception cref="IncompleteAlterTableStatementException">Thrown if <paramref name="statement"/> is not correctly defined.</exception>
 	public static string Generate(IAlterTableMigrationStatement statement, string schema)
 	{
 		if (!IsComplete(statement))
