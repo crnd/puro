@@ -182,4 +182,55 @@ public class MigrationTests
 				.InSchema("dbo");
 		}
 	}
+
+	[Fact]
+	public void OverwrittenSchemaReturnedFromMigration()
+	{
+		var migration = new SchemaOverwriteMigration();
+
+		Assert.Equal("overwritten", migration.Schema);
+	}
+
+	private sealed class SchemaOverwriteMigration : SchemaOverwriteMigrationBase
+	{
+		public override void Down()
+		{
+			Drop.Table("Vehicle");
+		}
+
+		public override void Up()
+		{
+			Create.Table("Vehicle")
+				.WithColumn("Id").AsInt().Identity()
+				.WithColumn("Model").AsString().MaximumLength(200).NotNull();
+		}
+	}
+
+	private abstract class SchemaOverwriteMigrationBase : Migration
+	{
+		public new string Schema => "overwritten";
+	}
+
+	[Fact]
+	public void OverwrittenSchemaReturnedFromUpMigration()
+	{
+		var migration = new SchemaOverwriteUpMigration();
+
+		Assert.Equal("overwritten", migration.Schema);
+	}
+
+	private sealed class SchemaOverwriteUpMigration : SchemaOverwriteUpMigrationBase
+	{
+		public override void Up()
+		{
+			Create.Table("Vehicle")
+				.WithColumn("Id").AsInt().Identity()
+				.WithColumn("Model").AsString().MaximumLength(200).NotNull();
+		}
+	}
+
+	private abstract class SchemaOverwriteUpMigrationBase : UpMigration
+	{
+		public new string Schema => "overwritten";
+	}
 }
