@@ -1,8 +1,12 @@
 ﻿namespace Puro.SqlServer.Runner;
 
-internal sealed class RunnerSettings
+internal sealed record RunnerSettings
 {
-	public string? AssemblyLocation { get; set; }
+	public required string AssemblyLocation { get; set; }
 
 	public string? ConnectionString { get; set; }
+
+	public string? FromMigration { get; set; }
+
+	public string? ToMigration { get; set; }
 }
