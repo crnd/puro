@@ -16,70 +16,48 @@ internal static class ArgumentsParser
 	private const string ConnectionShortFrom = "-c";
 	private const string ConnectionLongForm = "--connection";
 
-	public static RunnerSettings Parse(string[] arguments)
+	public static RunnerSettings Parse(string[] args)
 	{
-		if (arguments.Length == 0 || arguments.Length % 2 != 0 || arguments.Length > 8)
+		if (args.Length == 0 || args.Length % 2 != 0 || args.Length > 8 || (args[0] != AssemblyShortForm && args[0] != AssemblyLongForm))
 		{
 			throw new InvalidRunnerArgumentsException();
 		}
 
-		string? assemblyLocation = null;
-		string? fromMigration = null;
-		string? toMigration = null;
-		string? connectionString = null;
+		var settings = new RunnerSettings { AssemblyLocation = args[1] };
 
-		for (var i = 0; i < arguments.Length; i += 2)
+		for (var i = 2; i < args.Length; i += 2)
 		{
-			switch (arguments[i])
+			switch (args[i])
 			{
-				case AssemblyShortForm:
-				case AssemblyLongForm:
-					if (assemblyLocation is not null)
-					{
-						throw new InvalidRunnerArgumentsException();
-					}
-					assemblyLocation = arguments[i + 1];
-					break;
 				case FromMigrationShortForm:
 				case FromMigrationLongForm:
-					if (fromMigration is not null)
+					if (settings.FromMigration is not null)
 					{
 						throw new InvalidRunnerArgumentsException();
 					}
-					fromMigration = arguments[i + 1];
+					settings.FromMigration = args[i + 1];
 					break;
 				case ToMigrationShortForm:
 				case ToMigrationLongForm:
-					if (toMigration is not null)
+					if (settings.ToMigration is not null)
 					{
 						throw new InvalidRunnerArgumentsException();
 					}
-					toMigration = arguments[i + 1];
+					settings.ToMigration = args[i + 1];
 					break;
 				case ConnectionShortFrom:
 				case ConnectionLongForm:
-					if (connectionString is not null)
+					if (settings.ConnectionString is not null)
 					{
 						throw new InvalidRunnerArgumentsException();
 					}
-					connectionString = arguments[i + 1];
+					settings.ConnectionString = args[i + 1];
 					break;
 				default:
 					throw new InvalidRunnerArgumentsException();
 			}
 		}
 
-		if (assemblyLocation is null)
-		{
-			throw new InvalidRunnerArgumentsException();
-		}
-
-		return new RunnerSettings
-		{
-			AssemblyLocation = assemblyLocation,
-			FromMigration = fromMigration,
-			ToMigration = toMigration,
-			ConnectionString = connectionString
-		};
+		return settings;
 	}
 }
