@@ -186,7 +186,7 @@ public class ArgumentsParserTests
 	[InlineData("-a", "a", "-t", "t", "-c", "c", "-f", "f")]
 	[InlineData("-a", "a", "-f", "f", "-c", "c", "-t", "t")]
 	[InlineData("-a", "a", "-c", "c", "-f", "f", "-t", "t")]
-	public void AllArgumentOrdersSupported(params string[] arguments)
+	public void ValidArgumentOrder(params string[] arguments)
 	{
 		var settings = ArgumentsParser.Parse(arguments);
 
@@ -194,5 +194,29 @@ public class ArgumentsParserTests
 		Assert.Equal("f", settings.FromMigration);
 		Assert.Equal("t", settings.ToMigration);
 		Assert.Equal("c", settings.ConnectionString);
+	}
+
+	[Theory]
+	[InlineData("-f", "f", "-a", "a", "-t", "t", "-c", "c")]
+	[InlineData("-t", "t", "-a", "a", "-f", "f", "-c", "c")]
+	[InlineData("-f", "f", "-t", "t", "-a", "a", "-c", "c")]
+	[InlineData("-t", "t", "-f", "f", "-a", "a", "-c", "c")]
+	[InlineData("-t", "t", "-f", "f", "-c", "c", "-a", "a")]
+	[InlineData("-f", "f", "-t", "t", "-c", "c", "-a", "a")]
+	[InlineData("-c", "c", "-t", "t", "-f", "f", "-a", "a")]
+	[InlineData("-t", "t", "-c", "c", "-f", "f", "-a", "a")]
+	[InlineData("-f", "f", "-c", "c", "-t", "t", "-a", "a")]
+	[InlineData("-c", "c", "-f", "f", "-t", "t", "-a", "a")]
+	[InlineData("-c", "c", "-a", "a", "-t", "t", "-f", "f")]
+	[InlineData("-t", "t", "-c", "c", "-a", "a", "-f", "f")]
+	[InlineData("-c", "c", "-t", "t", "-a", "a", "-f", "f")]
+	[InlineData("-t", "t", "-a", "a", "-c", "c", "-f", "f")]
+	[InlineData("-f", "f", "-a", "a", "-c", "c", "-t", "t")]
+	[InlineData("-c", "c", "-f", "f", "-a", "a", "-t", "t")]
+	[InlineData("-f", "f", "-c", "c", "-a", "a", "-t", "t")]
+	[InlineData("-c", "c", "-a", "a", "-f", "f", "-t", "t")]
+	public void InvalidArgumentOrder(params string[] arguments)
+	{
+		Assert.Throws<InvalidRunnerArgumentsException>(() => ArgumentsParser.Parse(arguments));
 	}
 }
