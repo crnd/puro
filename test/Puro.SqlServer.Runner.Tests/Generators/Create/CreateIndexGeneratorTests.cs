@@ -2,10 +2,8 @@
 using NSubstitute.ReturnsExtensions;
 using Puro.SqlServer.Runner.Exceptions;
 using Puro.SqlServer.Runner.Generators.Create;
-using Puro.SqlServer.Runner.Generators.Rename;
 using Puro.SqlServer.Runner.Tests.Extensions;
 using Puro.Statements.Create.Index;
-using Puro.Statements.Rename.Table;
 using Xunit;
 
 namespace Puro.SqlServer.Runner.Tests.Generators.Create;
