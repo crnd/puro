@@ -4,21 +4,9 @@ namespace Puro.SqlServer.Runner;
 
 internal static class ArgumentsParser
 {
-	private const string AssemblyShortForm = "-a";
-	private const string AssemblyLongForm = "--assembly";
-
-	private const string FromMigrationShortForm = "-f";
-	private const string FromMigrationLongForm = "--from-migration";
-
-	private const string ToMigrationShortForm = "-t";
-	private const string ToMigrationLongForm = "--to-migration";
-
-	private const string ConnectionShortFrom = "-c";
-	private const string ConnectionLongForm = "--connection";
-
 	public static RunnerSettings Parse(string[] args)
 	{
-		if (args.Length == 0 || args.Length % 2 != 0 || args.Length > 8 || (args[0] != AssemblyShortForm && args[0] != AssemblyLongForm))
+		if (args.Length == 0 || args.Length % 2 != 0 || args.Length > 8 || (args[0] != Constants.AssemblyShortForm && args[0] != Constants.AssemblyLongForm))
 		{
 			throw new InvalidRunnerArgumentsException();
 		}
@@ -29,24 +17,24 @@ internal static class ArgumentsParser
 		{
 			switch (args[i])
 			{
-				case FromMigrationShortForm:
-				case FromMigrationLongForm:
+				case Constants.FromMigrationShortForm:
+				case Constants.FromMigrationLongForm:
 					if (settings.FromMigration is not null)
 					{
 						throw new InvalidRunnerArgumentsException();
 					}
 					settings.FromMigration = args[i + 1];
 					break;
-				case ToMigrationShortForm:
-				case ToMigrationLongForm:
+				case Constants.ToMigrationShortForm:
+				case Constants.ToMigrationLongForm:
 					if (settings.ToMigration is not null)
 					{
 						throw new InvalidRunnerArgumentsException();
 					}
 					settings.ToMigration = args[i + 1];
 					break;
-				case ConnectionShortFrom:
-				case ConnectionLongForm:
+				case Constants.ConnectionShortFrom:
+				case Constants.ConnectionLongForm:
 					if (settings.ConnectionString is not null)
 					{
 						throw new InvalidRunnerArgumentsException();
