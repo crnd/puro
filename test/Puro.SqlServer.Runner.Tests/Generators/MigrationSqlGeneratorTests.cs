@@ -11,11 +11,7 @@ public class MigrationSqlGeneratorTests
 	{
 		var sql = MigrationSqlGenerator.Generate([]);
 
-		const string expected = $"""
-			{Constants.MigrationTableCreation}
-			BEGIN TRANSACTION;
-			COMMIT TRANSACTION;
-			""";
+		const string expected = Constants.MigrationTableCreation;
 
 		expected.SqlEqual(sql);
 	}
