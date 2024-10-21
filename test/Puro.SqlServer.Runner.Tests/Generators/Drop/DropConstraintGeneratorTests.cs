@@ -63,7 +63,12 @@ public class DropConstraintGeneratorTests
 
 		var sql = DropConstraintGenerator.Generate(statement, "Banking");
 
-		Assert.Equal("ALTER TABLE [Banking].[Account] DROP CONSTRAINT [PK_Account_Id];", sql);
+		const string expected = """
+			ALTER TABLE [Banking].[Account]
+			DROP CONSTRAINT [PK_Account_Id];
+			""";
+
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -76,7 +81,12 @@ public class DropConstraintGeneratorTests
 
 		var sql = DropConstraintGenerator.Generate(statement, "Wrong");
 
-		Assert.Equal("ALTER TABLE [Correct].[Account] DROP CONSTRAINT [PK_Account_Id];", sql);
+		const string expected = """
+			ALTER TABLE [Correct].[Account]
+			DROP CONSTRAINT [PK_Account_Id];
+			""";
+
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -89,6 +99,11 @@ public class DropConstraintGeneratorTests
 
 		var sql = DropConstraintGenerator.Generate(statement, "Banking");
 
-		Assert.Equal("ALTER TABLE [Banking].[Account] DROP CONSTRAINT [PK_Account_Id];", sql);
+		const string expected = """
+			ALTER TABLE [Banking].[Account]
+			DROP CONSTRAINT [PK_Account_Id];
+			""";
+
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 }

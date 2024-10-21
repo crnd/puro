@@ -17,6 +17,9 @@ internal static class DropConstraintGenerator
 			throw new ArgumentNullException(nameof(schema));
 		}
 
-		return $"ALTER TABLE [{statement.Schema ?? schema}].[{statement.Table}] DROP CONSTRAINT [{statement.Constraint}];";
+		return $"""
+			ALTER TABLE [{statement.Schema ?? schema}].[{statement.Table}]
+			DROP CONSTRAINT [{statement.Constraint}];
+			""";
 	}
 }
