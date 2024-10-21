@@ -2,7 +2,6 @@
 using NSubstitute.ReturnsExtensions;
 using Puro.SqlServer.Runner.Exceptions;
 using Puro.SqlServer.Runner.Generators.Create;
-using Puro.SqlServer.Runner.Tests.Extensions;
 using Puro.Statements.Create.Index;
 using Xunit;
 
@@ -143,7 +142,7 @@ public class CreateIndexGeneratorTests
 			ON [dbo].[Customer] ([Name] ASC);
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -177,7 +176,7 @@ public class CreateIndexGeneratorTests
 			ON [dbo].[Customer] ([Name] ASC, [DateOfBirth] DESC, [AddressId] ASC);
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -203,7 +202,7 @@ public class CreateIndexGeneratorTests
 			ON [dbo].[Customer] ([AddressId] DESC);
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -234,7 +233,7 @@ public class CreateIndexGeneratorTests
 			WHERE [Enabled] = 1;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -260,7 +259,7 @@ public class CreateIndexGeneratorTests
 			ON [correct].[Customer] ([Name] ASC);
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -286,6 +285,6 @@ public class CreateIndexGeneratorTests
 			ON [dbo].[Customer] ([Name] ASC);
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 }

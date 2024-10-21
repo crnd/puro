@@ -2,7 +2,6 @@
 using NSubstitute.ReturnsExtensions;
 using Puro.SqlServer.Runner.Exceptions;
 using Puro.SqlServer.Runner.Generators.Alter;
-using Puro.SqlServer.Runner.Tests.Extensions;
 using Puro.Statements;
 using Puro.Statements.Alter.Table;
 using Xunit;
@@ -147,7 +146,8 @@ public class AlterTableGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column1] INT NULL;
+			ADD
+			[column1] INT NULL;
 
 			ALTER TABLE [schema].[table]
 			ALTER COLUMN [column2] DATETIMEOFFSET NULL;
@@ -167,7 +167,7 @@ public class AlterTableGeneratorTests
 			ALTER COLUMN [column8] NCHAR(250) NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -233,7 +233,8 @@ public class AlterTableGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [correct].[table]
-			ADD [column1] INT NULL;
+			ADD
+			[column1] INT NULL;
 
 			ALTER TABLE [correct].[table]
 			ALTER COLUMN [column2] DATETIMEOFFSET NULL;
@@ -253,7 +254,7 @@ public class AlterTableGeneratorTests
 			ALTER COLUMN [column8] NCHAR(250) NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -319,7 +320,8 @@ public class AlterTableGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column1] INT NULL;
+			ADD
+			[column1] INT NULL;
 
 			ALTER TABLE [schema].[table]
 			ALTER COLUMN [column2] DATETIMEOFFSET NULL;
@@ -339,6 +341,6 @@ public class AlterTableGeneratorTests
 			ALTER COLUMN [column8] NCHAR(250) NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 }

@@ -2,7 +2,6 @@
 using NSubstitute.ReturnsExtensions;
 using Puro.SqlServer.Runner.Exceptions;
 using Puro.SqlServer.Runner.Generators.Create;
-using Puro.SqlServer.Runner.Tests.Extensions;
 using Puro.Statements;
 using Puro.Statements.Create.ForeignKey;
 using Xunit;
@@ -161,7 +160,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE NO ACTION;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -186,7 +185,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE NO ACTION;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -211,7 +210,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE NO ACTION;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -236,7 +235,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE CASCADE;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -261,7 +260,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE SET NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -286,7 +285,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE NO ACTION;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -311,7 +310,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE NO ACTION;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -336,7 +335,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE CASCADE;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -361,6 +360,6 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE CASCADE;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 }

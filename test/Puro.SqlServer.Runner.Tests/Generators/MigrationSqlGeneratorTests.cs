@@ -1,5 +1,5 @@
-﻿using Puro.SqlServer.Runner.Generators;
-using Puro.SqlServer.Runner.Tests.Extensions;
+﻿using Puro.SqlServer.Runner.Exceptions;
+using Puro.SqlServer.Runner.Generators;
 using Xunit;
 
 namespace Puro.SqlServer.Runner.Tests.Generators;
@@ -9,11 +9,7 @@ public class MigrationSqlGeneratorTests
 	[Fact]
 	public void NoMigrations()
 	{
-		var sql = MigrationSqlGenerator.Generate([]);
-
-		const string expected = Constants.MigrationTableCreation;
-
-		expected.SqlEqual(sql);
+		Assert.Throws<MigrationsNotFoundException>(() => MigrationSqlGenerator.Generate([]));
 	}
 
 	[Fact]
@@ -27,27 +23,20 @@ public class MigrationSqlGeneratorTests
 		const string expected = $"""
 			{Constants.MigrationTableCreation}
 			BEGIN TRANSACTION;
-
 			IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationId] = N'1_CreateTable')
 			BEGIN
-
 			CREATE TABLE [dbo].[Book] (
 			[Id] INT NOT NULL IDENTITY(1, 1),
-			[Name] NVARCHAR(MAX) NOT NULL
-			);
-
-			ALTER TABLE [dbo].[Book]
-			ADD CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED ([Id]);
-
+			[Name] NVARCHAR(MAX) NOT NULL);
+			ALTER TABLE [dbo].[Book] ADD CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED ([Id]);
 			INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
 			VALUES (N'1_CreateTable', SYSUTCDATETIME()));
 
 			END
-
 			COMMIT TRANSACTION;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -63,38 +52,28 @@ public class MigrationSqlGeneratorTests
 		const string expected = $"""
 			{Constants.MigrationTableCreation}
 			BEGIN TRANSACTION;
-			
 			IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationId] = N'1_CreateTable')
 			BEGIN
-			
 			CREATE TABLE [dbo].[Book] (
 			[Id] INT NOT NULL IDENTITY(1, 1),
-			[Name] NVARCHAR(MAX) NOT NULL
-			);
-			
-			ALTER TABLE [dbo].[Book]
-			ADD CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED ([Id]);
-			
+			[Name] NVARCHAR(MAX) NOT NULL);
+			ALTER TABLE [dbo].[Book] ADD CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED ([Id]);
 			INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
 			VALUES (N'1_CreateTable', SYSUTCDATETIME()));
-			
-			END
 
+			END
 			IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationId] = N'2_CreateIndex')
 			BEGIN
-
 			CREATE UNIQUE INDEX [UIX_Book_Name]
 			ON [dbo].[Book] ([Name] ASC);
-
 			INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
 			VALUES (N'2_CreateIndex', SYSUTCDATETIME()));
 
 			END
-			
 			COMMIT TRANSACTION;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[MigrationName("1_CreateTable")]

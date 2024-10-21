@@ -23,54 +23,55 @@ internal static class MigrationSqlGenerator
 {
 	public static string Generate(List<Migration> migrations)
 	{
+		if (migrations.Count == 0)
+		{
+			throw new MigrationsNotFoundException();
+		}
+
 		var sqlBuilder = new StringBuilder();
 		sqlBuilder.AppendLine(Constants.MigrationTableCreation);
+		sqlBuilder.AppendLine("BEGIN TRANSACTION;");
 
-		if (migrations.Count > 0)
+		foreach (var migration in migrations)
 		{
-			sqlBuilder.AppendLine("BEGIN TRANSACTION;");
+			sqlBuilder.AppendLine($"""
+			IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationId] = N'{migration.Name}')
+			BEGIN
+			""");
 
-			foreach (var migration in migrations)
+			var schema = migration.Schema ?? Constants.DefaultSchema;
+
+			foreach (var migrationStatement in migration.Statements)
 			{
-				sqlBuilder.AppendLine($"""
-				IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationId] = N'{migration.Name}')
-				BEGIN
-				""");
-
-				var schema = migration.Schema ?? Constants.DefaultSchema;
-
-				foreach (var migrationStatement in migration.Statements)
+				var sql = migrationStatement switch
 				{
-					var sql = migrationStatement switch
-					{
-						IAlterTableMigrationStatement statement => AlterTableGenerator.Generate(statement, schema),
-						ICreateForeignKeyMigrationStatement statement => CreateForeignKeyGenerator.Generate(statement, schema),
-						ICreateIndexMigrationStatement statement => CreateIndexGenerator.Generate(statement, schema),
-						ICreatePrimaryKeyMigrationStatement statement => CreatePrimaryKeyGenerator.Generate(statement, schema),
-						ICreateTableMigrationStatement statement => CreateTableGenerator.Generate(statement, schema),
-						IDropConstraintMigrationStatement statement => DropConstraintGenerator.Generate(statement, schema),
-						IDropIndexMigrationStatement statement => DropIndexGenerator.Generate(statement, schema),
-						IDropTableMigrationStatement statement => DropTableGenerator.Generate(statement, schema),
-						IRenameColumnMigrationStatement statement => RenameColumnGenerator.Generate(statement, schema),
-						IRenameIndexMigrationStatement statement => RenameIndexGenerator.Generate(statement, schema),
-						IRenameTableMigrationStatement statement => RenameTableGenerator.Generate(statement, schema),
-						ISqlMigrationStatement statement => statement.Sql,
-						_ => throw new UnsupportedMigrationStatementException(migrationStatement.GetType())
-					};
+					IAlterTableMigrationStatement statement => AlterTableGenerator.Generate(statement, schema),
+					ICreateForeignKeyMigrationStatement statement => CreateForeignKeyGenerator.Generate(statement, schema),
+					ICreateIndexMigrationStatement statement => CreateIndexGenerator.Generate(statement, schema),
+					ICreatePrimaryKeyMigrationStatement statement => CreatePrimaryKeyGenerator.Generate(statement, schema),
+					ICreateTableMigrationStatement statement => CreateTableGenerator.Generate(statement, schema),
+					IDropConstraintMigrationStatement statement => DropConstraintGenerator.Generate(statement, schema),
+					IDropIndexMigrationStatement statement => DropIndexGenerator.Generate(statement, schema),
+					IDropTableMigrationStatement statement => DropTableGenerator.Generate(statement, schema),
+					IRenameColumnMigrationStatement statement => RenameColumnGenerator.Generate(statement, schema),
+					IRenameIndexMigrationStatement statement => RenameIndexGenerator.Generate(statement, schema),
+					IRenameTableMigrationStatement statement => RenameTableGenerator.Generate(statement, schema),
+					ISqlMigrationStatement statement => statement.Sql,
+					_ => throw new UnsupportedMigrationStatementException(migrationStatement.GetType())
+				};
 
-					sqlBuilder.AppendLine(sql);
-				}
-
-				sqlBuilder.AppendLine($"""
-				INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
-				VALUES (N'{migration.Name}', SYSUTCDATETIME()));
-
-				END
-				""");
+				sqlBuilder.AppendLine(sql);
 			}
 
-			sqlBuilder.AppendLine("COMMIT TRANSACTION;");
+			sqlBuilder.AppendLine($"""
+			INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
+			VALUES (N'{migration.Name}', SYSUTCDATETIME()));
+
+			END
+			""");
 		}
+
+		sqlBuilder.Append("COMMIT TRANSACTION;");
 
 		return sqlBuilder.ToString();
 	}

@@ -2,7 +2,6 @@
 using Puro.Exceptions;
 using Puro.SqlServer.Runner.Exceptions;
 using Puro.SqlServer.Runner.Generators.Alter;
-using Puro.SqlServer.Runner.Tests.Extensions;
 using Puro.Statements;
 using Puro.Statements.Alter.Table;
 using Xunit;
@@ -357,10 +356,11 @@ public class AlterTableGeneratorAddColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column] BIT NOT NULL;
+			ADD
+			[column] BIT NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -385,10 +385,11 @@ public class AlterTableGeneratorAddColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column] SMALLINT NOT NULL;
+			ADD
+			[column] SMALLINT NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -413,10 +414,11 @@ public class AlterTableGeneratorAddColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column] INT NOT NULL;
+			ADD
+			[column] INT NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -441,10 +443,11 @@ public class AlterTableGeneratorAddColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column] BIGINT NULL;
+			ADD
+			[column] BIGINT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -469,10 +472,11 @@ public class AlterTableGeneratorAddColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column] FLOAT(53) NOT NULL;
+			ADD
+			[column] FLOAT(53) NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -499,10 +503,11 @@ public class AlterTableGeneratorAddColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column] DECIMAL(8, 3) NULL;
+			ADD
+			[column] DECIMAL(8, 3) NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -527,10 +532,11 @@ public class AlterTableGeneratorAddColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column] NVARCHAR(MAX) NOT NULL;
+			ADD
+			[column] NVARCHAR(MAX) NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -556,10 +562,11 @@ public class AlterTableGeneratorAddColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column] NVARCHAR(1000) NOT NULL;
+			ADD
+			[column] NVARCHAR(1000) NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -585,10 +592,11 @@ public class AlterTableGeneratorAddColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column] NCHAR(500) NULL;
+			ADD
+			[column] NCHAR(500) NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -613,10 +621,11 @@ public class AlterTableGeneratorAddColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column] UNIQUEIDENTIFIER NOT NULL;
+			ADD
+			[column] UNIQUEIDENTIFIER NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -641,10 +650,11 @@ public class AlterTableGeneratorAddColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column] DATE NULL;
+			ADD
+			[column] DATE NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -669,10 +679,11 @@ public class AlterTableGeneratorAddColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column] TIME NOT NULL;
+			ADD
+			[column] TIME NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -697,10 +708,11 @@ public class AlterTableGeneratorAddColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column] DATETIME2 NULL;
+			ADD
+			[column] DATETIME2 NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -725,10 +737,11 @@ public class AlterTableGeneratorAddColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ADD [column] DATETIMEOFFSET NOT NULL;
+			ADD
+			[column] DATETIMEOFFSET NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -773,6 +786,6 @@ public class AlterTableGeneratorAddColumnTests
 			[Description] NVARCHAR(1000) NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 }

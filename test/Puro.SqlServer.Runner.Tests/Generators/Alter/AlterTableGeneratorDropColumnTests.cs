@@ -1,6 +1,5 @@
 ﻿using NSubstitute;
 using Puro.SqlServer.Runner.Generators.Alter;
-using Puro.SqlServer.Runner.Tests.Extensions;
 using Puro.Statements;
 using Puro.Statements.Alter.Table;
 using System.Collections.ObjectModel;
@@ -26,7 +25,7 @@ public class AlterTableGeneratorDropColumnTests
 			DROP COLUMN [column1];
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -45,7 +44,7 @@ public class AlterTableGeneratorDropColumnTests
 			DROP COLUMN [column1], [column2], [column3];
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	private static ReadOnlyCollection<(TableColumnChangeType, ITableColumn)> GenerateColumnChanges(params string[] columnNames)

@@ -2,9 +2,8 @@
 using Puro.Exceptions;
 using Puro.SqlServer.Runner.Exceptions;
 using Puro.SqlServer.Runner.Generators.Alter;
-using Puro.SqlServer.Runner.Tests.Extensions;
-using Puro.Statements.Alter.Table;
 using Puro.Statements;
+using Puro.Statements.Alter.Table;
 using Xunit;
 
 namespace Puro.SqlServer.Runner.Tests.Generators.Alter;
@@ -360,7 +359,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] BIT NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -388,7 +387,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] SMALLINT NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -416,7 +415,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] INT NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -444,7 +443,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] BIGINT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -472,7 +471,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] FLOAT(53) NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -502,7 +501,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] DECIMAL(8, 3) NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -530,7 +529,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] NVARCHAR(MAX) NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -559,7 +558,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] NVARCHAR(1000) NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -588,7 +587,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] NCHAR(500) NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -616,7 +615,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] UNIQUEIDENTIFIER NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -644,7 +643,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] DATE NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -672,7 +671,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] TIME NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -700,7 +699,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] DATETIME2 NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -728,7 +727,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] DATETIMEOFFSET NOT NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 
 	[Fact]
@@ -776,6 +775,6 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [Description] NVARCHAR(1000) NULL;
 			""";
 
-		expected.SqlEqual(sql);
+		Assert.Equal(expected, sql);
 	}
 }
