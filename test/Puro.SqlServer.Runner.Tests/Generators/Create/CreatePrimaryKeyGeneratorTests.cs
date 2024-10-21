@@ -80,9 +80,12 @@ public class CreatePrimaryKeyGeneratorTests
 
 		var sql = CreatePrimaryKeyGenerator.Generate(statement, "Banking");
 
-		const string expected = "ALTER TABLE [Banking].[Account] ADD CONSTRAINT [PK_Account_Id] PRIMARY KEY CLUSTERED ([Id]);";
+		const string expected = """
+			ALTER TABLE [Banking].[Account]
+			ADD CONSTRAINT [PK_Account_Id] PRIMARY KEY CLUSTERED ([Id]);
+			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -96,9 +99,12 @@ public class CreatePrimaryKeyGeneratorTests
 
 		var sql = CreatePrimaryKeyGenerator.Generate(statement, "Banking");
 
-		const string expected = "ALTER TABLE [Banking].[Account] ADD CONSTRAINT [PK_Account_AccountId_CustomerId_BankId] PRIMARY KEY CLUSTERED ([AccountId], [CustomerId], [BankId]);";
+		const string expected = """
+			ALTER TABLE [Banking].[Account]
+			ADD CONSTRAINT [PK_Account_AccountId_CustomerId_BankId] PRIMARY KEY CLUSTERED ([AccountId], [CustomerId], [BankId]);
+			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -112,9 +118,12 @@ public class CreatePrimaryKeyGeneratorTests
 
 		var sql = CreatePrimaryKeyGenerator.Generate(statement, "Wrong");
 
-		const string expected = "ALTER TABLE [Correct].[Account] ADD CONSTRAINT [PK_Account_AccountId_CustomerId_BankId] PRIMARY KEY CLUSTERED ([AccountId], [CustomerId], [BankId]);";
+		const string expected = """
+			ALTER TABLE [Correct].[Account]
+			ADD CONSTRAINT [PK_Account_AccountId_CustomerId_BankId] PRIMARY KEY CLUSTERED ([AccountId], [CustomerId], [BankId]);
+			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -128,8 +137,11 @@ public class CreatePrimaryKeyGeneratorTests
 
 		var sql = CreatePrimaryKeyGenerator.Generate(statement, "Banking");
 
-		const string expected = "ALTER TABLE [Banking].[Account] ADD CONSTRAINT [PK_Account_AccountId_CustomerId_BankId] PRIMARY KEY CLUSTERED ([AccountId], [CustomerId], [BankId]);";
+		const string expected = """
+			ALTER TABLE [Banking].[Account]
+			ADD CONSTRAINT [PK_Account_AccountId_CustomerId_BankId] PRIMARY KEY CLUSTERED ([AccountId], [CustomerId], [BankId]);
+			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 }

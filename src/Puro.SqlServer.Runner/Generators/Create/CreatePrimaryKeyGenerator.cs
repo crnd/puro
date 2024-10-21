@@ -17,7 +17,10 @@ internal static class CreatePrimaryKeyGenerator
 			throw new ArgumentNullException(nameof(schema));
 		}
 
-		return $"ALTER TABLE [{statement.Schema ?? schema}].[{statement.Table}] ADD CONSTRAINT [{statement.PrimaryKey}] PRIMARY KEY CLUSTERED ([{GetColumns(statement.Columns)}]);";
+		return $"""
+			ALTER TABLE [{statement.Schema ?? schema}].[{statement.Table}]
+			ADD CONSTRAINT [{statement.PrimaryKey}] PRIMARY KEY CLUSTERED ([{GetColumns(statement.Columns)}]);
+			""";
 	}
 
 	private static string GetColumns(IReadOnlyList<string> columns) => string.Join("], [", columns);

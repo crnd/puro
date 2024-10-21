@@ -28,7 +28,8 @@ public class MigrationSqlGeneratorTests
 			CREATE TABLE [dbo].[Book] (
 			[Id] INT NOT NULL IDENTITY(1, 1),
 			[Name] NVARCHAR(MAX) NOT NULL);
-			ALTER TABLE [dbo].[Book] ADD CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED ([Id]);
+			ALTER TABLE [dbo].[Book]
+			ADD CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED ([Id]);
 			INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
 			VALUES (N'1_CreateTable', SYSUTCDATETIME()));
 
@@ -57,7 +58,8 @@ public class MigrationSqlGeneratorTests
 			CREATE TABLE [dbo].[Book] (
 			[Id] INT NOT NULL IDENTITY(1, 1),
 			[Name] NVARCHAR(MAX) NOT NULL);
-			ALTER TABLE [dbo].[Book] ADD CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED ([Id]);
+			ALTER TABLE [dbo].[Book]
+			ADD CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED ([Id]);
 			INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
 			VALUES (N'1_CreateTable', SYSUTCDATETIME()));
 
