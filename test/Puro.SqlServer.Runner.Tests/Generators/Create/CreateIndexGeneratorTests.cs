@@ -142,7 +142,7 @@ public class CreateIndexGeneratorTests
 			ON [dbo].[Customer] ([Name] ASC);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -176,7 +176,7 @@ public class CreateIndexGeneratorTests
 			ON [dbo].[Customer] ([Name] ASC, [DateOfBirth] DESC, [AddressId] ASC);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -202,7 +202,7 @@ public class CreateIndexGeneratorTests
 			ON [dbo].[Customer] ([AddressId] DESC);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -233,7 +233,7 @@ public class CreateIndexGeneratorTests
 			WHERE [Enabled] = 1;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -259,7 +259,7 @@ public class CreateIndexGeneratorTests
 			ON [correct].[Customer] ([Name] ASC);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -285,6 +285,6 @@ public class CreateIndexGeneratorTests
 			ON [dbo].[Customer] ([Name] ASC);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 }

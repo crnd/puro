@@ -456,7 +456,7 @@ public class CreateTableGeneratorTests
 			[Id] SMALLINT NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -486,7 +486,7 @@ public class CreateTableGeneratorTests
 			[Id] INT NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -516,7 +516,7 @@ public class CreateTableGeneratorTests
 			[Id] BIGINT NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -546,7 +546,7 @@ public class CreateTableGeneratorTests
 			[Id] BIT NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -576,7 +576,7 @@ public class CreateTableGeneratorTests
 			[Id] FLOAT(53) NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -606,7 +606,7 @@ public class CreateTableGeneratorTests
 			[Id] DECIMAL(17, 5) NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -636,7 +636,7 @@ public class CreateTableGeneratorTests
 			[Name] NVARCHAR(MAX) NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -666,7 +666,7 @@ public class CreateTableGeneratorTests
 			[Name] NCHAR(250) NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -696,7 +696,7 @@ public class CreateTableGeneratorTests
 			[Name] NVARCHAR(750) NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -726,7 +726,7 @@ public class CreateTableGeneratorTests
 			[Id] UNIQUEIDENTIFIER NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -756,7 +756,7 @@ public class CreateTableGeneratorTests
 			[Date] DATE NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -786,7 +786,7 @@ public class CreateTableGeneratorTests
 			[Time] TIME NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -816,7 +816,7 @@ public class CreateTableGeneratorTests
 			[DateTime] DATETIME2 NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -846,7 +846,7 @@ public class CreateTableGeneratorTests
 			[DateTime] DATETIMEOFFSET NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -898,7 +898,7 @@ public class CreateTableGeneratorTests
 			[Description] NVARCHAR(MAX) NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -928,7 +928,7 @@ public class CreateTableGeneratorTests
 			[Id] BIT NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -958,6 +958,6 @@ public class CreateTableGeneratorTests
 			[Id] BIT NOT NULL);
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 }

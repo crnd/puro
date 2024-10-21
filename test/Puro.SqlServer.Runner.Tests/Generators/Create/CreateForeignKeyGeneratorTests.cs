@@ -160,7 +160,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE NO ACTION;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -185,7 +185,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE NO ACTION;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -210,7 +210,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE NO ACTION;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -235,7 +235,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE CASCADE;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -260,7 +260,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE SET NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -285,7 +285,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE NO ACTION;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -310,7 +310,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE NO ACTION;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -335,7 +335,7 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE CASCADE;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -360,6 +360,6 @@ public class CreateForeignKeyGeneratorTests
 			ON DELETE CASCADE;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 }

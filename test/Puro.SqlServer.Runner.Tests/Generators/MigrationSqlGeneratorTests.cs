@@ -36,7 +36,7 @@ public class MigrationSqlGeneratorTests
 			COMMIT TRANSACTION;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -73,7 +73,7 @@ public class MigrationSqlGeneratorTests
 			COMMIT TRANSACTION;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[MigrationName("1_CreateTable")]

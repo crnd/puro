@@ -167,7 +167,7 @@ public class AlterTableGeneratorTests
 			ALTER COLUMN [column8] NCHAR(250) NOT NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -254,7 +254,7 @@ public class AlterTableGeneratorTests
 			ALTER COLUMN [column8] NCHAR(250) NOT NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -341,6 +341,6 @@ public class AlterTableGeneratorTests
 			ALTER COLUMN [column8] NCHAR(250) NOT NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 }

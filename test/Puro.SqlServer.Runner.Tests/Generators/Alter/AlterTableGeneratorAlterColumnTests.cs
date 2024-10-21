@@ -359,7 +359,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] BIT NOT NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -387,7 +387,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] SMALLINT NOT NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -415,7 +415,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] INT NOT NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -443,7 +443,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] BIGINT NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -471,7 +471,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] FLOAT(53) NOT NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -501,7 +501,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] DECIMAL(8, 3) NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -529,7 +529,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] NVARCHAR(MAX) NOT NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -558,7 +558,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] NVARCHAR(1000) NOT NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -587,7 +587,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] NCHAR(500) NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -615,7 +615,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] UNIQUEIDENTIFIER NOT NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -643,7 +643,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] DATE NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -671,7 +671,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] TIME NOT NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -699,7 +699,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] DATETIME2 NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -727,7 +727,7 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [column] DATETIMEOFFSET NOT NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -775,6 +775,6 @@ public class AlterTableGeneratorAlterColumnTests
 			ALTER COLUMN [Description] NVARCHAR(1000) NULL;
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 }

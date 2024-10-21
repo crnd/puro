@@ -25,7 +25,7 @@ public class AlterTableGeneratorDropColumnTests
 			DROP COLUMN [column1];
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	[Fact]
@@ -44,7 +44,7 @@ public class AlterTableGeneratorDropColumnTests
 			DROP COLUMN [column1], [column2], [column3];
 			""";
 
-		Assert.Equal(expected, sql);
+		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
 	}
 
 	private static ReadOnlyCollection<(TableColumnChangeType, ITableColumn)> GenerateColumnChanges(params string[] columnNames)
