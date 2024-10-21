@@ -23,7 +23,7 @@ public class AlterTableGeneratorDropColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				DROP COLUMN [column1];
+			DROP COLUMN [column1];
 			""";
 
 		expected.SqlEqual(sql);
@@ -42,7 +42,7 @@ public class AlterTableGeneratorDropColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				DROP COLUMN [column1], [column2], [column3];
+			DROP COLUMN [column1], [column2], [column3];
 			""";
 
 		expected.SqlEqual(sql);

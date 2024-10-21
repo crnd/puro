@@ -32,12 +32,12 @@ public class MigrationSqlGeneratorTests
 			BEGIN
 
 			CREATE TABLE [dbo].[Book] (
-				[Id] INT NOT NULL IDENTITY(1, 1),
-				[Name] NVARCHAR(MAX) NOT NULL
+			[Id] INT NOT NULL IDENTITY(1, 1),
+			[Name] NVARCHAR(MAX) NOT NULL
 			);
 
 			ALTER TABLE [dbo].[Book]
-				ADD CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED ([Id]);
+			ADD CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED ([Id]);
 
 			INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
 			VALUES (N'1_CreateTable', SYSUTCDATETIME()));
@@ -68,12 +68,12 @@ public class MigrationSqlGeneratorTests
 			BEGIN
 			
 			CREATE TABLE [dbo].[Book] (
-				[Id] INT NOT NULL IDENTITY(1, 1),
-				[Name] NVARCHAR(MAX) NOT NULL
+			[Id] INT NOT NULL IDENTITY(1, 1),
+			[Name] NVARCHAR(MAX) NOT NULL
 			);
 			
 			ALTER TABLE [dbo].[Book]
-				ADD CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED ([Id]);
+			ADD CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED ([Id]);
 			
 			INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
 			VALUES (N'1_CreateTable', SYSUTCDATETIME()));
@@ -84,7 +84,7 @@ public class MigrationSqlGeneratorTests
 			BEGIN
 
 			CREATE UNIQUE INDEX [UIX_Book_Name]
-				ON [dbo].[Book] ([Name] ASC);
+			ON [dbo].[Book] ([Name] ASC);
 
 			INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
 			VALUES (N'2_CreateIndex', SYSUTCDATETIME()));

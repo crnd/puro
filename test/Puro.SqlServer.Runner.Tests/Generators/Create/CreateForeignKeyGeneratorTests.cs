@@ -157,8 +157,8 @@ public class CreateForeignKeyGeneratorTests
 		const string expected = """
 			ALTER TABLE [schema].[referencingTable]
 			ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
-				REFERENCES [schema].[referencedTable] ([ReferencedId])
-				ON DELETE NO ACTION;
+			REFERENCES [schema].[referencedTable] ([ReferencedId])
+			ON DELETE NO ACTION;
 			""";
 
 		expected.SqlEqual(sql);
@@ -181,9 +181,9 @@ public class CreateForeignKeyGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [fromSchema].[referencingTable]
-				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
-					REFERENCES [toSchema].[referencedTable] ([ReferencedId])
-					ON DELETE NO ACTION;
+			ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
+			REFERENCES [toSchema].[referencedTable] ([ReferencedId])
+			ON DELETE NO ACTION;
 			""";
 
 		expected.SqlEqual(sql);
@@ -206,9 +206,9 @@ public class CreateForeignKeyGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [fromSchema].[referencingTable]
-				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId1], [ReferencingId2])
-					REFERENCES [toSchema].[referencedTable] ([ReferencedId1], [ReferencedId2])
-					ON DELETE NO ACTION;
+			ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId1], [ReferencingId2])
+			REFERENCES [toSchema].[referencedTable] ([ReferencedId1], [ReferencedId2])
+			ON DELETE NO ACTION;
 			""";
 
 		expected.SqlEqual(sql);
@@ -231,9 +231,9 @@ public class CreateForeignKeyGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [schema].[referencingTable]
-				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
-					REFERENCES [schema].[referencedTable] ([ReferencedId])
-					ON DELETE CASCADE;
+			ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
+			REFERENCES [schema].[referencedTable] ([ReferencedId])
+			ON DELETE CASCADE;
 			""";
 
 		expected.SqlEqual(sql);
@@ -256,9 +256,9 @@ public class CreateForeignKeyGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [schema].[referencingTable]
-				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
-					REFERENCES [schema].[referencedTable] ([ReferencedId])
-					ON DELETE SET NULL;
+			ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
+			REFERENCES [schema].[referencedTable] ([ReferencedId])
+			ON DELETE SET NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -281,9 +281,9 @@ public class CreateForeignKeyGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [correct].[referencingTable]
-				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId1], [ReferencingId2])
-					REFERENCES [correct].[referencedTable] ([ReferencedId1], [ReferencedId2])
-					ON DELETE NO ACTION;
+			ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId1], [ReferencingId2])
+			REFERENCES [correct].[referencedTable] ([ReferencedId1], [ReferencedId2])
+			ON DELETE NO ACTION;
 			""";
 
 		expected.SqlEqual(sql);
@@ -306,9 +306,9 @@ public class CreateForeignKeyGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [testschema].[referencingTable]
-				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId1], [ReferencingId2])
-					REFERENCES [testschema].[referencedTable] ([ReferencedId1], [ReferencedId2])
-					ON DELETE NO ACTION;
+			ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId1], [ReferencingId2])
+			REFERENCES [testschema].[referencedTable] ([ReferencedId1], [ReferencedId2])
+			ON DELETE NO ACTION;
 			""";
 
 		expected.SqlEqual(sql);
@@ -331,9 +331,9 @@ public class CreateForeignKeyGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [migration].[referencingTable]
-				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
-					REFERENCES [statement].[referencedTable] ([ReferencedId])
-					ON DELETE CASCADE;
+			ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
+			REFERENCES [statement].[referencedTable] ([ReferencedId])
+			ON DELETE CASCADE;
 			""";
 
 		expected.SqlEqual(sql);
@@ -356,9 +356,9 @@ public class CreateForeignKeyGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [statement].[referencingTable]
-				ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
-					REFERENCES [migration].[referencedTable] ([ReferencedId])
-					ON DELETE CASCADE;
+			ADD CONSTRAINT [FK_referencingTable_referencedTable] FOREIGN KEY ([ReferencingId])
+			REFERENCES [migration].[referencedTable] ([ReferencedId])
+			ON DELETE CASCADE;
 			""";
 
 		expected.SqlEqual(sql);

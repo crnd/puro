@@ -83,7 +83,7 @@ public class CreatePrimaryKeyGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [Banking].[Account]
-				ADD CONSTRAINT [PK_Account_Id] PRIMARY KEY CLUSTERED ([Id]);
+			ADD CONSTRAINT [PK_Account_Id] PRIMARY KEY CLUSTERED ([Id]);
 			""";
 
 		expected.SqlEqual(sql);
@@ -102,8 +102,8 @@ public class CreatePrimaryKeyGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [Banking].[Account]
-				ADD CONSTRAINT [PK_Account_AccountId_CustomerId_BankId]
-					PRIMARY KEY CLUSTERED ([AccountId], [CustomerId], [BankId]);
+			ADD CONSTRAINT [PK_Account_AccountId_CustomerId_BankId]
+			PRIMARY KEY CLUSTERED ([AccountId], [CustomerId], [BankId]);
 			""";
 
 		expected.SqlEqual(sql);
@@ -122,8 +122,8 @@ public class CreatePrimaryKeyGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [Correct].[Account]
-				ADD CONSTRAINT [PK_Account_AccountId_CustomerId_BankId]
-					PRIMARY KEY CLUSTERED ([AccountId], [CustomerId], [BankId]);
+			ADD CONSTRAINT [PK_Account_AccountId_CustomerId_BankId]
+			PRIMARY KEY CLUSTERED ([AccountId], [CustomerId], [BankId]);
 			""";
 
 		expected.SqlEqual(sql);
@@ -142,8 +142,8 @@ public class CreatePrimaryKeyGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [Banking].[Account]
-				ADD CONSTRAINT [PK_Account_AccountId_CustomerId_BankId]
-					PRIMARY KEY CLUSTERED ([AccountId], [CustomerId], [BankId]);
+			ADD CONSTRAINT [PK_Account_AccountId_CustomerId_BankId]
+			PRIMARY KEY CLUSTERED ([AccountId], [CustomerId], [BankId]);
 			""";
 
 		expected.SqlEqual(sql);

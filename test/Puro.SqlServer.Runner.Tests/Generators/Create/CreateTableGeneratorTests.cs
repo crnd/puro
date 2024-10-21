@@ -454,7 +454,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[Id] SMALLINT NOT NULL
+			[Id] SMALLINT NOT NULL
 			);
 			""";
 
@@ -485,7 +485,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[Id] INT NOT NULL
+			[Id] INT NOT NULL
 			);
 			""";
 
@@ -516,7 +516,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[Id] BIGINT NOT NULL
+			[Id] BIGINT NOT NULL
 			);
 			""";
 
@@ -547,7 +547,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[Id] BIT NOT NULL
+			[Id] BIT NOT NULL
 			);
 			""";
 
@@ -578,7 +578,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[Id] FLOAT(53) NOT NULL
+			[Id] FLOAT(53) NOT NULL
 			);
 			""";
 
@@ -609,7 +609,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[Id] DECIMAL(17, 5) NOT NULL
+			[Id] DECIMAL(17, 5) NOT NULL
 			);
 			""";
 
@@ -640,7 +640,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[Name] NVARCHAR(MAX) NOT NULL
+			[Name] NVARCHAR(MAX) NOT NULL
 			);
 			""";
 
@@ -671,7 +671,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[Name] NCHAR(250) NOT NULL
+			[Name] NCHAR(250) NOT NULL
 			);
 			""";
 
@@ -702,7 +702,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[Name] NVARCHAR(750) NOT NULL
+			[Name] NVARCHAR(750) NOT NULL
 			);
 			""";
 
@@ -733,7 +733,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[Id] UNIQUEIDENTIFIER NOT NULL
+			[Id] UNIQUEIDENTIFIER NOT NULL
 			);
 			""";
 
@@ -764,7 +764,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[Date] DATE NOT NULL
+			[Date] DATE NOT NULL
 			);
 			""";
 
@@ -795,7 +795,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[Time] TIME NOT NULL
+			[Time] TIME NOT NULL
 			);
 			""";
 
@@ -826,7 +826,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[DateTime] DATETIME2 NOT NULL
+			[DateTime] DATETIME2 NOT NULL
 			);
 			""";
 
@@ -857,7 +857,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[DateTime] DATETIMEOFFSET NOT NULL
+			[DateTime] DATETIMEOFFSET NOT NULL
 			);
 			""";
 
@@ -908,9 +908,9 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[Id] INT NOT NULL IDENTITY(1, 1),
-				[Name] NVARCHAR(200) NOT NULL,
-				[Description] NVARCHAR(MAX) NULL
+			[Id] INT NOT NULL IDENTITY(1, 1),
+			[Name] NVARCHAR(200) NOT NULL,
+			[Description] NVARCHAR(MAX) NULL
 			);
 			""";
 
@@ -941,7 +941,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [correct].[table] (
-				[Id] BIT NOT NULL
+			[Id] BIT NOT NULL
 			);
 			""";
 
@@ -972,7 +972,7 @@ public class CreateTableGeneratorTests
 
 		const string expected = """
 			CREATE TABLE [schema].[table] (
-				[Id] BIT NOT NULL
+			[Id] BIT NOT NULL
 			);
 			""";
 

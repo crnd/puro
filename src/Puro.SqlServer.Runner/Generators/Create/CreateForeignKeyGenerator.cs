@@ -20,9 +20,9 @@ internal static class CreateForeignKeyGenerator
 
 		return $"""
 			ALTER TABLE [{statement.ReferencingTableSchema ?? schema}].[{statement.ReferencingTable}]
-				ADD CONSTRAINT [{statement.ForeignKey}] FOREIGN KEY ([{GetColumns(statement.ReferencingColumns)}])
-				REFERENCES [{statement.ReferencedTableSchema ?? schema}].[{statement.ReferencedTable}] ([{GetColumns(statement.ReferencedColumns)}])
-				ON DELETE {ConvertOnDeleteToString(statement.OnDelete!.Value)};
+			ADD CONSTRAINT [{statement.ForeignKey}] FOREIGN KEY ([{GetColumns(statement.ReferencingColumns)}])
+			REFERENCES [{statement.ReferencedTableSchema ?? schema}].[{statement.ReferencedTable}] ([{GetColumns(statement.ReferencedColumns)}])
+			ON DELETE {ConvertOnDeleteToString(statement.OnDelete!.Value)};
 			""";
 	}
 

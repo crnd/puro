@@ -357,7 +357,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column] BIT NOT NULL;
+			ALTER COLUMN [column] BIT NOT NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -385,7 +385,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column] SMALLINT NOT NULL;
+			ALTER COLUMN [column] SMALLINT NOT NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -413,7 +413,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column] INT NOT NULL;
+			ALTER COLUMN [column] INT NOT NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -441,7 +441,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column] BIGINT NULL;
+			ALTER COLUMN [column] BIGINT NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -469,7 +469,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column] FLOAT(53) NOT NULL;
+			ALTER COLUMN [column] FLOAT(53) NOT NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -499,7 +499,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column] DECIMAL(8, 3) NULL;
+			ALTER COLUMN [column] DECIMAL(8, 3) NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -527,7 +527,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column] NVARCHAR(MAX) NOT NULL;
+			ALTER COLUMN [column] NVARCHAR(MAX) NOT NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -556,7 +556,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column] NVARCHAR(1000) NOT NULL;
+			ALTER COLUMN [column] NVARCHAR(1000) NOT NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -585,7 +585,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column] NCHAR(500) NULL;
+			ALTER COLUMN [column] NCHAR(500) NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -613,7 +613,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column] UNIQUEIDENTIFIER NOT NULL;
+			ALTER COLUMN [column] UNIQUEIDENTIFIER NOT NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -641,7 +641,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column] DATE NULL;
+			ALTER COLUMN [column] DATE NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -669,7 +669,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column] TIME NOT NULL;
+			ALTER COLUMN [column] TIME NOT NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -697,7 +697,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column] DATETIME2 NULL;
+			ALTER COLUMN [column] DATETIME2 NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -725,7 +725,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column] DATETIMEOFFSET NOT NULL;
+			ALTER COLUMN [column] DATETIMEOFFSET NOT NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -767,13 +767,13 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [LastUpdated] DATETIME2 NOT NULL;
+			ALTER COLUMN [LastUpdated] DATETIME2 NOT NULL;
 
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [Code] NCHAR(10) NOT NULL;
+			ALTER COLUMN [Code] NCHAR(10) NOT NULL;
 
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [Description] NVARCHAR(1000) NULL;
+			ALTER COLUMN [Description] NVARCHAR(1000) NULL;
 			""";
 
 		expected.SqlEqual(sql);

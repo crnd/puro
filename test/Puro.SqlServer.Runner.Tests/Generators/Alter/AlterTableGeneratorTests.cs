@@ -147,24 +147,24 @@ public class AlterTableGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ADD [column1] INT NULL;
+			ADD [column1] INT NULL;
 
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column2] DATETIMEOFFSET NULL;
+			ALTER COLUMN [column2] DATETIMEOFFSET NULL;
 
 			ALTER TABLE [schema].[table]
-				DROP COLUMN [column3], [column4];
+			DROP COLUMN [column3], [column4];
 
 			ALTER TABLE [schema].[table]
-				ADD
-					[column5] DECIMAL(5, 2) NULL,
-					[column6] INT NOT NULL;
+			ADD
+			[column5] DECIMAL(5, 2) NULL,
+			[column6] INT NOT NULL;
 
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column7] TIME NULL;
+			ALTER COLUMN [column7] TIME NULL;
 
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column8] NCHAR(250) NOT NULL;
+			ALTER COLUMN [column8] NCHAR(250) NOT NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -233,24 +233,24 @@ public class AlterTableGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [correct].[table]
-				ADD [column1] INT NULL;
+			ADD [column1] INT NULL;
 
 			ALTER TABLE [correct].[table]
-				ALTER COLUMN [column2] DATETIMEOFFSET NULL;
+			ALTER COLUMN [column2] DATETIMEOFFSET NULL;
 
 			ALTER TABLE [correct].[table]
-				DROP COLUMN [column3], [column4];
+			DROP COLUMN [column3], [column4];
 
 			ALTER TABLE [correct].[table]
-				ADD
-					[column5] DECIMAL(5, 2) NULL,
-					[column6] INT NOT NULL;
+			ADD
+			[column5] DECIMAL(5, 2) NULL,
+			[column6] INT NOT NULL;
 
 			ALTER TABLE [correct].[table]
-				ALTER COLUMN [column7] TIME NULL;
+			ALTER COLUMN [column7] TIME NULL;
 
 			ALTER TABLE [correct].[table]
-				ALTER COLUMN [column8] NCHAR(250) NOT NULL;
+			ALTER COLUMN [column8] NCHAR(250) NOT NULL;
 			""";
 
 		expected.SqlEqual(sql);
@@ -319,24 +319,24 @@ public class AlterTableGeneratorTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-				ADD [column1] INT NULL;
+			ADD [column1] INT NULL;
 
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column2] DATETIMEOFFSET NULL;
+			ALTER COLUMN [column2] DATETIMEOFFSET NULL;
 
 			ALTER TABLE [schema].[table]
-				DROP COLUMN [column3], [column4];
+			DROP COLUMN [column3], [column4];
 
 			ALTER TABLE [schema].[table]
-				ADD
-					[column5] DECIMAL(5, 2) NULL,
-					[column6] INT NOT NULL;
+			ADD
+			[column5] DECIMAL(5, 2) NULL,
+			[column6] INT NOT NULL;
 
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column7] TIME NULL;
+			ALTER COLUMN [column7] TIME NULL;
 
 			ALTER TABLE [schema].[table]
-				ALTER COLUMN [column8] NCHAR(250) NOT NULL;
+			ALTER COLUMN [column8] NCHAR(250) NOT NULL;
 			""";
 
 		expected.SqlEqual(sql);
