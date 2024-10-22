@@ -30,14 +30,14 @@ internal static class MigrationSqlGenerator
 
 		var sqlBuilder = new StringBuilder();
 		sqlBuilder.AppendLine(Constants.MigrationTableCreation);
-		sqlBuilder.AppendLine("BEGIN TRANSACTION;");
 
 		foreach (var migration in migrations)
 		{
 			sqlBuilder.AppendLine($"""
-			IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationId] = N'{migration.Name}')
-			BEGIN
-			""");
+				IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationId] = N'{migration.Name}')
+				BEGIN
+
+				""");
 
 			var schema = migration.Schema ?? Constants.DefaultSchema;
 
@@ -60,15 +60,16 @@ internal static class MigrationSqlGenerator
 					_ => throw new UnsupportedMigrationStatementException(migrationStatement.GetType())
 				};
 
-				sqlBuilder.AppendLine(sql);
+				sqlBuilder.AppendLine(sql).AppendLine();
 			}
 
 			sqlBuilder.AppendLine($"""
-			INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
-			VALUES (N'{migration.Name}', SYSUTCDATETIME()));
+				INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
+				VALUES (N'{migration.Name}', SYSUTCDATETIME()));
 
-			END
-			""");
+				END
+
+				""");
 		}
 
 		sqlBuilder.Append("COMMIT TRANSACTION;");
