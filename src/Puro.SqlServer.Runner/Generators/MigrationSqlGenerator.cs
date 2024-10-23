@@ -28,8 +28,21 @@ internal static class MigrationSqlGenerator
 			throw new MigrationsNotFoundException();
 		}
 
-		var sqlBuilder = new StringBuilder();
-		sqlBuilder.AppendLine(Constants.MigrationTableCreation);
+		var sqlBuilder = new StringBuilder("""
+			IF OBJECT_ID(N'[dbo].[__PuroMigrationsHistory]') IS NULL
+			BEGIN
+
+			CREATE TABLE [dbo].[__PuroMigrationsHistory] (
+			[MigrationName] NVARCHAR(150) NOT NULL,
+			[AppliedOn] DATETIME2 NOT NULL,
+			CONSTRAINT [PK___PuroMigrationsHistory] PRIMARY KEY ([MigrationName]));
+
+			END;
+
+			BEGIN TRANSACTION;
+
+
+			""");
 
 		foreach (var migration in migrations)
 		{
