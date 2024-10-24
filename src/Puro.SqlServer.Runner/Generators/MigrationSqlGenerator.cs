@@ -21,6 +21,8 @@ namespace Puro.SqlServer.Runner.Generators;
 
 internal static class MigrationSqlGenerator
 {
+	private const string DefaultSchema = "dbo";
+
 	public static string Generate(List<Migration> migrations)
 	{
 		if (migrations.Count == 0)
@@ -52,7 +54,7 @@ internal static class MigrationSqlGenerator
 
 				""");
 
-			var schema = migration.Schema ?? Constants.DefaultSchema;
+			var schema = migration.Schema ?? DefaultSchema;
 
 			foreach (var migrationStatement in migration.Statements)
 			{
