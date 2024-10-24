@@ -99,6 +99,8 @@ public class ColumnGeneratorTests
 	[InlineData(typeof(ulong))]
 	[InlineData(typeof(char))]
 	[InlineData(typeof(float))]
+	[InlineData(typeof(nint))]
+	[InlineData(typeof(nuint))]
 	public void ColumnBuildUnsupportedTypeThrows(Type columnType)
 	{
 		var column = Substitute.For<ITableColumn>();
