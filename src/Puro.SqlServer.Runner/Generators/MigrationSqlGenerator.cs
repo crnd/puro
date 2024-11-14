@@ -49,7 +49,7 @@ internal static class MigrationSqlGenerator
 		foreach (var migration in migrations)
 		{
 			sqlBuilder.AppendLine($"""
-				IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationId] = N'{migration.Name}')
+				IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationName] = N'{migration.Name}')
 				BEGIN
 
 				""");
@@ -80,7 +80,7 @@ internal static class MigrationSqlGenerator
 
 			sqlBuilder.AppendLine($"""
 				INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
-				VALUES (N'{migration.Name}', SYSUTCDATETIME()));
+				VALUES (N'{migration.Name}', SYSUTCDATETIME());
 
 				END
 

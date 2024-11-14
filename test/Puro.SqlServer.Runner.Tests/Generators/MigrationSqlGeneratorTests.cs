@@ -33,7 +33,7 @@ public class MigrationSqlGeneratorTests
 
 			BEGIN TRANSACTION;
 
-			IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationId] = N'1_CreateTable')
+			IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationName] = N'1_CreateTable')
 			BEGIN
 
 			CREATE TABLE [dbo].[Book] (
@@ -44,7 +44,7 @@ public class MigrationSqlGeneratorTests
 			ADD CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED ([Id]);
 
 			INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
-			VALUES (N'1_CreateTable', SYSUTCDATETIME()));
+			VALUES (N'1_CreateTable', SYSUTCDATETIME());
 
 			END
 
@@ -77,7 +77,7 @@ public class MigrationSqlGeneratorTests
 
 			BEGIN TRANSACTION;
 
-			IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationId] = N'1_CreateTable')
+			IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationName] = N'1_CreateTable')
 			BEGIN
 
 			CREATE TABLE [dbo].[Book] (
@@ -88,18 +88,18 @@ public class MigrationSqlGeneratorTests
 			ADD CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED ([Id]);
 
 			INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
-			VALUES (N'1_CreateTable', SYSUTCDATETIME()));
+			VALUES (N'1_CreateTable', SYSUTCDATETIME());
 
 			END
 
-			IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationId] = N'2_CreateIndex')
+			IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationName] = N'2_CreateIndex')
 			BEGIN
 
 			CREATE UNIQUE INDEX [UIX_Book_Name]
 			ON [dbo].[Book] ([Name] ASC);
 
 			INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
-			VALUES (N'2_CreateIndex', SYSUTCDATETIME()));
+			VALUES (N'2_CreateIndex', SYSUTCDATETIME());
 
 			END
 
