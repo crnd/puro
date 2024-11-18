@@ -7,7 +7,7 @@ using Puro.Statements;
 using Puro.Statements.Create.Table;
 using Xunit;
 
-namespace Puro.SqlServer.Runner.Tests.Generators.Create;
+namespace Puro.SqlServer.Runner.Tests.Unit.Generators.Create;
 
 public class CreateTableGeneratorTests
 {

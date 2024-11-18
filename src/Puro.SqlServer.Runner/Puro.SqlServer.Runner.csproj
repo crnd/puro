@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Puro.SqlServer.Runner.Tests" />
-    <InternalsVisibleTo Include="Puro.SqlServer.Runner.IntegrationTests"/>
+    <InternalsVisibleTo Include="Puro.SqlServer.Runner.Tests.Integration" />
+    <InternalsVisibleTo Include="Puro.SqlServer.Runner.Tests.Unit"/>
   </ItemGroup>
 
   <ItemGroup>

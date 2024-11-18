@@ -5,7 +5,7 @@ using Puro.SqlServer.Runner.Generators;
 using Puro.Statements;
 using Xunit;
 
-namespace Puro.SqlServer.Runner.Tests.Generators;
+namespace Puro.SqlServer.Runner.Tests.Unit.Generators;
 
 public class ColumnGeneratorTests
 {

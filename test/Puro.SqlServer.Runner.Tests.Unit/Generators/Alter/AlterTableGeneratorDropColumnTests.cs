@@ -5,7 +5,7 @@ using Puro.Statements.Alter.Table;
 using System.Collections.ObjectModel;
 using Xunit;
 
-namespace Puro.SqlServer.Runner.Tests.Generators.Alter;
+namespace Puro.SqlServer.Runner.Tests.Unit.Generators.Alter;
 
 public class AlterTableGeneratorDropColumnTests
 {

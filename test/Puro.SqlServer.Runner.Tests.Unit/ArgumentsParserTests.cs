@@ -1,7 +1,7 @@
 ﻿using Puro.SqlServer.Runner.Exceptions;
 using Xunit;
 
-namespace Puro.SqlServer.Runner.Tests;
+namespace Puro.SqlServer.Runner.Tests.Unit;
 
 public class ArgumentsParserTests
 {
@@ -15,7 +15,7 @@ public class ArgumentsParserTests
 	public void AssemblyShortFormNoValueThrows()
 	{
 		string[] arguments = ["-a"];
-		
+
 		Assert.Throws<InvalidRunnerArgumentsException>(() => ArgumentsParser.Parse(arguments));
 	}
 

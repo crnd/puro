@@ -10,7 +10,7 @@ using Puro.Statements.Drop.Table;
 using Puro.Statements.Sql;
 using Xunit;
 
-namespace Puro.SqlServer.Runner.Tests;
+namespace Puro.SqlServer.Runner.Tests.Unit;
 
 public class MigrationsProcessorTests
 {

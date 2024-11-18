@@ -5,7 +5,7 @@ using Puro.SqlServer.Runner.Generators.Create;
 using Puro.Statements.Create.Index;
 using Xunit;
 
-namespace Puro.SqlServer.Runner.Tests.Generators.Create;
+namespace Puro.SqlServer.Runner.Tests.Unit.Generators.Create;
 
 public class CreateIndexGeneratorTests
 {

@@ -6,9 +6,9 @@ using Puro.Statements;
 using Puro.Statements.Alter.Table;
 using Xunit;
 
-namespace Puro.SqlServer.Runner.Tests.Generators.Alter;
+namespace Puro.SqlServer.Runner.Tests.Unit.Generators.Alter;
 
-public class AlterTableGeneratorAlterColumnTests
+public class AlterTableGeneratorAddColumnTests
 {
 	[Fact]
 	public void MissingColumnTypeThrows()
@@ -18,7 +18,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -38,7 +38,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -59,7 +59,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -80,7 +80,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -104,8 +104,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column1),
-			(TableColumnChangeType.Alter, column2)
+			(TableColumnChangeType.Add, column1),
+			(TableColumnChangeType.Add, column2)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -130,8 +130,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column1),
-			(TableColumnChangeType.Alter, column2)
+			(TableColumnChangeType.Add, column1),
+			(TableColumnChangeType.Add, column2)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -158,8 +158,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column1),
-			(TableColumnChangeType.Alter, column2)
+			(TableColumnChangeType.Add, column1),
+			(TableColumnChangeType.Add, column2)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -186,8 +186,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column1),
-			(TableColumnChangeType.Alter, column2)
+			(TableColumnChangeType.Add, column1),
+			(TableColumnChangeType.Add, column2)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -210,7 +210,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -233,7 +233,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -256,7 +256,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -279,7 +279,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -301,7 +301,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -323,7 +323,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -344,7 +344,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -356,7 +356,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [column] BIT NOT NULL;
+			ADD
+			[column] BIT NOT NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
@@ -372,7 +373,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -384,7 +385,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [column] SMALLINT NOT NULL;
+			ADD
+			[column] SMALLINT NOT NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
@@ -400,7 +402,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -412,7 +414,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [column] INT NOT NULL;
+			ADD
+			[column] INT NOT NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
@@ -428,7 +431,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -440,7 +443,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [column] BIGINT NULL;
+			ADD
+			[column] BIGINT NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
@@ -456,7 +460,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -468,7 +472,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [column] FLOAT(53) NOT NULL;
+			ADD
+			[column] FLOAT(53) NOT NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
@@ -486,7 +491,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -498,7 +503,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [column] DECIMAL(8, 3) NULL;
+			ADD
+			[column] DECIMAL(8, 3) NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
@@ -514,7 +520,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -526,7 +532,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [column] NVARCHAR(MAX) NOT NULL;
+			ADD
+			[column] NVARCHAR(MAX) NOT NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
@@ -543,7 +550,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -555,7 +562,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [column] NVARCHAR(1000) NOT NULL;
+			ADD
+			[column] NVARCHAR(1000) NOT NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
@@ -572,7 +580,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -584,7 +592,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [column] NCHAR(500) NULL;
+			ADD
+			[column] NCHAR(500) NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
@@ -600,7 +609,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -612,7 +621,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [column] UNIQUEIDENTIFIER NOT NULL;
+			ADD
+			[column] UNIQUEIDENTIFIER NOT NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
@@ -628,7 +638,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -640,7 +650,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [column] DATE NULL;
+			ADD
+			[column] DATE NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
@@ -656,7 +667,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -668,7 +679,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [column] TIME NOT NULL;
+			ADD
+			[column] TIME NOT NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
@@ -684,7 +696,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -696,7 +708,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [column] DATETIME2 NULL;
+			ADD
+			[column] DATETIME2 NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
@@ -712,7 +725,7 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column)
+			(TableColumnChangeType.Add, column)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -724,7 +737,8 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [column] DATETIMEOFFSET NOT NULL;
+			ADD
+			[column] DATETIMEOFFSET NOT NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
@@ -752,9 +766,9 @@ public class AlterTableGeneratorAlterColumnTests
 
 		var changes = new List<(TableColumnChangeType, ITableColumn)>
 		{
-			(TableColumnChangeType.Alter, column1),
-			(TableColumnChangeType.Alter, column2),
-			(TableColumnChangeType.Alter, column3)
+			(TableColumnChangeType.Add, column1),
+			(TableColumnChangeType.Add, column2),
+			(TableColumnChangeType.Add, column3)
 		};
 
 		var statement = Substitute.For<IAlterTableMigrationStatement>();
@@ -766,13 +780,10 @@ public class AlterTableGeneratorAlterColumnTests
 
 		const string expected = """
 			ALTER TABLE [schema].[table]
-			ALTER COLUMN [LastUpdated] DATETIME2 NOT NULL;
-
-			ALTER TABLE [schema].[table]
-			ALTER COLUMN [Code] NCHAR(10) NOT NULL;
-
-			ALTER TABLE [schema].[table]
-			ALTER COLUMN [Description] NVARCHAR(1000) NULL;
+			ADD
+			[LastUpdated] DATETIME2 NOT NULL,
+			[Code] NCHAR(10) NOT NULL,
+			[Description] NVARCHAR(1000) NULL;
 			""";
 
 		Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);

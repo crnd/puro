@@ -4,7 +4,7 @@ using Puro.SqlServer.Runner.Generators.Drop;
 using Puro.Statements.Drop.Table;
 using Xunit;
 
-namespace Puro.SqlServer.Runner.Tests.Generators.Drop;
+namespace Puro.SqlServer.Runner.Tests.Unit.Generators.Drop;
 
 public class DropTableGeneratorTests
 {

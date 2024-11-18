@@ -2,7 +2,7 @@ using Microsoft.Data.SqlClient;
 using Puro.SqlServer.Runner.Generators;
 using Testcontainers.MsSql;
 
-namespace Puro.SqlServer.Runner.IntegrationTests;
+namespace Puro.SqlServer.Runner.Tests.Integration;
 
 public abstract class ContainerTests : IAsyncLifetime
 {

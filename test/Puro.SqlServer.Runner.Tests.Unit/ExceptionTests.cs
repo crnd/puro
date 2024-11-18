@@ -1,7 +1,7 @@
 using Puro.Exceptions;
 using Xunit;
 
-namespace Puro.SqlServer.Runner.Tests;
+namespace Puro.SqlServer.Runner.Tests.Unit;
 
 public class ExceptionTests
 {

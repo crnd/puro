@@ -6,7 +6,7 @@ using Puro.Statements;
 using Puro.Statements.Alter.Table;
 using Xunit;
 
-namespace Puro.SqlServer.Runner.Tests.Generators.Alter;
+namespace Puro.SqlServer.Runner.Tests.Unit.Generators.Alter;
 
 public class AlterTableGeneratorTests
 {

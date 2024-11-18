@@ -5,7 +5,7 @@ using Puro.SqlServer.Runner.Generators.Drop;
 using Puro.Statements.Drop.Index;
 using Xunit;
 
-namespace Puro.SqlServer.Runner.Tests.Generators.Drop;
+namespace Puro.SqlServer.Runner.Tests.Unit.Generators.Drop;
 
 public class DropIndexGeneratorTests
 {

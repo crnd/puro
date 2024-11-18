@@ -5,7 +5,7 @@ using Puro.SqlServer.Runner.Generators.Rename;
 using Puro.Statements.Rename.Index;
 using Xunit;
 
-namespace Puro.SqlServer.Runner.Tests.Generators.Rename;
+namespace Puro.SqlServer.Runner.Tests.Unit.Generators.Rename;
 
 public class RenameIndexGeneratorTests
 {

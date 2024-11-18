@@ -18,9 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puro.SqlServer.Runner", "src\Puro.SqlServer.Runner\Puro.SqlServer.Runner.csproj", "{D70CF03B-FBEB-4091-AF8C-99A4751E3F7F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puro.SqlServer.Runner.Tests", "test\Puro.SqlServer.Runner.Tests\Puro.SqlServer.Runner.Tests.csproj", "{805CB2C0-9987-43AB-9ED3-300AF468CBD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puro.SqlServer.Runner.Tests.Unit", "test\Puro.SqlServer.Runner.Tests.Unit\Puro.SqlServer.Runner.Tests.Unit.csproj", "{805CB2C0-9987-43AB-9ED3-300AF468CBD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Puro.SqlServer.Runner.IntegrationTests", "test\Puro.SqlServer.Runner.IntegrationTests\Puro.SqlServer.Runner.IntegrationTests.csproj", "{5A9A3A84-F4F7-4C7A-BBAD-B8BBDC9F7A8D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Puro.SqlServer.Runner.Tests.Integration", "test\Puro.SqlServer.Runner.Tests.Integration\Puro.SqlServer.Runner.Tests.Integration.csproj", "{5A9A3A84-F4F7-4C7A-BBAD-B8BBDC9F7A8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
