@@ -20,6 +20,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puro.SqlServer.Runner", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puro.SqlServer.Runner.Tests", "test\Puro.SqlServer.Runner.Tests\Puro.SqlServer.Runner.Tests.csproj", "{805CB2C0-9987-43AB-9ED3-300AF468CBD2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Puro.SqlServer.Runner.IntegrationTests", "test\Puro.SqlServer.Runner.IntegrationTests\Puro.SqlServer.Runner.IntegrationTests.csproj", "{5A9A3A84-F4F7-4C7A-BBAD-B8BBDC9F7A8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,10 @@ Global
 		{805CB2C0-9987-43AB-9ED3-300AF468CBD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{805CB2C0-9987-43AB-9ED3-300AF468CBD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{805CB2C0-9987-43AB-9ED3-300AF468CBD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A9A3A84-F4F7-4C7A-BBAD-B8BBDC9F7A8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A9A3A84-F4F7-4C7A-BBAD-B8BBDC9F7A8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A9A3A84-F4F7-4C7A-BBAD-B8BBDC9F7A8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A9A3A84-F4F7-4C7A-BBAD-B8BBDC9F7A8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{4AE92F71-89E4-446A-A3EF-8B80DFE8B879} = {7CD98063-59D8-4B05-A0DE-3603A1CD4B2A}
 		{D70CF03B-FBEB-4091-AF8C-99A4751E3F7F} = {55334AC5-BE0B-4207-859D-57B712035747}
 		{805CB2C0-9987-43AB-9ED3-300AF468CBD2} = {7CD98063-59D8-4B05-A0DE-3603A1CD4B2A}
+		{5A9A3A84-F4F7-4C7A-BBAD-B8BBDC9F7A8D} = {7CD98063-59D8-4B05-A0DE-3603A1CD4B2A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {349F0784-5032-4611-B2F0-1ABEB1F7D223}

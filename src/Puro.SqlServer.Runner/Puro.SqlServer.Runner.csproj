@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="Puro.SqlServer.Runner.Tests" />
+    <InternalsVisibleTo Include="Puro.SqlServer.Runner.IntegrationTests"/>
   </ItemGroup>
 
   <ItemGroup>
