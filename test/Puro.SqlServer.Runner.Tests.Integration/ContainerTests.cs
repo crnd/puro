@@ -1,6 +1,7 @@
 using Microsoft.Data.SqlClient;
 using Puro.SqlServer.Runner.Generators;
 using Testcontainers.MsSql;
+using Xunit;
 
 namespace Puro.SqlServer.Runner.Tests.Integration;
 
