@@ -29,107 +29,41 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 		using var command = new SqlCommand(migrationSql, connection);
 		command.ExecuteNonQuery();
 
-		const string tableExistenceSql = """
-			IF OBJECT_ID('[dbo].[__PuroMigrationsHistory]', 'U') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
+		command.CommandText = GenerateTableExistsSql("dbo", "__PuroMigrationsHistory"); ;
+		var tableCreated = Convert.ToBoolean(command.ExecuteScalar());
 
-		command.CommandText = tableExistenceSql;
-		var exists = Convert.ToBoolean(command.ExecuteScalar());
-
-		Assert.True(exists);
+		Assert.True(tableCreated);
 	}
 
 	[Fact]
 	[TestPriority(2)]
 	public void TablesCreated()
 	{
-		const string table1CreatedSql = """
-			IF OBJECT_ID('[Test].[Table1]', 'U') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
 
-		using var command = new SqlCommand(table1CreatedSql, connection);
+		using var command = new SqlCommand(GenerateTableExistsSql("Test", "Table1"), connection);
 		command.ExecuteNonQuery();
 
 		var tableCreated = Convert.ToBoolean(command.ExecuteScalar());
 		Assert.True(tableCreated);
 
-		const string table2CreatedSql = """
-			IF OBJECT_ID('[Test].[Table2]', 'U') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table2CreatedSql;
+		command.CommandText = GenerateTableExistsSql("Test", "Table2"); ;
 		tableCreated = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.True(tableCreated);
 
-		const string table3CreatedSql = """
-			IF OBJECT_ID('[Test].[Table3]', 'U') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table3CreatedSql;
+		command.CommandText = GenerateTableExistsSql("Test", "Table3"); ;
 		tableCreated = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.True(tableCreated);
 
-		const string table4CreatedSql = """
-			IF OBJECT_ID('[Test].[Table4]', 'U') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table4CreatedSql;
+		command.CommandText = GenerateTableExistsSql("Test", "Table4"); ;
 		tableCreated = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.True(tableCreated);
 
-		const string table5CreatedSql = """
-			IF OBJECT_ID('[Funky].[Table5]', 'U') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table5CreatedSql;
+		command.CommandText = GenerateTableExistsSql("Funky", "Table5");
 		tableCreated = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.True(tableCreated);
@@ -148,30 +82,22 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 		using var command = new SqlCommand(migrationSql, connection);
 		command.ExecuteNonQuery();
 
-		const string table1PrimaryKeyCreatedSql = "SELECT OBJECTPROPERTY(OBJECT_ID(N'[Test].[Table1]'),'TableHasPrimaryKey');";
-
-		command.CommandText = table1PrimaryKeyCreatedSql;
+		command.CommandText = GeneratePrimaryKeyExistsSql("Test", "Table1");
 		var primaryKeyCreated = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.True(primaryKeyCreated);
 
-		const string table2PrimaryKeyCreatedSql = "SELECT OBJECTPROPERTY(OBJECT_ID(N'[Test].[Table2]'),'TableHasPrimaryKey');";
-
-		command.CommandText = table2PrimaryKeyCreatedSql;
+		command.CommandText = GeneratePrimaryKeyExistsSql("Test", "Table2");
 		primaryKeyCreated = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.True(primaryKeyCreated);
 
-		const string table3PrimaryKeyCreatedSql = "SELECT OBJECTPROPERTY(OBJECT_ID(N'[Test].[Table3]'),'TableHasPrimaryKey');";
-
-		command.CommandText = table3PrimaryKeyCreatedSql;
+		command.CommandText = GeneratePrimaryKeyExistsSql("Test", "Table3");
 		primaryKeyCreated = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.True(primaryKeyCreated);
 
-		const string table4PrimaryKeyCreatedSql = "SELECT OBJECTPROPERTY(OBJECT_ID(N'[Test].[Table4]'),'TableHasPrimaryKey');";
-
-		command.CommandText = table4PrimaryKeyCreatedSql;
+		command.CommandText = GeneratePrimaryKeyExistsSql("Test", "Table4");
 		primaryKeyCreated = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.True(primaryKeyCreated);
@@ -190,50 +116,17 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 		using var command = new SqlCommand(migrationSql, connection);
 		command.ExecuteNonQuery();
 
-		const string table1ForeignKeyCreatedSql = """
-			IF OBJECT_ID(N'[Test].[FK_Table4_Table1]', 'F') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table1ForeignKeyCreatedSql;
+		command.CommandText = GenerateForeignKeyExistsSql("Test", "FK_Table4_Table1");
 		var foreignKeyCreated = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.True(foreignKeyCreated);
 
-		const string table2ForeignKeyCreatedSql = """
-			IF OBJECT_ID(N'[Test].[FK_Table4_Table2]', 'F') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table2ForeignKeyCreatedSql;
+		command.CommandText = GenerateForeignKeyExistsSql("Test", "FK_Table4_Table2");
 		foreignKeyCreated = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.True(foreignKeyCreated);
 
-		const string table3ForeignKeyCreatedSql = """
-			IF OBJECT_ID(N'[Test].[FK_Table4_Table3]', 'F') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table3ForeignKeyCreatedSql;
+		command.CommandText = GenerateForeignKeyExistsSql("Test", "FK_Table4_Table3");
 		foreignKeyCreated = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.True(foreignKeyCreated);
@@ -252,34 +145,12 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 		using var command = new SqlCommand(migrationSql, connection);
 		command.ExecuteNonQuery();
 
-		const string table1IndexCreatedSql = """
-			IF INDEXPROPERTY(OBJECT_ID(N'[Test].[Table1]'), N'UIX_Table1_Guid', N'IndexID') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table1IndexCreatedSql;
+		command.CommandText = GenerateIndexExistsSql("Test", "Table1", "UIX_Table1_Guid");
 		var indexCreated = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.True(indexCreated);
 
-		const string table2IndexCreatedSql = """
-			IF INDEXPROPERTY(OBJECT_ID(N'[Test].[Table2]'), N'IX_Table2_Date_Time', N'IndexID') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table2IndexCreatedSql;
+		command.CommandText = GenerateIndexExistsSql("Test", "Table2", "IX_Table2_Date_Time");
 		indexCreated = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.True(indexCreated);
@@ -298,37 +169,15 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 		using var command = new SqlCommand(migrationSql, connection);
 		command.ExecuteNonQuery();
 
-		const string table5ColumnAddedSql = """
-			IF COL_LENGTH(N'[Funky].[Table5]', N'Description') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END;
-			""";
+		command.CommandText = GenerateColumnExistsSql("Funky", "Table5", "Description");
+		var columnExists = Convert.ToBoolean(command.ExecuteScalar());
 
-		command.CommandText = table5ColumnAddedSql;
-		var columnAdded = Convert.ToBoolean(command.ExecuteScalar());
+		Assert.True(columnExists);
 
-		Assert.True(columnAdded);
+		command.CommandText = GenerateColumnExistsSql("Test", "Table2", "Code");
+		columnExists = Convert.ToBoolean(command.ExecuteScalar());
 
-		const string table2ColumnAddedSql = """
-			IF COL_LENGTH(N'[Test].[Table2]', N'Code') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END;
-			""";
-
-		command.CommandText = table2ColumnAddedSql;
-		columnAdded = Convert.ToBoolean(command.ExecuteScalar());
-
-		Assert.True(columnAdded);
+		Assert.True(columnExists);
 
 		const string table1ColumnAlteredSql = """
 			SELECT TOP 1
@@ -392,21 +241,10 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 
 		reader.Close();
 
-		const string table3ColumnDeletedSql = """
-			IF COL_LENGTH(N'[Test].[Table3]', N'FixedString') IS NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END;
-			""";
+		command.CommandText = GenerateColumnExistsSql("Test", "Table3", "FixedString");
+		columnExists = Convert.ToBoolean(command.ExecuteScalar());
 
-		command.CommandText = table3ColumnDeletedSql;
-		var columnDeleted = Convert.ToBoolean(command.ExecuteScalar());
-
-		Assert.True(columnAdded);
+		Assert.False(columnExists);
 	}
 
 	[Fact]
@@ -490,21 +328,10 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 		using var command = new SqlCommand(migrationSql, connection);
 		command.ExecuteNonQuery();
 
-		const string tableCreatedSql = """
-			IF OBJECT_ID('[dbo].[Table5]', 'U') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
+		command.CommandText = GenerateTableExistsSql("dbo", "Table5");
+		var tableExists = Convert.ToBoolean(command.ExecuteScalar());
 
-		command.CommandText = tableCreatedSql;
-		var tableCreated = Convert.ToBoolean(command.ExecuteScalar());
-
-		Assert.True(tableCreated);
+		Assert.True(tableExists);
 	}
 
 	[Fact]
@@ -520,34 +347,12 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 		using var command = new SqlCommand(migrationSql, connection);
 		command.ExecuteNonQuery();
 
-		const string table1IndexExistsSql = """
-			IF INDEXPROPERTY(OBJECT_ID(N'[Test].[Table1]'), N'UIX_Table1_Guid_Renamed', N'IndexID') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table1IndexExistsSql;
+		command.CommandText = GenerateIndexExistsSql("Test", "Table1", "UIX_Table1_Guid_Renamed");
 		var indexExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(indexExists);
 
-		const string table2IndexExistsSql = """
-			IF INDEXPROPERTY(OBJECT_ID(N'[Test].[Table2]'), N'IX_Table2_Date_Time', N'IndexID') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table2IndexExistsSql;
+		command.CommandText = GenerateIndexExistsSql("Test", "Table2", "IX_Table2_Date_Time");
 		indexExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(indexExists);
@@ -566,50 +371,17 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 		using var command = new SqlCommand(migrationSql, connection);
 		command.ExecuteNonQuery();
 
-		const string table1ForeignKeyExistsSql = """
-			IF OBJECT_ID(N'[Test].[FK_Table4_Table1]', 'F') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table1ForeignKeyExistsSql;
+		command.CommandText = GenerateForeignKeyExistsSql("Test", "FK_Table4_Table1");
 		var foreignKeyExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(foreignKeyExists);
 
-		const string table2ForeignKeyExistsSql = """
-			IF OBJECT_ID(N'[Test].[FK_Table4_Table2]', 'F') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table2ForeignKeyExistsSql;
+		command.CommandText = GenerateForeignKeyExistsSql("Test", "FK_Table4_Table2");
 		foreignKeyExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(foreignKeyExists);
 
-		const string table3ForeignKeyExistsSql = """
-			IF OBJECT_ID(N'[Test].[FK_Table4_Table3]', 'F') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table3ForeignKeyExistsSql;
+		command.CommandText = GenerateForeignKeyExistsSql("Test", "FK_Table4_Table3");
 		foreignKeyExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(foreignKeyExists);
@@ -628,30 +400,22 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 		using var command = new SqlCommand(migrationSql, connection);
 		command.ExecuteNonQuery();
 
-		const string table1PrimaryKeyExistsSql = "SELECT OBJECTPROPERTY(OBJECT_ID(N'[Test].[Table1]'),'TableHasPrimaryKey');";
-
-		command.CommandText = table1PrimaryKeyExistsSql;
+		command.CommandText = GeneratePrimaryKeyExistsSql("Test", "Table1");
 		var primaryKeyExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(primaryKeyExists);
 
-		const string table2PrimaryKeyExistsSql = "SELECT OBJECTPROPERTY(OBJECT_ID(N'[Test].[Table2]'),'TableHasPrimaryKey');";
-
-		command.CommandText = table2PrimaryKeyExistsSql;
+		command.CommandText = GeneratePrimaryKeyExistsSql("Test", "Table2");
 		primaryKeyExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(primaryKeyExists);
 
-		const string table3PrimaryKeyExistsSql = "SELECT OBJECTPROPERTY(OBJECT_ID(N'[Test].[Table3]'),'TableHasPrimaryKey');";
-
-		command.CommandText = table3PrimaryKeyExistsSql;
+		command.CommandText = GeneratePrimaryKeyExistsSql("Test", "Table3");
 		primaryKeyExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(primaryKeyExists);
 
-		const string table4PrimaryKeyExistsSql = "SELECT OBJECTPROPERTY(OBJECT_ID(N'[Test].[Table4]'),'TableHasPrimaryKey');";
-
-		command.CommandText = table4PrimaryKeyExistsSql;
+		command.CommandText = GeneratePrimaryKeyExistsSql("Test", "Table4");
 		primaryKeyExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(primaryKeyExists);
@@ -670,98 +434,32 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 		using var command = new SqlCommand(migrationSql, connection);
 		command.ExecuteNonQuery();
 
-		const string table1ExistsSql = """
-			IF OBJECT_ID('[Test].[Table1]', 'U') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table1ExistsSql;
+		command.CommandText = GenerateTableExistsSql("Test", "Table1");
 		var tableExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(tableExists);
 
-		const string table2ExistsSql = """
-			IF OBJECT_ID('[Test].[Table2]', 'U') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table2ExistsSql;
+		command.CommandText = GenerateTableExistsSql("Test", "Table2");
 		tableExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(tableExists);
 
-		const string table3ExistsSql = """
-			IF OBJECT_ID('[Test].[Table3]', 'U') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table3ExistsSql;
+		command.CommandText = GenerateTableExistsSql("Test", "Table3");
 		tableExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(tableExists);
 
-		const string table4ExistsSql = """
-			IF OBJECT_ID('[Test].[Table4]', 'U') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table4ExistsSql;
+		command.CommandText = GenerateTableExistsSql("Test", "Table4");
 		tableExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(tableExists);
 
-		const string table5ExistsSql = """
-			IF OBJECT_ID('[dbo].[Table5]', 'U') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table5ExistsSql;
+		command.CommandText = GenerateTableExistsSql("dbo", "Table5");
 		tableExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(tableExists);
 
-		const string table6ExistsSql = """
-			IF OBJECT_ID('[Funky].[Table6]', 'U') IS NOT NULL
-			BEGIN
-				SELECT 1;
-			END
-			ELSE
-			BEGIN
-				SELECT 0;
-			END
-			""";
-
-		command.CommandText = table6ExistsSql;
+		command.CommandText = GenerateTableExistsSql("Funky", "Table6");
 		tableExists = Convert.ToBoolean(command.ExecuteScalar());
 
 		Assert.False(tableExists);
@@ -1026,5 +724,66 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 			Drop.Table("Table5");
 			Drop.Table("Table6").InSchema("Funky");
 		}
+	}
+
+	private static string GenerateTableExistsSql(string schema, string table)
+	{
+		return $"""
+			IF OBJECT_ID('[{schema}].[{table}]', 'U') IS NOT NULL
+			BEGIN
+				SELECT 1;
+			END
+			ELSE
+			BEGIN
+				SELECT 0;
+			END
+			""";
+	}
+
+	private static string GenerateIndexExistsSql(string schema, string table, string index)
+	{
+		return $"""
+			IF INDEXPROPERTY(OBJECT_ID(N'[{schema}].[{table}]'), N'{index}', N'IndexID') IS NOT NULL
+			BEGIN
+				SELECT 1;
+			END
+			ELSE
+			BEGIN
+				SELECT 0;
+			END
+			""";
+	}
+
+	private static string GenerateForeignKeyExistsSql(string schema, string foreignKey)
+	{
+		return $"""
+			IF OBJECT_ID(N'[{schema}].[{foreignKey}]', N'F') IS NOT NULL
+			BEGIN
+				SELECT 1;
+			END
+			ELSE
+			BEGIN
+				SELECT 0;
+			END
+			""";
+	}
+
+	private static string GeneratePrimaryKeyExistsSql(string schema, string table)
+	{
+		return $"SELECT OBJECTPROPERTY(OBJECT_ID(N'[{schema}].[{table}]'), N'TableHasPrimaryKey');";
+	}
+
+	private static string GenerateColumnExistsSql(string schema, string table, string column)
+	{
+		return $"""
+			IF COL_LENGTH(N'[{schema}].[{table}]', N'{column}') IS NOT NULL
+			BEGIN
+				SELECT 1;
+			END
+			ELSE
+			BEGIN
+				SELECT 0;
+			END;
+			""";
 	}
 }
