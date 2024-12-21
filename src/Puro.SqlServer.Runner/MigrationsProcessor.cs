@@ -4,13 +4,14 @@ namespace Puro.SqlServer.Runner;
 
 internal static class MigrationsProcessor
 {
-	public static List<Migration> Prepare(Type[] migrationTypes, string? fromMigration, string? toMigration)
+	public static (List<Migration>, bool) Prepare(Type[] migrationTypes, string? fromMigration, string? toMigration)
 	{
 		var migrations = InstantiateMigrations(migrationTypes);
 		var fromMigrationIndex = FindMigrationIndex(fromMigration, migrations);
 		var toMigrationIndex = FindMigrationIndex(toMigration, migrations);
+		var isUpDirection = IsUpDirection(fromMigrationIndex, toMigrationIndex);
 
-		if (IsUpDirection(fromMigrationIndex, toMigrationIndex))
+		if (isUpDirection)
 		{
 			if (fromMigrationIndex is not null || toMigrationIndex is not null)
 			{
@@ -55,7 +56,7 @@ internal static class MigrationsProcessor
 			}
 		}
 
-		return migrations;
+		return (migrations, isUpDirection);
 	}
 
 	public static List<Migration> InstantiateMigrations(Type[] migrationTypes)

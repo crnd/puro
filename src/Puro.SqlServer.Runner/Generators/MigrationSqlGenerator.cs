@@ -23,7 +23,7 @@ internal static class MigrationSqlGenerator
 {
 	private const string DefaultSchema = "dbo";
 
-	public static string Generate(List<Migration> migrations)
+	public static string Generate(List<Migration> migrations, bool isUpDirection)
 	{
 		if (migrations.Count == 0)
 		{
@@ -48,11 +48,27 @@ internal static class MigrationSqlGenerator
 
 		foreach (var migration in migrations)
 		{
-			sqlBuilder.AppendLine($"""
-				IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationName] = N'{migration.Name}')
-				BEGIN
+			if (isUpDirection)
+			{
+				sqlBuilder.AppendLine($"""
+					IF NOT EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationName] = N'{migration.Name}')
+					BEGIN
 
-				""");
+					""");
+			}
+			else
+			{
+				if (migration is UpMigration)
+				{
+					continue;
+				}
+
+				sqlBuilder.AppendLine($"""
+					IF EXISTS (SELECT 1 FROM [dbo].[__PuroMigrationsHistory] WHERE [MigrationName] = N'{migration.Name}')
+					BEGIN
+
+					""");
+			}
 
 			var schema = migration.Schema ?? DefaultSchema;
 
@@ -78,13 +94,26 @@ internal static class MigrationSqlGenerator
 				sqlBuilder.AppendLine(sql).AppendLine();
 			}
 
-			sqlBuilder.AppendLine($"""
-				INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
-				VALUES (N'{migration.Name}', SYSUTCDATETIME());
+			if (isUpDirection)
+			{
+				sqlBuilder.AppendLine($"""
+					INSERT INTO [dbo].[__PuroMigrationsHistory] ([MigrationName], [AppliedOn])
+					VALUES (N'{migration.Name}', SYSUTCDATETIME());
 
-				END
+					END
 
-				""");
+					""");
+			}
+			else
+			{
+				sqlBuilder.AppendLine($"""
+					DELETE FROM [dbo].[__PuroMigrationsHistory]
+					WHERE [MigrationName] = N'{migration.Name}';
+
+					END
+
+					""");
+			}
 		}
 
 		sqlBuilder.Append("COMMIT TRANSACTION;");

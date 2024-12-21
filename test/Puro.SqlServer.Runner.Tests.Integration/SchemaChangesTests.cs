@@ -20,8 +20,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(1)]
 	public void MigrationsTableCreated()
 	{
-		var migrations = MigrationsProcessor.Prepare([typeof(CreateTablesMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations);
+		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(CreateTablesMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -73,8 +73,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(3)]
 	public void PrimaryKeysCreated()
 	{
-		var migrations = MigrationsProcessor.Prepare([typeof(CreatePrimaryKeysMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations);
+		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(CreatePrimaryKeysMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -107,8 +107,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(4)]
 	public void ForeignKeysCreated()
 	{
-		var migrations = MigrationsProcessor.Prepare([typeof(CreateForeignKeysMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations);
+		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(CreateForeignKeysMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -136,8 +136,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(5)]
 	public void IndexesCreated()
 	{
-		var migrations = MigrationsProcessor.Prepare([typeof(CreateIndexesMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations);
+		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(CreateIndexesMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -160,8 +160,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(6)]
 	public void TablesAltered()
 	{
-		var migrations = MigrationsProcessor.Prepare([typeof(AlterMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations);
+		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(AlterMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -251,8 +251,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(7)]
 	public void ObjectsRenamed()
 	{
-		var migrations = MigrationsProcessor.Prepare([typeof(RenameMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations);
+		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(RenameMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -319,8 +319,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(8)]
 	public void SqlExecuted()
 	{
-		var migrations = MigrationsProcessor.Prepare([typeof(SqlMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations);
+		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(SqlMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -338,8 +338,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(9)]
 	public void IndexesDropped()
 	{
-		var migrations = MigrationsProcessor.Prepare([typeof(DropIndexesMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations);
+		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(DropIndexesMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -362,8 +362,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(10)]
 	public void ForeignKeysDropped()
 	{
-		var migrations = MigrationsProcessor.Prepare([typeof(DropForeignKeysMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations);
+		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(DropForeignKeysMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -391,8 +391,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(11)]
 	public void PrimaryKeysDropped()
 	{
-		var migrations = MigrationsProcessor.Prepare([typeof(DropPrimaryKeysMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations);
+		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(DropPrimaryKeysMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -425,8 +425,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(12)]
 	public void TablesDropped()
 	{
-		var migrations = MigrationsProcessor.Prepare([typeof(DropTablesMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations);
+		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(DropTablesMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
