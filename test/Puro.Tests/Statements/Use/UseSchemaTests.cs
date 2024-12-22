@@ -13,7 +13,7 @@ public class UseSchemaTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullSchemaMigration : UpMigration
+	private sealed class NullSchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -29,7 +29,7 @@ public class UseSchemaTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptySchemaMigration : UpMigration
+	private sealed class EmptySchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -45,7 +45,7 @@ public class UseSchemaTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceSchemaMigration : UpMigration
+	private sealed class WhiteSpaceSchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -61,7 +61,7 @@ public class UseSchemaTests
 		Assert.Throws<InvalidUseSchemaStatementException>(migration.Up);
 	}
 
-	private sealed class MultipleUseSchemaMigration : UpMigration
+	private sealed class MultipleUseSchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -78,7 +78,7 @@ public class UseSchemaTests
 		Assert.Throws<InvalidUseSchemaStatementException>(migration.Up);
 	}
 
-	private sealed class UseSchemaAfterOtherStatementMigration : UpMigration
+	private sealed class UseSchemaAfterOtherStatementMigration : Migration
 	{
 		public override void Up()
 		{
@@ -106,7 +106,7 @@ public class UseSchemaTests
 		Assert.Empty(migration.Statements);
 	}
 
-	private sealed class UseSchemaMigration : UpMigration
+	private sealed class UseSchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -123,7 +123,7 @@ public class UseSchemaTests
 		Assert.Equal("Accounting", migration.Schema);
 	}
 
-	private sealed class UseSchemaBeforeOtherStatementsMigration : UpMigration
+	private sealed class UseSchemaBeforeOtherStatementsMigration : Migration
 	{
 		public override void Up()
 		{

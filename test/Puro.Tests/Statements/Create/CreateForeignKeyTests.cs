@@ -15,7 +15,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullForeignKeyMigration : UpMigration
+	private sealed class NullForeignKeyMigration : Migration
 	{
 		public override void Up()
 		{
@@ -34,7 +34,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullPrincipalTableMigration : UpMigration
+	private sealed class NullPrincipalTableMigration : Migration
 	{
 		public override void Up()
 		{
@@ -53,7 +53,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullPrincipalTableSchemaMigration : UpMigration
+	private sealed class NullPrincipalTableSchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -72,7 +72,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullPrincipalTableColumnMigration : UpMigration
+	private sealed class NullPrincipalTableColumnMigration : Migration
 	{
 		public override void Up()
 		{
@@ -91,7 +91,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullTargetTableMigration : UpMigration
+	private sealed class NullTargetTableMigration : Migration
 	{
 		public override void Up()
 		{
@@ -110,7 +110,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullTargetTableSchemaMigration : UpMigration
+	private sealed class NullTargetTableSchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -129,7 +129,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullTargetTableColumnMigration : UpMigration
+	private sealed class NullTargetTableColumnMigration : Migration
 	{
 		public override void Up()
 		{
@@ -148,7 +148,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyForeignKeyMigration : UpMigration
+	private sealed class EmptyForeignKeyMigration : Migration
 	{
 		public override void Up()
 		{
@@ -167,7 +167,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyPrincipalTableMigration : UpMigration
+	private sealed class EmptyPrincipalTableMigration : Migration
 	{
 		public override void Up()
 		{
@@ -186,7 +186,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyPrincipalTableSchemaMigration : UpMigration
+	private sealed class EmptyPrincipalTableSchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -205,7 +205,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyPrincipalTableColumnMigration : UpMigration
+	private sealed class EmptyPrincipalTableColumnMigration : Migration
 	{
 		public override void Up()
 		{
@@ -224,7 +224,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyTargetTableMigration : UpMigration
+	private sealed class EmptyTargetTableMigration : Migration
 	{
 		public override void Up()
 		{
@@ -243,7 +243,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyTargetTableSchemaMigration : UpMigration
+	private sealed class EmptyTargetTableSchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -262,7 +262,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyTargetTableColumnMigration : UpMigration
+	private sealed class EmptyTargetTableColumnMigration : Migration
 	{
 		public override void Up()
 		{
@@ -281,7 +281,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceForeignKeyMigration : UpMigration
+	private sealed class WhiteSpaceForeignKeyMigration : Migration
 	{
 		public override void Up()
 		{
@@ -300,7 +300,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpacePrincipalTableMigration : UpMigration
+	private sealed class WhiteSpacePrincipalTableMigration : Migration
 	{
 		public override void Up()
 		{
@@ -319,7 +319,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpacePrincipalTableSchemaMigration : UpMigration
+	private sealed class WhiteSpacePrincipalTableSchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -338,7 +338,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpacePrincipalTableColumnMigration : UpMigration
+	private sealed class WhiteSpacePrincipalTableColumnMigration : Migration
 	{
 		public override void Up()
 		{
@@ -357,7 +357,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceTargetTableMigration : UpMigration
+	private sealed class WhiteSpaceTargetTableMigration : Migration
 	{
 		public override void Up()
 		{
@@ -376,7 +376,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceTargetTableSchemaMigration : UpMigration
+	private sealed class WhiteSpaceTargetTableSchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -395,7 +395,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceTargetTableColumnMigration : UpMigration
+	private sealed class WhiteSpaceTargetTableColumnMigration : Migration
 	{
 		public override void Up()
 		{
@@ -414,7 +414,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ConstraintColumnExistsException>(() => migration.Up());
 	}
 
-	private sealed class DuplicateFromColumnsMigration : UpMigration
+	private sealed class DuplicateFromColumnsMigration : Migration
 	{
 		public override void Up()
 		{
@@ -433,7 +433,7 @@ public class CreateForeignKeyTests
 		Assert.Throws<ConstraintColumnExistsException>(() => migration.Up());
 	}
 
-	private sealed class DuplicateToColumnsMigration : UpMigration
+	private sealed class DuplicateToColumnsMigration : Migration
 	{
 		public override void Up()
 		{
@@ -534,7 +534,7 @@ public class CreateForeignKeyTests
 		Assert.StrictEqual(OnDeleteBehavior.Cascade, statement.OnDelete);
 	}
 
-	private sealed class SingleColumnMigration : UpMigration
+	private sealed class SingleColumnMigration : Migration
 	{
 		public override void Up()
 		{
@@ -584,7 +584,7 @@ public class CreateForeignKeyTests
 		Assert.StrictEqual(OnDeleteBehavior.Restrict, statement.OnDelete);
 	}
 
-	private sealed class MultiColumnMigration : UpMigration
+	private sealed class MultiColumnMigration : Migration
 	{
 		public override void Up()
 		{
@@ -606,7 +606,7 @@ public class CreateForeignKeyTests
 		Assert.StrictEqual(OnDeleteBehavior.SetNull, statement.OnDelete);
 	}
 
-	private sealed class SetNullMigration : UpMigration
+	private sealed class SetNullMigration : Migration
 	{
 		public override void Up()
 		{
@@ -639,7 +639,7 @@ public class CreateForeignKeyTests
 		Assert.Null(statement.ReferencingTableSchema);
 	}
 
-	private sealed class ReferencingSchemaNotDefinedMigration : UpMigration
+	private sealed class ReferencingSchemaNotDefinedMigration : Migration
 	{
 		public override void Up()
 		{
@@ -672,7 +672,7 @@ public class CreateForeignKeyTests
 		Assert.Null(statement.ReferencedTableSchema);
 	}
 
-	private sealed class ReferencedSchemaNotDefinedMigration : UpMigration
+	private sealed class ReferencedSchemaNotDefinedMigration : Migration
 	{
 		public override void Up()
 		{
@@ -773,7 +773,7 @@ public class CreateForeignKeyTests
 		Assert.StrictEqual(OnDeleteBehavior.SetNull, statement.OnDelete);
 	}
 
-	private sealed class NoSchemasMigration : UpMigration
+	private sealed class NoSchemasMigration : Migration
 	{
 		public override void Up()
 		{

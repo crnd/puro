@@ -11,17 +11,17 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 {
 	private readonly string connectionString;
 
-	public SchemaChangesTests(ContainerFixture containerFixture)
+	public SchemaChangesTests(ContainerFixture fixture)
 	{
-		connectionString = containerFixture.container.GetConnectionString();
+		connectionString = fixture.container.GetConnectionString();
 	}
 
 	[Fact]
 	[TestPriority(1)]
 	public void MigrationsTableCreated()
 	{
-		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(CreateTablesMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
+		var migrations = MigrationsProcessor.Prepare([typeof(CreateTablesMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -73,8 +73,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(3)]
 	public void PrimaryKeysCreated()
 	{
-		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(CreatePrimaryKeysMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
+		var migrations = MigrationsProcessor.Prepare([typeof(CreatePrimaryKeysMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -107,8 +107,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(4)]
 	public void ForeignKeysCreated()
 	{
-		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(CreateForeignKeysMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
+		var migrations = MigrationsProcessor.Prepare([typeof(CreateForeignKeysMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -136,8 +136,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(5)]
 	public void IndexesCreated()
 	{
-		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(CreateIndexesMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
+		var migrations = MigrationsProcessor.Prepare([typeof(CreateIndexesMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -160,8 +160,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(6)]
 	public void TablesAltered()
 	{
-		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(AlterMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
+		var migrations = MigrationsProcessor.Prepare([typeof(AlterMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -251,8 +251,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(7)]
 	public void ObjectsRenamed()
 	{
-		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(RenameMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
+		var migrations = MigrationsProcessor.Prepare([typeof(RenameMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -319,8 +319,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(8)]
 	public void SqlExecuted()
 	{
-		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(SqlMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
+		var migrations = MigrationsProcessor.Prepare([typeof(SqlMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -338,8 +338,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(9)]
 	public void IndexesDropped()
 	{
-		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(DropIndexesMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
+		var migrations = MigrationsProcessor.Prepare([typeof(DropIndexesMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -362,8 +362,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(10)]
 	public void ForeignKeysDropped()
 	{
-		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(DropForeignKeysMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
+		var migrations = MigrationsProcessor.Prepare([typeof(DropForeignKeysMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -391,8 +391,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(11)]
 	public void PrimaryKeysDropped()
 	{
-		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(DropPrimaryKeysMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
+		var migrations = MigrationsProcessor.Prepare([typeof(DropPrimaryKeysMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -425,8 +425,8 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	[TestPriority(12)]
 	public void TablesDropped()
 	{
-		var (migrations, isUpDirection) = MigrationsProcessor.Prepare([typeof(DropTablesMigration)], null, null);
-		var migrationSql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
+		var migrations = MigrationsProcessor.Prepare([typeof(DropTablesMigration)], null, null);
+		var migrationSql = MigrationSqlGenerator.Generate(migrations);
 
 		using var connection = new SqlConnection(connectionString);
 		connection.Open();
@@ -501,7 +501,7 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	}
 
 	[MigrationName("1_CreateTablesMigration")]
-	private sealed class CreateTablesMigration : UpMigration
+	private sealed class CreateTablesMigration : Migration
 	{
 		public override void Up()
 		{
@@ -540,7 +540,7 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	}
 
 	[MigrationName("2_CreatePrimaryKeysMigration")]
-	private sealed class CreatePrimaryKeysMigration : UpMigration
+	private sealed class CreatePrimaryKeysMigration : Migration
 	{
 		public override void Up()
 		{
@@ -566,7 +566,7 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	}
 
 	[MigrationName("3_CreateForeignKeysMigration")]
-	private sealed class CreateForeignKeysMigration : UpMigration
+	private sealed class CreateForeignKeysMigration : Migration
 	{
 		public override void Up()
 		{
@@ -596,7 +596,7 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	}
 
 	[MigrationName("4_CreateIndexesMigration")]
-	private sealed class CreateIndexesMigration : UpMigration
+	private sealed class CreateIndexesMigration : Migration
 	{
 		public override void Up()
 		{
@@ -614,7 +614,7 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	}
 
 	[MigrationName("5_AlterMigration")]
-	private sealed class AlterMigration : UpMigration
+	private sealed class AlterMigration : Migration
 	{
 		public override void Up()
 		{
@@ -645,7 +645,7 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	}
 
 	[MigrationName("6_RenameMigration")]
-	private sealed class RenameMigration : UpMigration
+	private sealed class RenameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -666,7 +666,7 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	}
 
 	[MigrationName("7_SqlMigration")]
-	private sealed class SqlMigration : UpMigration
+	private sealed class SqlMigration : Migration
 	{
 		public override void Up()
 		{
@@ -680,7 +680,7 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	}
 
 	[MigrationName("8_DropIndexesMigration")]
-	private sealed class DropIndexesMigration : UpMigration
+	private sealed class DropIndexesMigration : Migration
 	{
 		public override void Up()
 		{
@@ -690,7 +690,7 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	}
 
 	[MigrationName("9_DropForeignKeysMigration")]
-	private sealed class DropForeignKeysMigration : UpMigration
+	private sealed class DropForeignKeysMigration : Migration
 	{
 		public override void Up()
 		{
@@ -701,7 +701,7 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	}
 
 	[MigrationName("10_DropPrimaryKeysMigration")]
-	private sealed class DropPrimaryKeysMigration : UpMigration
+	private sealed class DropPrimaryKeysMigration : Migration
 	{
 		public override void Up()
 		{
@@ -713,7 +713,7 @@ public class SchemaChangesTests : IClassFixture<ContainerFixture>
 	}
 
 	[MigrationName("11_DropTablesMigration")]
-	private sealed class DropTablesMigration : UpMigration
+	private sealed class DropTablesMigration : Migration
 	{
 		public override void Up()
 		{

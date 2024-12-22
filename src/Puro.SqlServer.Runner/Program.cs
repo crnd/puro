@@ -21,8 +21,8 @@ public sealed class Program
 			Console.WriteLine("OK");
 
 			Console.Write("Generating SQL from migrations... ");
-			var (migrations, isUpDirection) = MigrationsProcessor.Prepare(migrationTypes, settings.FromMigration, settings.ToMigration);
-			var sql = MigrationSqlGenerator.Generate(migrations, isUpDirection);
+			var migrations = MigrationsProcessor.Prepare(migrationTypes, settings.FromMigration, settings.ToMigration);
+			var sql = MigrationSqlGenerator.Generate(migrations);
 			Console.WriteLine("OK");
 
 			if (settings.ConnectionString is null)

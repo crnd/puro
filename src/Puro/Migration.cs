@@ -65,14 +65,9 @@ public abstract class Migration
 	public string Name => GetMigrationName();
 
 	/// <summary>
-	/// Processes the migration statements that are defined for the up direction.
+	/// Processes the defined migration statements.
 	/// </summary>
 	public abstract void Up();
-
-	/// <summary>
-	/// Processes the migration statements that are defined for the down direction.
-	/// </summary>
-	public abstract void Down();
 
 	private string GetMigrationName()
 	{

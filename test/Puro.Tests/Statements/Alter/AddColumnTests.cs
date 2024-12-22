@@ -14,7 +14,7 @@ public class AddColumnTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullColumnNameMigration : UpMigration
+	private sealed class NullColumnNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -31,7 +31,7 @@ public class AddColumnTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyColumnNameMigration : UpMigration
+	private sealed class EmptyColumnNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -48,7 +48,7 @@ public class AddColumnTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceColumnNameMigration : UpMigration
+	private sealed class WhiteSpaceColumnNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -65,7 +65,7 @@ public class AddColumnTests
 		Assert.Throws<TableColumnExistsException>(() => migration.Up());
 	}
 
-	private sealed class DuplicateColumnNameMigration : UpMigration
+	private sealed class DuplicateColumnNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -83,7 +83,7 @@ public class AddColumnTests
 		Assert.Throws<InvalidStringLengthException>(() => migration.Up());
 	}
 
-	private sealed class NonPositiveFixedStringLengthMigration : UpMigration
+	private sealed class NonPositiveFixedStringLengthMigration : Migration
 	{
 		public override void Up()
 		{
@@ -100,7 +100,7 @@ public class AddColumnTests
 		Assert.Throws<InvalidStringLengthException>(() => migration.Up());
 	}
 
-	private sealed class NonPositiveMaximumStringLengthMigration : UpMigration
+	private sealed class NonPositiveMaximumStringLengthMigration : Migration
 	{
 		public override void Up()
 		{
@@ -135,7 +135,7 @@ public class AddColumnTests
 		Assert.StrictEqual(typeof(bool), column.Type);
 	}
 
-	private sealed class BoolMigration : UpMigration
+	private sealed class BoolMigration : Migration
 	{
 		public override void Up()
 		{
@@ -157,7 +157,7 @@ public class AddColumnTests
 		Assert.StrictEqual(typeof(short), column.Type);
 	}
 
-	private sealed class ShortMigration : UpMigration
+	private sealed class ShortMigration : Migration
 	{
 		public override void Up()
 		{
@@ -179,7 +179,7 @@ public class AddColumnTests
 		Assert.StrictEqual(typeof(int), column.Type);
 	}
 
-	private sealed class IntMigration : UpMigration
+	private sealed class IntMigration : Migration
 	{
 		public override void Up()
 		{
@@ -201,7 +201,7 @@ public class AddColumnTests
 		Assert.StrictEqual(typeof(long), column.Type);
 	}
 
-	private sealed class LongMigration : UpMigration
+	private sealed class LongMigration : Migration
 	{
 		public override void Up()
 		{
@@ -223,7 +223,7 @@ public class AddColumnTests
 		Assert.StrictEqual(typeof(double), column.Type);
 	}
 
-	private sealed class DoubleMigration : UpMigration
+	private sealed class DoubleMigration : Migration
 	{
 		public override void Up()
 		{
@@ -271,7 +271,7 @@ public class AddColumnTests
 		Assert.StrictEqual(2, column.Scale);
 	}
 
-	private sealed class DecimalMigration : UpMigration
+	private sealed class DecimalMigration : Migration
 	{
 		public override void Up()
 		{
@@ -293,7 +293,7 @@ public class AddColumnTests
 		Assert.StrictEqual(typeof(Guid), column.Type);
 	}
 
-	private sealed class GuidMigration : UpMigration
+	private sealed class GuidMigration : Migration
 	{
 		public override void Up()
 		{
@@ -341,7 +341,7 @@ public class AddColumnTests
 		Assert.Null(column.MaximumLength);
 	}
 
-	private sealed class StringMigration : UpMigration
+	private sealed class StringMigration : Migration
 	{
 		public override void Up()
 		{
@@ -363,7 +363,7 @@ public class AddColumnTests
 		Assert.StrictEqual(350, column.FixedLength);
 	}
 
-	private sealed class FixedStringLengthMigration : UpMigration
+	private sealed class FixedStringLengthMigration : Migration
 	{
 		public override void Up()
 		{
@@ -385,7 +385,7 @@ public class AddColumnTests
 		Assert.StrictEqual(760, column.MaximumLength);
 	}
 
-	private sealed class MaximumStringLengthMigration : UpMigration
+	private sealed class MaximumStringLengthMigration : Migration
 	{
 		public override void Up()
 		{
@@ -407,7 +407,7 @@ public class AddColumnTests
 		Assert.StrictEqual(typeof(DateOnly), column.Type);
 	}
 
-	private sealed class DateMigration : UpMigration
+	private sealed class DateMigration : Migration
 	{
 		public override void Up()
 		{
@@ -429,7 +429,7 @@ public class AddColumnTests
 		Assert.StrictEqual(typeof(TimeOnly), column.Type);
 	}
 
-	private sealed class TimeMigration : UpMigration
+	private sealed class TimeMigration : Migration
 	{
 		public override void Up()
 		{
@@ -451,7 +451,7 @@ public class AddColumnTests
 		Assert.StrictEqual(typeof(DateTime), column.Type);
 	}
 
-	private sealed class DateTimeMigration : UpMigration
+	private sealed class DateTimeMigration : Migration
 	{
 		public override void Up()
 		{
@@ -473,7 +473,7 @@ public class AddColumnTests
 		Assert.StrictEqual(typeof(DateTimeOffset), column.Type);
 	}
 
-	private sealed class DateTimeOffsetMigration : UpMigration
+	private sealed class DateTimeOffsetMigration : Migration
 	{
 		public override void Up()
 		{
@@ -495,7 +495,7 @@ public class AddColumnTests
 		Assert.True(column.Nullable);
 	}
 
-	private sealed class NullableMigration : UpMigration
+	private sealed class NullableMigration : Migration
 	{
 		public override void Up()
 		{
@@ -517,7 +517,7 @@ public class AddColumnTests
 		Assert.False(column.Nullable);
 	}
 
-	private sealed class NotNullableMigration : UpMigration
+	private sealed class NotNullableMigration : Migration
 	{
 		public override void Up()
 		{
@@ -557,7 +557,7 @@ public class AddColumnTests
 		Assert.True(column.Nullable);
 	}
 
-	private sealed class MultipleColumnsMigration : UpMigration
+	private sealed class MultipleColumnsMigration : Migration
 	{
 		public override void Up()
 		{

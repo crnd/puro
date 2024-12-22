@@ -77,7 +77,6 @@ public class ColumnGeneratorTests
 	[InlineData(typeof(TimeOnly), null, null)]
 	[InlineData(typeof(DateTime), null, null)]
 	[InlineData(typeof(DateTimeOffset), null, null)]
-
 	public void CompleteColumn(Type columnType, int? precision, int? scale)
 	{
 		var column = Substitute.For<ITableColumn>();

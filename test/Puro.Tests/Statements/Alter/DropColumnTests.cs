@@ -13,7 +13,7 @@ public class DropColumnTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullColumnNameMigration : UpMigration
+	private sealed class NullColumnNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -30,7 +30,7 @@ public class DropColumnTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyColumnNameMigration : UpMigration
+	private sealed class EmptyColumnNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -47,7 +47,7 @@ public class DropColumnTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceColumnNameMigration : UpMigration
+	private sealed class WhiteSpaceColumnNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -91,7 +91,7 @@ public class DropColumnTests
 		Assert.Equal("TestColumn", column.Name);
 	}
 
-	private sealed class SingleColumnDropMigration : UpMigration
+	private sealed class SingleColumnDropMigration : Migration
 	{
 		public override void Up()
 		{
@@ -116,7 +116,7 @@ public class DropColumnTests
 		Assert.Equal("FourthColumn", statement.ColumnChanges[3].Column.Name);
 	}
 
-	private sealed class MultipleColumnDropMigration : UpMigration
+	private sealed class MultipleColumnDropMigration : Migration
 	{
 		public override void Up()
 		{

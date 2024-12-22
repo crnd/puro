@@ -13,7 +13,7 @@ public class DropConstraintTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullConstraintNameMigration : UpMigration
+	private sealed class NullConstraintNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -29,7 +29,7 @@ public class DropConstraintTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullTableNameMigration : UpMigration
+	private sealed class NullTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -45,7 +45,7 @@ public class DropConstraintTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullTableNameWithoutSchemaMigration : UpMigration
+	private sealed class NullTableNameWithoutSchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -61,7 +61,7 @@ public class DropConstraintTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullSchemaNameMigration : UpMigration
+	private sealed class NullSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -77,7 +77,7 @@ public class DropConstraintTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyConstraintNameMigration : UpMigration
+	private sealed class EmptyConstraintNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -93,7 +93,7 @@ public class DropConstraintTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyTableNameMigration : UpMigration
+	private sealed class EmptyTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -109,7 +109,7 @@ public class DropConstraintTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyTableNameWithoutSchemaMigration : UpMigration
+	private sealed class EmptyTableNameWithoutSchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -125,7 +125,7 @@ public class DropConstraintTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptySchemaNameMigration : UpMigration
+	private sealed class EmptySchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -141,7 +141,7 @@ public class DropConstraintTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceConstraintNameMigration : UpMigration
+	private sealed class WhiteSpaceConstraintNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -157,7 +157,7 @@ public class DropConstraintTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceTableNameMigration : UpMigration
+	private sealed class WhiteSpaceTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -173,7 +173,7 @@ public class DropConstraintTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceTableNameWithoutSchemaMigration : UpMigration
+	private sealed class WhiteSpaceTableNameWithoutSchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -189,7 +189,7 @@ public class DropConstraintTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceSchemaNameMigration : UpMigration
+	private sealed class WhiteSpaceSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -208,7 +208,7 @@ public class DropConstraintTests
 		Assert.Null(statement.Table);
 	}
 
-	private sealed class NoTableNameMigration : UpMigration
+	private sealed class NoTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -249,7 +249,7 @@ public class DropConstraintTests
 		Assert.Equal("table", statement.Table);
 	}
 
-	private sealed class NoSchemaNameMigration : UpMigration
+	private sealed class NoSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -290,7 +290,7 @@ public class DropConstraintTests
 		Assert.Equal("TestSchemaName", statement.Schema);
 	}
 
-	private sealed class DropConstraintMigration : UpMigration
+	private sealed class DropConstraintMigration : Migration
 	{
 		public override void Up()
 		{
@@ -309,7 +309,7 @@ public class DropConstraintTests
 		Assert.Equal("TestTableName", statement.Table);
 	}
 
-	private sealed class DropConstraintWithoutSchemaMigration : UpMigration
+	private sealed class DropConstraintWithoutSchemaMigration : Migration
 	{
 		public override void Up()
 		{

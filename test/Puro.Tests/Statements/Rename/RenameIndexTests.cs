@@ -13,7 +13,7 @@ public class RenameIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullCurrentIndexNameMigration : UpMigration
+	private sealed class NullCurrentIndexNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -29,7 +29,7 @@ public class RenameIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullTableNameMigration : UpMigration
+	private sealed class NullTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -45,7 +45,7 @@ public class RenameIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullSchemaNameMigration : UpMigration
+	private sealed class NullSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -61,7 +61,7 @@ public class RenameIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullNewIndexNameMigration : UpMigration
+	private sealed class NullNewIndexNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -77,7 +77,7 @@ public class RenameIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyCurrentIndexNameMigration : UpMigration
+	private sealed class EmptyCurrentIndexNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -93,7 +93,7 @@ public class RenameIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyTableNameMigration : UpMigration
+	private sealed class EmptyTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -109,7 +109,7 @@ public class RenameIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptySchemaNameMigration : UpMigration
+	private sealed class EmptySchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -125,7 +125,7 @@ public class RenameIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyNewIndexNameMigration : UpMigration
+	private sealed class EmptyNewIndexNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -141,7 +141,7 @@ public class RenameIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceCurrentIndexNameMigration : UpMigration
+	private sealed class WhiteSpaceCurrentIndexNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -157,7 +157,7 @@ public class RenameIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceTableNameMigration : UpMigration
+	private sealed class WhiteSpaceTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -173,7 +173,7 @@ public class RenameIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceSchemaNameMigration : UpMigration
+	private sealed class WhiteSpaceSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -189,7 +189,7 @@ public class RenameIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceNewIndexNameMigration : UpMigration
+	private sealed class WhiteSpaceNewIndexNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -241,7 +241,7 @@ public class RenameIndexTests
 		Assert.Equal("UIX_AccountNumber", statement.NewName);
 	}
 
-	private sealed class MigrationWithSchema : UpMigration
+	private sealed class MigrationWithSchema : Migration
 	{
 		public override void Up()
 		{
@@ -293,7 +293,7 @@ public class RenameIndexTests
 		Assert.Null(statement.Schema);
 	}
 
-	private sealed class MigrationWithoutSchema : UpMigration
+	private sealed class MigrationWithoutSchema : Migration
 	{
 		public override void Up()
 		{

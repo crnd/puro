@@ -4,59 +4,41 @@ namespace Puro.SqlServer.Runner;
 
 internal static class MigrationsProcessor
 {
-	public static (List<Migration>, bool) Prepare(Type[] migrationTypes, string? fromMigration, string? toMigration)
+	public static List<Migration> Prepare(Type[] migrationTypes, string? fromMigration, string? toMigration)
 	{
 		var migrations = InstantiateMigrations(migrationTypes);
 		var fromMigrationIndex = FindMigrationIndex(fromMigration, migrations);
 		var toMigrationIndex = FindMigrationIndex(toMigration, migrations);
-		var isUpDirection = IsUpDirection(fromMigrationIndex, toMigrationIndex);
 
-		if (isUpDirection)
+		if (fromMigrationIndex is not null || toMigrationIndex is not null)
 		{
-			if (fromMigrationIndex is not null || toMigrationIndex is not null)
+			// If starting migration has been defined, increment it by one so the first migration
+			// being applied is the one after the starting migration.
+			if (fromMigrationIndex is not null)
 			{
-				// If starting migration has been defined, increment it by one so the first migration
-				// being applied is the one after the starting migration.
-				if (fromMigrationIndex is not null)
-				{
-					fromMigrationIndex++;
-				}
-
-				// If there is a to migration defined, calculate how many migrations should
-				// be included. Otherwise include all the rest of the migrations.
-				var amount = migrations.Count;
-				if (toMigrationIndex is not null)
-				{
-					amount = toMigrationIndex.Value + 1 - (fromMigrationIndex ?? 0);
-				}
-
-				migrations = migrations
-					.Skip(fromMigrationIndex ?? 0)
-					.Take(amount)
-					.ToList();
+				fromMigrationIndex++;
 			}
 
-			foreach (var migration in migrations)
+			// If there is a to migration defined, calculate how many migrations should
+			// be included. Otherwise include all the rest of the migrations.
+			var amount = migrations.Count;
+			if (toMigrationIndex is not null)
 			{
-				migration.Up();
+				amount = toMigrationIndex.Value + 1 - (fromMigrationIndex ?? 0);
 			}
-		}
-		else
-		{
-			// From and to migrations indexes are guaranteed to exist for the down direction.
+
 			migrations = migrations
-				.Skip(toMigrationIndex!.Value + 1)
-				.Take(fromMigrationIndex!.Value - toMigrationIndex!.Value)
-				.Reverse()
+				.Skip(fromMigrationIndex ?? 0)
+				.Take(amount)
 				.ToList();
-
-			foreach (var migration in migrations)
-			{
-				migration.Down();
-			}
 		}
 
-		return (migrations, isUpDirection);
+		foreach (var migration in migrations)
+		{
+			migration.Up();
+		}
+
+		return migrations;
 	}
 
 	public static List<Migration> InstantiateMigrations(Type[] migrationTypes)
@@ -89,15 +71,5 @@ internal static class MigrationsProcessor
 		}
 
 		return index;
-	}
-
-	public static bool IsUpDirection(int? fromIndex, int? toIndex)
-	{
-		if (fromIndex is null || toIndex is null)
-		{
-			return true;
-		}
-
-		return fromIndex <= toIndex;
 	}
 }

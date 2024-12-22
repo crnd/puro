@@ -14,7 +14,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullIndexNameMigration : UpMigration
+	private sealed class NullIndexNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -32,7 +32,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullTableNameMigration : UpMigration
+	private sealed class NullTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -50,7 +50,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullSchemaNameMigration : UpMigration
+	private sealed class NullSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -68,7 +68,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullColumnNameMigration : UpMigration
+	private sealed class NullColumnNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -86,7 +86,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullFilterMigration : UpMigration
+	private sealed class NullFilterMigration : Migration
 	{
 		public override void Up()
 		{
@@ -105,7 +105,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyIndexNameMigration : UpMigration
+	private sealed class EmptyIndexNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -123,7 +123,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyTableNameMigration : UpMigration
+	private sealed class EmptyTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -141,7 +141,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptySchemaNameMigration : UpMigration
+	private sealed class EmptySchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -159,7 +159,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyColumnNameMigration : UpMigration
+	private sealed class EmptyColumnNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -177,7 +177,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyFilterMigration : UpMigration
+	private sealed class EmptyFilterMigration : Migration
 	{
 		public override void Up()
 		{
@@ -196,7 +196,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceIndexNameMigration : UpMigration
+	private sealed class WhiteSpaceIndexNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -214,7 +214,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceTableNameMigration : UpMigration
+	private sealed class WhiteSpaceTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -232,7 +232,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceSchemaNameMigration : UpMigration
+	private sealed class WhiteSpaceSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -250,7 +250,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceColumnNameMigration : UpMigration
+	private sealed class WhiteSpaceColumnNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -268,7 +268,7 @@ public class CreateIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceFilterMigration : UpMigration
+	private sealed class WhiteSpaceFilterMigration : Migration
 	{
 		public override void Up()
 		{
@@ -287,7 +287,7 @@ public class CreateIndexTests
 		Assert.Throws<IndexColumnExistsException>(migration.Up);
 	}
 
-	private sealed class DuplicateColumnNameMigration : UpMigration
+	private sealed class DuplicateColumnNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -377,7 +377,7 @@ public class CreateIndexTests
 		Assert.False(statement.Unique);
 	}
 
-	private sealed class SingleColumnMigration : UpMigration
+	private sealed class SingleColumnMigration : Migration
 	{
 		public override void Up()
 		{
@@ -433,7 +433,7 @@ public class CreateIndexTests
 		Assert.Equal("[Enabled] = 1", statement.Filter);
 	}
 
-	private sealed class NoSchemaMigration : UpMigration
+	private sealed class NoSchemaMigration : Migration
 	{
 		public override void Up()
 		{
@@ -478,7 +478,7 @@ public class CreateIndexTests
 		Assert.True(statement.Unique);
 	}
 
-	private sealed class MultipleColumnMigration : UpMigration
+	private sealed class MultipleColumnMigration : Migration
 	{
 		public override void Up()
 		{

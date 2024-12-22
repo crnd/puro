@@ -4,9 +4,6 @@ using Puro.Statements.Create.ForeignKey;
 using Puro.Statements.Create.Index;
 using Puro.Statements.Create.PrimaryKey;
 using Puro.Statements.Create.Table;
-using Puro.Statements.Drop.Constraint;
-using Puro.Statements.Drop.Index;
-using Puro.Statements.Drop.Table;
 using Puro.Statements.Sql;
 using Xunit;
 
@@ -73,24 +70,10 @@ public class MigrationsProcessorTests
 		Assert.StrictEqual(2, index);
 	}
 
-	[Theory]
-	[InlineData(null, null, true)]
-	[InlineData(null, 10, true)]
-	[InlineData(2, null, true)]
-	[InlineData(2, 10, true)]
-	[InlineData(5, 5, true)]
-	[InlineData(5, 3, false)]
-	internal void MigrationDirectionTests(int? fromIndex, int? toIndex, bool expectedDirectionIsUp)
-	{
-		var isUpDirection = MigrationsProcessor.IsUpDirection(fromIndex, toIndex);
-
-		Assert.StrictEqual(expectedDirectionIsUp, isUpDirection);
-	}
-
 	[Fact]
 	public void PrepareNoMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare([], null, null);
+		var migrations = MigrationsProcessor.Prepare([], null, null);
 
 		Assert.Empty(migrations);
 	}
@@ -98,7 +81,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void AllMigrationsReturnedInOrder()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, null, null);
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, null, null);
 
 		Assert.StrictEqual(4, migrations.Count);
 		Assert.Equal("1_FirstMigration", migrations[0].Name);
@@ -110,7 +93,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromFirstMigrationReturnsCorrectMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", null);
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", null);
 
 		Assert.StrictEqual(3, migrations.Count);
 		Assert.Equal("2_SecondMigration", migrations[0].Name);
@@ -121,7 +104,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromSecondMigrationReturnsCorrectMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", null);
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", null);
 
 		Assert.StrictEqual(2, migrations.Count);
 		Assert.Equal("3_ThirdMigration", migrations[0].Name);
@@ -131,7 +114,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromThirdMigrationReturnsCorrectMigration()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", null);
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", null);
 
 		var migration = Assert.Single(migrations);
 		Assert.Equal("4_FourthMigration", migration.Name);
@@ -140,7 +123,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromFourthMigrationReturnsNoMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "4_FourthMigration", null);
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "4_FourthMigration", null);
 
 		Assert.Empty(migrations);
 	}
@@ -148,7 +131,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void ToFirstMigrationReturnsCorrectMigration()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, null, "1_FirstMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, null, "1_FirstMigration");
 
 		var migration = Assert.Single(migrations);
 		Assert.Equal("1_FirstMigration", migration.Name);
@@ -157,7 +140,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void ToSecondMigrationReturnsCorrectMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, null, "2_SecondMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, null, "2_SecondMigration");
 
 		Assert.StrictEqual(2, migrations.Count);
 		Assert.Equal("1_FirstMigration", migrations[0].Name);
@@ -167,7 +150,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void ToThirdMigrationReturnsCorrectMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, null, "3_ThirdMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, null, "3_ThirdMigration");
 
 		Assert.StrictEqual(3, migrations.Count);
 		Assert.Equal("1_FirstMigration", migrations[0].Name);
@@ -178,7 +161,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void ToFourthMigrationReturnsCorrectMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, null, "4_FourthMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, null, "4_FourthMigration");
 
 		Assert.StrictEqual(4, migrations.Count);
 		Assert.Equal("1_FirstMigration", migrations[0].Name);
@@ -190,7 +173,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromFirstToFirstMigrationReturnsNoMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", "1_FirstMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", "1_FirstMigration");
 
 		Assert.Empty(migrations);
 	}
@@ -198,7 +181,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromFirstToSecondMigrationReturnsCorrectMigration()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", "2_SecondMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", "2_SecondMigration");
 
 		var migration = Assert.Single(migrations);
 		Assert.Equal("2_SecondMigration", migration.Name);
@@ -207,7 +190,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromFirstToThirdMigrationReturnsCorrectMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", "3_ThirdMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", "3_ThirdMigration");
 
 		Assert.StrictEqual(2, migrations.Count);
 		Assert.Equal("2_SecondMigration", migrations[0].Name);
@@ -217,7 +200,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromFirstToFourthMigrationReturnsCorrectMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", "4_FourthMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", "4_FourthMigration");
 
 		Assert.StrictEqual(3, migrations.Count);
 		Assert.Equal("2_SecondMigration", migrations[0].Name);
@@ -226,18 +209,17 @@ public class MigrationsProcessorTests
 	}
 
 	[Fact]
-	public void FromSecondToFirstMigrationReturnsCorrectMigration()
+	public void FromSecondToFirstMigrationReturnsNoMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", "1_FirstMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", "1_FirstMigration");
 
-		var migration = Assert.Single(migrations);
-		Assert.Equal("2_SecondMigration", migration.Name);
+		Assert.Empty(migrations);
 	}
 
 	[Fact]
 	public void FromSecondToSecondMigrationReturnsNoMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", "2_SecondMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", "2_SecondMigration");
 
 		Assert.Empty(migrations);
 	}
@@ -245,7 +227,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromSecondToThirdMigrationReturnsCorrectMigration()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", "3_ThirdMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", "3_ThirdMigration");
 
 		var migration = Assert.Single(migrations);
 		Assert.Equal("3_ThirdMigration", migration.Name);
@@ -254,7 +236,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromSecondToFourthMigrationReturnsCorrectMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", "4_FourthMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", "4_FourthMigration");
 
 		Assert.StrictEqual(2, migrations.Count);
 		Assert.Equal("3_ThirdMigration", migrations[0].Name);
@@ -262,28 +244,25 @@ public class MigrationsProcessorTests
 	}
 
 	[Fact]
-	public void FromThirdToFirstMigrationReturnsCorrectMigrations()
+	public void FromThirdToFirstMigrationReturnsNoMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", "1_FirstMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", "1_FirstMigration");
 
-		Assert.StrictEqual(2, migrations.Count);
-		Assert.Equal("3_ThirdMigration", migrations[0].Name);
-		Assert.Equal("2_SecondMigration", migrations[1].Name);
+		Assert.Empty(migrations);
 	}
 
 	[Fact]
-	public void FromThirdToSecondMigrationReturnsCorrectMigration()
+	public void FromThirdToSecondMigrationReturnsNoMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", "2_SecondMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", "2_SecondMigration");
 
-		var migration = Assert.Single(migrations);
-		Assert.Equal("3_ThirdMigration", migration.Name);
+		Assert.Empty(migrations);
 	}
 
 	[Fact]
 	public void FromThirdToThirdMigrationReturnsNoMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", "3_ThirdMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", "3_ThirdMigration");
 
 		Assert.Empty(migrations);
 	}
@@ -291,46 +270,40 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromThirdToFourthMigrationReturnsCorrectMigration()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", "4_FourthMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", "4_FourthMigration");
 
 		var migration = Assert.Single(migrations);
 		Assert.Equal("4_FourthMigration", migration.Name);
 	}
 
 	[Fact]
-	public void FromFourthToFirstMigrationReturnsCorrectMigrations()
+	public void FromFourthToFirstMigrationReturnsNoMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "4_FourthMigration", "1_FirstMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "4_FourthMigration", "1_FirstMigration");
 
-		Assert.StrictEqual(3, migrations.Count);
-		Assert.Equal("4_FourthMigration", migrations[0].Name);
-		Assert.Equal("3_ThirdMigration", migrations[1].Name);
-		Assert.Equal("2_SecondMigration", migrations[2].Name);
+		Assert.Empty(migrations);
 	}
 
 	[Fact]
-	public void FromFourthToSecondMigrationReturnsCorrectMigrations()
+	public void FromFourthToSecondMigrationReturnsNoMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "4_FourthMigration", "2_SecondMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "4_FourthMigration", "2_SecondMigration");
 
-		Assert.StrictEqual(2, migrations.Count);
-		Assert.Equal("4_FourthMigration", migrations[0].Name);
-		Assert.Equal("3_ThirdMigration", migrations[1].Name);
+		Assert.Empty(migrations);
 	}
 
 	[Fact]
-	public void FromFourthToThirdMigrationReturnsCorrectMigration()
+	public void FromFourthToThirdMigrationReturnsNoMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "4_FourthMigration", "3_ThirdMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "4_FourthMigration", "3_ThirdMigration");
 
-		var migration = Assert.Single(migrations);
-		Assert.Equal("4_FourthMigration", migration.Name);
+		Assert.Empty(migrations);
 	}
 
 	[Fact]
 	public void FromFourthToFourthMigrationReturnsNoMigrations()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "4_FourthMigration", "4_FourthMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "4_FourthMigration", "4_FourthMigration");
 
 		Assert.Empty(migrations);
 	}
@@ -338,7 +311,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromFirstMigrationReturnsCorrectMigrationStatements()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", null);
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", null);
 
 		Assert.StrictEqual(3, migrations.Count);
 		var statement = Assert.Single(migrations[0].Statements);
@@ -357,7 +330,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromSecondMigrationReturnsCorrectMigrationStatements()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", null);
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", null);
 
 		Assert.StrictEqual(2, migrations.Count);
 		Assert.StrictEqual(6, migrations[0].Statements.Count);
@@ -374,7 +347,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromThirdMigrationReturnsCorrectMigrationStatements()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", null);
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", null);
 
 		var migration = Assert.Single(migrations);
 		var statement = Assert.Single(migration.Statements);
@@ -384,7 +357,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void ToFirstMigrationReturnsCorrectMigrationStatements()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, null, "1_FirstMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, null, "1_FirstMigration");
 
 		var migration = Assert.Single(migrations);
 		Assert.StrictEqual(2, migration.Statements.Count);
@@ -395,7 +368,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void ToSecondMigrationReturnsCorrectMigrationStatements()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, null, "2_SecondMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, null, "2_SecondMigration");
 
 		Assert.StrictEqual(2, migrations.Count);
 		Assert.StrictEqual(2, migrations[0].Statements.Count);
@@ -408,7 +381,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void ToThirdMigrationReturnsCorrectMigrationStatements()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, null, "3_ThirdMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, null, "3_ThirdMigration");
 
 		Assert.StrictEqual(3, migrations.Count);
 		Assert.StrictEqual(2, migrations[0].Statements.Count);
@@ -428,7 +401,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void ToFourthMigrationReturnsCorrectMigrationStatements()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, null, "4_FourthMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, null, "4_FourthMigration");
 
 		Assert.StrictEqual(4, migrations.Count);
 		Assert.StrictEqual(2, migrations[0].Statements.Count);
@@ -448,9 +421,9 @@ public class MigrationsProcessorTests
 	}
 
 	[Fact]
-	public void FromFirstToSecondMigrationReturnsCorrectMigrationStatements()
+	public void FromFirstToSecondMigrationReturnsCorrectMigrationStatement()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", "2_SecondMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", "2_SecondMigration");
 
 		var migration = Assert.Single(migrations);
 		var statement = Assert.Single(migration.Statements);
@@ -460,7 +433,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromFirstToThirdMigrationReturnsCorrectMigrationStatements()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", "3_ThirdMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", "3_ThirdMigration");
 
 		Assert.StrictEqual(2, migrations.Count);
 		var statement = Assert.Single(migrations[0].Statements);
@@ -477,7 +450,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromFirstToFourthMigrationReturnsCorrectMigrationStatements()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", "4_FourthMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "1_FirstMigration", "4_FourthMigration");
 
 		Assert.StrictEqual(3, migrations.Count);
 		var statement = Assert.Single(migrations[0].Statements);
@@ -494,18 +467,9 @@ public class MigrationsProcessorTests
 	}
 
 	[Fact]
-	public void FromSecondToFirstMigrationReturnsCorrectMigrationStatements()
-	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", "1_FirstMigration");
-
-		var migration = Assert.Single(migrations);
-		Assert.Empty(migration.Statements);
-	}
-
-	[Fact]
 	public void FromSecondToThirdMigrationReturnsCorrectMigrationStatements()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", "3_ThirdMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", "3_ThirdMigration");
 
 		var migration = Assert.Single(migrations);
 		Assert.StrictEqual(6, migration.Statements.Count);
@@ -520,7 +484,7 @@ public class MigrationsProcessorTests
 	[Fact]
 	public void FromSecondToFourthMigrationReturnsCorrectMigrationStatements()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", "4_FourthMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "2_SecondMigration", "4_FourthMigration");
 
 		Assert.StrictEqual(2, migrations.Count);
 		Assert.StrictEqual(6, migrations[0].Statements.Count);
@@ -535,87 +499,18 @@ public class MigrationsProcessorTests
 	}
 
 	[Fact]
-	public void FromThirdToFirstMigrationReturnsCorrectMigrationStatements()
-	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", "1_FirstMigration");
-
-		Assert.StrictEqual(2, migrations.Count);
-		Assert.StrictEqual(3, migrations[0].Statements.Count);
-		Assert.IsAssignableFrom<IDropIndexMigrationStatement>(migrations[0].Statements[0]);
-		Assert.IsAssignableFrom<IDropConstraintMigrationStatement>(migrations[0].Statements[1]);
-		Assert.IsAssignableFrom<IDropTableMigrationStatement>(migrations[0].Statements[2]);
-		Assert.Empty(migrations[1].Statements);
-	}
-
-	[Fact]
-	public void FromThirdToSecondMigrationReturnsCorrectMigrationStatements()
-	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", "2_SecondMigration");
-
-		var migration = Assert.Single(migrations);
-		Assert.StrictEqual(3, migration.Statements.Count);
-		Assert.IsAssignableFrom<IDropIndexMigrationStatement>(migration.Statements[0]);
-		Assert.IsAssignableFrom<IDropConstraintMigrationStatement>(migration.Statements[1]);
-		Assert.IsAssignableFrom<IDropTableMigrationStatement>(migration.Statements[2]);
-	}
-
-	[Fact]
 	public void FromThirdToFourthMigrationReturnsCorrectMigrationStatements()
 	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", "4_FourthMigration");
+		var migrations = MigrationsProcessor.Prepare(migrationTypes, "3_ThirdMigration", "4_FourthMigration");
 
 		var migration = Assert.Single(migrations);
 		var statement = Assert.Single(migration.Statements);
 		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(statement);
 	}
 
-	[Fact]
-	public void FromFourthToFirstMigrationReturnsCorrectMigrationStatements()
-	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "4_FourthMigration", "1_FirstMigration");
-
-		Assert.StrictEqual(3, migrations.Count);
-		var statement = Assert.Single(migrations[0].Statements);
-		Assert.IsAssignableFrom<IDropIndexMigrationStatement>(statement);
-		Assert.StrictEqual(3, migrations[1].Statements.Count);
-		Assert.IsAssignableFrom<IDropIndexMigrationStatement>(migrations[1].Statements[0]);
-		Assert.IsAssignableFrom<IDropConstraintMigrationStatement>(migrations[1].Statements[1]);
-		Assert.IsAssignableFrom<IDropTableMigrationStatement>(migrations[1].Statements[2]);
-		Assert.Empty(migrations[2].Statements);
-	}
-
-	[Fact]
-	public void FromFourthToSecondMigrationReturnsCorrectMigrationStatements()
-	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "4_FourthMigration", "2_SecondMigration");
-
-		Assert.StrictEqual(2, migrations.Count);
-		var statement = Assert.Single(migrations[0].Statements);
-		Assert.IsAssignableFrom<IDropIndexMigrationStatement>(statement);
-		Assert.StrictEqual(3, migrations[1].Statements.Count);
-		Assert.IsAssignableFrom<IDropIndexMigrationStatement>(migrations[1].Statements[0]);
-		Assert.IsAssignableFrom<IDropConstraintMigrationStatement>(migrations[1].Statements[1]);
-		Assert.IsAssignableFrom<IDropTableMigrationStatement>(migrations[1].Statements[2]);
-	}
-
-	[Fact]
-	public void FromFourthToThirdMigrationReturnsCorrectMigrationStatements()
-	{
-		var (migrations, _) = MigrationsProcessor.Prepare(migrationTypes, "4_FourthMigration", "3_ThirdMigration");
-
-		var migration = Assert.Single(migrations);
-		var statement = Assert.Single(migration.Statements);
-		Assert.IsAssignableFrom<IDropIndexMigrationStatement>(statement);
-	}
-
 	[MigrationName("1_FirstMigration")]
 	private sealed class FirstMigration : Migration
 	{
-		public override void Down()
-		{
-			Drop.Table("Account");
-		}
-
 		public override void Up()
 		{
 			Create.Table("Account")
@@ -629,7 +524,7 @@ public class MigrationsProcessorTests
 	}
 
 	[MigrationName("2_SecondMigration")]
-	private sealed class SecondMigration : UpMigration
+	private sealed class SecondMigration : Migration
 	{
 		public override void Up()
 		{
@@ -643,17 +538,6 @@ public class MigrationsProcessorTests
 	[MigrationName("3_ThirdMigration")]
 	private sealed class ThirdMigration : Migration
 	{
-		public override void Down()
-		{
-			Drop.Index("IX_Account_CustomerId")
-				.FromTable("Account");
-
-			Drop.Constraint("FK_Account_Customer")
-				.FromTable("Account");
-
-			Drop.Table("Customer");
-		}
-
 		public override void Up()
 		{
 			Create.Table("Customer")
@@ -689,11 +573,6 @@ public class MigrationsProcessorTests
 	[MigrationName("4_FourthMigration")]
 	private sealed class FourthMigration : Migration
 	{
-		public override void Down()
-		{
-			Drop.Index("UIX_Account_Number");
-		}
-
 		public override void Up()
 		{
 			Create.UniqueIndex("UIX_Account_Number")

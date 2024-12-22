@@ -13,7 +13,7 @@ public class DropIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullIndexNameMigration : UpMigration
+	private sealed class NullIndexNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -29,7 +29,7 @@ public class DropIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullTableNameMigration : UpMigration
+	private sealed class NullTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -45,7 +45,7 @@ public class DropIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullSchemaNameMigration : UpMigration
+	private sealed class NullSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -61,7 +61,7 @@ public class DropIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyIndexNameMigration : UpMigration
+	private sealed class EmptyIndexNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -77,7 +77,7 @@ public class DropIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyTableNameMigration : UpMigration
+	private sealed class EmptyTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -93,7 +93,7 @@ public class DropIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptySchemaNameMigration : UpMigration
+	private sealed class EmptySchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -109,7 +109,7 @@ public class DropIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceIndexNameMigration : UpMigration
+	private sealed class WhiteSpaceIndexNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -125,7 +125,7 @@ public class DropIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceTableNameMigration : UpMigration
+	private sealed class WhiteSpaceTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -141,7 +141,7 @@ public class DropIndexTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceSchemaNameMigration : UpMigration
+	private sealed class WhiteSpaceSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -160,7 +160,7 @@ public class DropIndexTests
 		Assert.Null(statement.Table);
 	}
 
-	private sealed class NoTableNameMigration : UpMigration
+	private sealed class NoTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -201,7 +201,7 @@ public class DropIndexTests
 		Assert.Equal("TestSchemaName", statement.Schema);
 	}
 
-	private sealed class DropIndexMigration : UpMigration
+	private sealed class DropIndexMigration : Migration
 	{
 		public override void Up()
 		{
@@ -242,7 +242,7 @@ public class DropIndexTests
 		Assert.Null(statement.Schema);
 	}
 
-	private sealed class DropIndexNoSchemaMigration : UpMigration
+	private sealed class DropIndexNoSchemaMigration : Migration
 	{
 		public override void Up()
 		{

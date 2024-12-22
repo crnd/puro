@@ -13,7 +13,7 @@ public class RenameTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullCurrentTableNameMigration : UpMigration
+	private sealed class NullCurrentTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -29,7 +29,7 @@ public class RenameTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullSchemaNameMigration : UpMigration
+	private sealed class NullSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -45,7 +45,7 @@ public class RenameTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullNewNameMigration : UpMigration
+	private sealed class NullNewNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -61,7 +61,7 @@ public class RenameTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyCurrentTableNameMigration : UpMigration
+	private sealed class EmptyCurrentTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -77,7 +77,7 @@ public class RenameTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptySchemaNameMigration : UpMigration
+	private sealed class EmptySchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -93,7 +93,7 @@ public class RenameTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyNewNameMigration : UpMigration
+	private sealed class EmptyNewNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -109,7 +109,7 @@ public class RenameTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceCurrentTableNameMigration : UpMigration
+	private sealed class WhiteSpaceCurrentTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -125,7 +125,7 @@ public class RenameTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceSchemaNameMigration : UpMigration
+	private sealed class WhiteSpaceSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -141,7 +141,7 @@ public class RenameTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceNewNameMigration : UpMigration
+	private sealed class WhiteSpaceNewNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -182,7 +182,7 @@ public class RenameTableTests
 		Assert.Equal("Vehicle", statement.NewName);
 	}
 
-	private sealed class RenameTableMigration : UpMigration
+	private sealed class RenameTableMigration : Migration
 	{
 		public override void Up()
 		{
@@ -223,7 +223,7 @@ public class RenameTableTests
 		Assert.Null(statement.Schema);
 	}
 
-	private sealed class SchemalessRenameTableMigration : UpMigration
+	private sealed class SchemalessRenameTableMigration : Migration
 	{
 		public override void Up()
 		{

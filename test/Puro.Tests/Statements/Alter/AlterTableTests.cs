@@ -13,7 +13,7 @@ public class AlterTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullTableNameMigration : UpMigration
+	private sealed class NullTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -30,7 +30,7 @@ public class AlterTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullSchemaNameMigration : UpMigration
+	private sealed class NullSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -47,7 +47,7 @@ public class AlterTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyTableNameMigration : UpMigration
+	private sealed class EmptyTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -64,7 +64,7 @@ public class AlterTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptySchemaNameMigration : UpMigration
+	private sealed class EmptySchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -81,7 +81,7 @@ public class AlterTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceTableNameMigration : UpMigration
+	private sealed class WhiteSpaceTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -98,7 +98,7 @@ public class AlterTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceSchemaNameMigration : UpMigration
+	private sealed class WhiteSpaceSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -140,7 +140,7 @@ public class AlterTableTests
 		Assert.Equal("TestSchema", statement.Schema);
 	}
 
-	private sealed class NoColumnsMigration : UpMigration
+	private sealed class NoColumnsMigration : Migration
 	{
 		public override void Up()
 		{
@@ -181,7 +181,7 @@ public class AlterTableTests
 		Assert.Equal("LastUpdated", column.Name);
 	}
 
-	private sealed class MultipleColumnsMigration : UpMigration
+	private sealed class MultipleColumnsMigration : Migration
 	{
 		public override void Up()
 		{
@@ -225,7 +225,7 @@ public class AlterTableTests
 		Assert.Equal("AccountVersion", column.Name);
 	}
 
-	private sealed class NoSchemaMigration : UpMigration
+	private sealed class NoSchemaMigration : Migration
 	{
 		public override void Up()
 		{

@@ -13,7 +13,7 @@ public class DropTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullTableNameMigration : UpMigration
+	private sealed class NullTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -29,7 +29,7 @@ public class DropTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullSchemaNameMigration : UpMigration
+	private sealed class NullSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -45,7 +45,7 @@ public class DropTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyTableNameMigration : UpMigration
+	private sealed class EmptyTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -61,7 +61,7 @@ public class DropTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptySchemaNameMigration : UpMigration
+	private sealed class EmptySchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -77,7 +77,7 @@ public class DropTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceTableNameMigration : UpMigration
+	private sealed class WhiteSpaceTableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -93,7 +93,7 @@ public class DropTableTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceSchemaNameMigration : UpMigration
+	private sealed class WhiteSpaceSchemaNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -123,7 +123,7 @@ public class DropTableTests
 		Assert.Null(statement.Schema);
 	}
 
-	private sealed class TableNameMigration : UpMigration
+	private sealed class TableNameMigration : Migration
 	{
 		public override void Up()
 		{
@@ -153,7 +153,7 @@ public class DropTableTests
 		Assert.Equal("TestTable", statement.Table);
 	}
 
-	private sealed class SchemaMigration : UpMigration
+	private sealed class SchemaMigration : Migration
 	{
 		public override void Up()
 		{

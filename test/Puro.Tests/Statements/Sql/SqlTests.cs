@@ -13,7 +13,7 @@ public class SqlTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class NullMigration : UpMigration
+	private sealed class NullMigration : Migration
 	{
 		public override void Up()
 		{
@@ -29,7 +29,7 @@ public class SqlTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class EmptyMigration : UpMigration
+	private sealed class EmptyMigration : Migration
 	{
 		public override void Up()
 		{
@@ -45,7 +45,7 @@ public class SqlTests
 		Assert.Throws<ArgumentNullException>(migration.Up);
 	}
 
-	private sealed class WhiteSpaceMigration : UpMigration
+	private sealed class WhiteSpaceMigration : Migration
 	{
 		public override void Up()
 		{
@@ -64,7 +64,7 @@ public class SqlTests
 		Assert.Equal("SELECT [CustomerId] FROM [Banking].[Account];", statement.Sql);
 	}
 
-	private sealed class SqlMigration : UpMigration
+	private sealed class SqlMigration : Migration
 	{
 		public override void Up()
 		{
