@@ -315,16 +315,16 @@ public class MigrationsProcessorTests
 
 		Assert.StrictEqual(3, migrations.Count);
 		var statement = Assert.Single(migrations[0].Statements);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(statement);
+		Assert.IsType<ISqlMigrationStatement>(statement, false);
 		Assert.StrictEqual(6, migrations[1].Statements.Count);
-		Assert.IsAssignableFrom<ICreateTableMigrationStatement>(migrations[1].Statements[0]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migrations[1].Statements[1]);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(migrations[1].Statements[2]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migrations[1].Statements[3]);
-		Assert.IsAssignableFrom<ICreateForeignKeyMigrationStatement>(migrations[1].Statements[4]);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(migrations[1].Statements[5]);
+		Assert.IsType<ICreateTableMigrationStatement>(migrations[1].Statements[0], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migrations[1].Statements[1], false);
+		Assert.IsType<ISqlMigrationStatement>(migrations[1].Statements[2], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migrations[1].Statements[3], false);
+		Assert.IsType<ICreateForeignKeyMigrationStatement>(migrations[1].Statements[4], false);
+		Assert.IsType<ICreateIndexMigrationStatement>(migrations[1].Statements[5], false);
 		statement = Assert.Single(migrations[2].Statements);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(statement);
+		Assert.IsType<ICreateIndexMigrationStatement>(statement, false);
 	}
 
 	[Fact]
@@ -334,14 +334,14 @@ public class MigrationsProcessorTests
 
 		Assert.StrictEqual(2, migrations.Count);
 		Assert.StrictEqual(6, migrations[0].Statements.Count);
-		Assert.IsAssignableFrom<ICreateTableMigrationStatement>(migrations[0].Statements[0]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migrations[0].Statements[1]);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(migrations[0].Statements[2]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migrations[0].Statements[3]);
-		Assert.IsAssignableFrom<ICreateForeignKeyMigrationStatement>(migrations[0].Statements[4]);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(migrations[0].Statements[5]);
+		Assert.IsType<ICreateTableMigrationStatement>(migrations[0].Statements[0], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migrations[0].Statements[1], false);
+		Assert.IsType<ISqlMigrationStatement>(migrations[0].Statements[2], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migrations[0].Statements[3], false);
+		Assert.IsType<ICreateForeignKeyMigrationStatement>(migrations[0].Statements[4], false);
+		Assert.IsType<ICreateIndexMigrationStatement>(migrations[0].Statements[5], false);
 		var statement = Assert.Single(migrations[1].Statements);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(statement);
+		Assert.IsType<ICreateIndexMigrationStatement>(statement, false);
 	}
 
 	[Fact]
@@ -351,7 +351,7 @@ public class MigrationsProcessorTests
 
 		var migration = Assert.Single(migrations);
 		var statement = Assert.Single(migration.Statements);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(statement);
+		Assert.IsType<ICreateIndexMigrationStatement>(statement, false);
 	}
 
 	[Fact]
@@ -361,8 +361,8 @@ public class MigrationsProcessorTests
 
 		var migration = Assert.Single(migrations);
 		Assert.StrictEqual(2, migration.Statements.Count);
-		Assert.IsAssignableFrom<ICreateTableMigrationStatement>(migration.Statements[0]);
-		Assert.IsAssignableFrom<ICreatePrimaryKeyMigrationStatement>(migration.Statements[1]);
+		Assert.IsType<ICreateTableMigrationStatement>(migration.Statements[0], false);
+		Assert.IsType<ICreatePrimaryKeyMigrationStatement>(migration.Statements[1], false);
 	}
 
 	[Fact]
@@ -372,10 +372,10 @@ public class MigrationsProcessorTests
 
 		Assert.StrictEqual(2, migrations.Count);
 		Assert.StrictEqual(2, migrations[0].Statements.Count);
-		Assert.IsAssignableFrom<ICreateTableMigrationStatement>(migrations[0].Statements[0]);
-		Assert.IsAssignableFrom<ICreatePrimaryKeyMigrationStatement>(migrations[0].Statements[1]);
+		Assert.IsType<ICreateTableMigrationStatement>(migrations[0].Statements[0], false);
+		Assert.IsType<ICreatePrimaryKeyMigrationStatement>(migrations[0].Statements[1], false);
 		var statement = Assert.Single(migrations[1].Statements);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(statement);
+		Assert.IsType<ISqlMigrationStatement>(statement, false);
 	}
 
 	[Fact]
@@ -385,17 +385,17 @@ public class MigrationsProcessorTests
 
 		Assert.StrictEqual(3, migrations.Count);
 		Assert.StrictEqual(2, migrations[0].Statements.Count);
-		Assert.IsAssignableFrom<ICreateTableMigrationStatement>(migrations[0].Statements[0]);
-		Assert.IsAssignableFrom<ICreatePrimaryKeyMigrationStatement>(migrations[0].Statements[1]);
+		Assert.IsType<ICreateTableMigrationStatement>(migrations[0].Statements[0], false);
+		Assert.IsType<ICreatePrimaryKeyMigrationStatement>(migrations[0].Statements[1], false);
 		var statement = Assert.Single(migrations[1].Statements);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(statement);
+		Assert.IsType<ISqlMigrationStatement>(statement, false);
 		Assert.StrictEqual(6, migrations[2].Statements.Count);
-		Assert.IsAssignableFrom<ICreateTableMigrationStatement>(migrations[2].Statements[0]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migrations[2].Statements[1]);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(migrations[2].Statements[2]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migrations[2].Statements[3]);
-		Assert.IsAssignableFrom<ICreateForeignKeyMigrationStatement>(migrations[2].Statements[4]);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(migrations[2].Statements[5]);
+		Assert.IsType<ICreateTableMigrationStatement>(migrations[2].Statements[0], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migrations[2].Statements[1], false);
+		Assert.IsType<ISqlMigrationStatement>(migrations[2].Statements[2], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migrations[2].Statements[3], false);
+		Assert.IsType<ICreateForeignKeyMigrationStatement>(migrations[2].Statements[4], false);
+		Assert.IsType<ICreateIndexMigrationStatement>(migrations[2].Statements[5], false);
 	}
 
 	[Fact]
@@ -405,19 +405,19 @@ public class MigrationsProcessorTests
 
 		Assert.StrictEqual(4, migrations.Count);
 		Assert.StrictEqual(2, migrations[0].Statements.Count);
-		Assert.IsAssignableFrom<ICreateTableMigrationStatement>(migrations[0].Statements[0]);
-		Assert.IsAssignableFrom<ICreatePrimaryKeyMigrationStatement>(migrations[0].Statements[1]);
+		Assert.IsType<ICreateTableMigrationStatement>(migrations[0].Statements[0], false);
+		Assert.IsType<ICreatePrimaryKeyMigrationStatement>(migrations[0].Statements[1], false);
 		var statement = Assert.Single(migrations[1].Statements);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(statement);
+		Assert.IsType<ISqlMigrationStatement>(statement, false);
 		Assert.StrictEqual(6, migrations[2].Statements.Count);
-		Assert.IsAssignableFrom<ICreateTableMigrationStatement>(migrations[2].Statements[0]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migrations[2].Statements[1]);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(migrations[2].Statements[2]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migrations[2].Statements[3]);
-		Assert.IsAssignableFrom<ICreateForeignKeyMigrationStatement>(migrations[2].Statements[4]);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(migrations[2].Statements[5]);
+		Assert.IsType<ICreateTableMigrationStatement>(migrations[2].Statements[0], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migrations[2].Statements[1], false);
+		Assert.IsType<ISqlMigrationStatement>(migrations[2].Statements[2], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migrations[2].Statements[3], false);
+		Assert.IsType<ICreateForeignKeyMigrationStatement>(migrations[2].Statements[4], false);
+		Assert.IsType<ICreateIndexMigrationStatement>(migrations[2].Statements[5], false);
 		statement = Assert.Single(migrations[3].Statements);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(statement);
+		Assert.IsType<ICreateIndexMigrationStatement>(statement, false);
 	}
 
 	[Fact]
@@ -427,7 +427,7 @@ public class MigrationsProcessorTests
 
 		var migration = Assert.Single(migrations);
 		var statement = Assert.Single(migration.Statements);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(statement);
+		Assert.IsType<ISqlMigrationStatement>(statement, false);
 	}
 
 	[Fact]
@@ -437,14 +437,14 @@ public class MigrationsProcessorTests
 
 		Assert.StrictEqual(2, migrations.Count);
 		var statement = Assert.Single(migrations[0].Statements);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(statement);
+		Assert.IsType<ISqlMigrationStatement>(statement, false);
 		Assert.StrictEqual(6, migrations[1].Statements.Count);
-		Assert.IsAssignableFrom<ICreateTableMigrationStatement>(migrations[1].Statements[0]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migrations[1].Statements[1]);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(migrations[1].Statements[2]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migrations[1].Statements[3]);
-		Assert.IsAssignableFrom<ICreateForeignKeyMigrationStatement>(migrations[1].Statements[4]);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(migrations[1].Statements[5]);
+		Assert.IsType<ICreateTableMigrationStatement>(migrations[1].Statements[0], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migrations[1].Statements[1], false);
+		Assert.IsType<ISqlMigrationStatement>(migrations[1].Statements[2], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migrations[1].Statements[3], false);
+		Assert.IsType<ICreateForeignKeyMigrationStatement>(migrations[1].Statements[4], false);
+		Assert.IsType<ICreateIndexMigrationStatement>(migrations[1].Statements[5], false);
 	}
 
 	[Fact]
@@ -454,16 +454,16 @@ public class MigrationsProcessorTests
 
 		Assert.StrictEqual(3, migrations.Count);
 		var statement = Assert.Single(migrations[0].Statements);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(statement);
+		Assert.IsType<ISqlMigrationStatement>(statement, false);
 		Assert.StrictEqual(6, migrations[1].Statements.Count);
-		Assert.IsAssignableFrom<ICreateTableMigrationStatement>(migrations[1].Statements[0]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migrations[1].Statements[1]);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(migrations[1].Statements[2]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migrations[1].Statements[3]);
-		Assert.IsAssignableFrom<ICreateForeignKeyMigrationStatement>(migrations[1].Statements[4]);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(migrations[1].Statements[5]);
+		Assert.IsType<ICreateTableMigrationStatement>(migrations[1].Statements[0], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migrations[1].Statements[1], false);
+		Assert.IsType<ISqlMigrationStatement>(migrations[1].Statements[2], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migrations[1].Statements[3], false);
+		Assert.IsType<ICreateForeignKeyMigrationStatement>(migrations[1].Statements[4], false);
+		Assert.IsType<ICreateIndexMigrationStatement>(migrations[1].Statements[5], false);
 		statement = Assert.Single(migrations[2].Statements);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(statement);
+		Assert.IsType<ICreateIndexMigrationStatement>(statement, false);
 	}
 
 	[Fact]
@@ -473,12 +473,12 @@ public class MigrationsProcessorTests
 
 		var migration = Assert.Single(migrations);
 		Assert.StrictEqual(6, migration.Statements.Count);
-		Assert.IsAssignableFrom<ICreateTableMigrationStatement>(migration.Statements[0]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migration.Statements[1]);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(migration.Statements[2]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migration.Statements[3]);
-		Assert.IsAssignableFrom<ICreateForeignKeyMigrationStatement>(migration.Statements[4]);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(migration.Statements[5]);
+		Assert.IsType<ICreateTableMigrationStatement>(migration.Statements[0], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migration.Statements[1], false);
+		Assert.IsType<ISqlMigrationStatement>(migration.Statements[2], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migration.Statements[3], false);
+		Assert.IsType<ICreateForeignKeyMigrationStatement>(migration.Statements[4], false);
+		Assert.IsType<ICreateIndexMigrationStatement>(migration.Statements[5], false);
 	}
 
 	[Fact]
@@ -488,14 +488,14 @@ public class MigrationsProcessorTests
 
 		Assert.StrictEqual(2, migrations.Count);
 		Assert.StrictEqual(6, migrations[0].Statements.Count);
-		Assert.IsAssignableFrom<ICreateTableMigrationStatement>(migrations[0].Statements[0]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migrations[0].Statements[1]);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(migrations[0].Statements[2]);
-		Assert.IsAssignableFrom<IAlterTableMigrationStatement>(migrations[0].Statements[3]);
-		Assert.IsAssignableFrom<ICreateForeignKeyMigrationStatement>(migrations[0].Statements[4]);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(migrations[0].Statements[5]);
+		Assert.IsType<ICreateTableMigrationStatement>(migrations[0].Statements[0], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migrations[0].Statements[1], false);
+		Assert.IsType<ISqlMigrationStatement>(migrations[0].Statements[2], false);
+		Assert.IsType<IAlterTableMigrationStatement>(migrations[0].Statements[3], false);
+		Assert.IsType<ICreateForeignKeyMigrationStatement>(migrations[0].Statements[4], false);
+		Assert.IsType<ICreateIndexMigrationStatement>(migrations[0].Statements[5], false);
 		var statement = Assert.Single(migrations[1].Statements);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(statement);
+		Assert.IsType<ICreateIndexMigrationStatement>(statement, false);
 	}
 
 	[Fact]
@@ -505,7 +505,7 @@ public class MigrationsProcessorTests
 
 		var migration = Assert.Single(migrations);
 		var statement = Assert.Single(migration.Statements);
-		Assert.IsAssignableFrom<ICreateIndexMigrationStatement>(statement);
+		Assert.IsType<ICreateIndexMigrationStatement>(statement, false);
 	}
 
 	[MigrationName("1_FirstMigration")]

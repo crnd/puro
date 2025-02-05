@@ -55,11 +55,11 @@ public class MigrationTests
 		migration.Up();
 
 		Assert.StrictEqual(5, migration.Statements.Count);
-		Assert.IsAssignableFrom<IDropConstraintMigrationStatement>(migration.Statements[0]);
-		Assert.IsAssignableFrom<ICreatePrimaryKeyMigrationStatement>(migration.Statements[1]);
-		Assert.IsAssignableFrom<IDropIndexMigrationStatement>(migration.Statements[2]);
-		Assert.IsAssignableFrom<ISqlMigrationStatement>(migration.Statements[3]);
-		Assert.IsAssignableFrom<IDropTableMigrationStatement>(migration.Statements[4]);
+		Assert.IsType<IDropConstraintMigrationStatement>(migration.Statements[0], false);
+		Assert.IsType<ICreatePrimaryKeyMigrationStatement>(migration.Statements[1], false);
+		Assert.IsType<IDropIndexMigrationStatement>(migration.Statements[2], false);
+		Assert.IsType<ISqlMigrationStatement>(migration.Statements[3], false);
+		Assert.IsType<IDropTableMigrationStatement>(migration.Statements[4], false);
 	}
 
 	[Fact]
