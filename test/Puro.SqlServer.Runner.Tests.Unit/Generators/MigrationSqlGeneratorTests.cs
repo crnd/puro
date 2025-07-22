@@ -20,7 +20,7 @@ public class MigrationSqlGeneratorTests
 
 		var sql = MigrationSqlGenerator.Generate([migration]);
 
-		const string expected = $"""
+		const string expected = """
 			IF OBJECT_ID(N'[dbo].[__PuroMigrationsHistory]') IS NULL
 			BEGIN
 
@@ -66,7 +66,7 @@ public class MigrationSqlGeneratorTests
 
 		var sql = MigrationSqlGenerator.Generate([migration1, migration2, migration3]);
 
-		const string expected = $"""
+		const string expected = """
 			IF OBJECT_ID(N'[dbo].[__PuroMigrationsHistory]') IS NULL
 			BEGIN
 
