@@ -6,8 +6,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    reviewers:
-      - "crnd"
     groups:
       xunit:
         patterns:
@@ -18,5 +16,3 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    reviewers:
-      - "crnd"
