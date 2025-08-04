@@ -1,7 +1,6 @@
 version: 2
 updates:
 
-  # NuGet
   - package-ecosystem: "nuget"
     directory: "/"
     schedule:
@@ -11,7 +10,6 @@ updates:
         patterns:
           - "xunit*"
 
-  # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
